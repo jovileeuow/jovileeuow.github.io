@@ -1,0 +1,1560 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/Vvm5C0YKRRhgYpNMTw3V7B?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>03 Object Data Model</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;Data Management and Security</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Since late 1970s a large number of graphical notation has been proposed to formally (more or less) describe a conceptual schema of a database domain. </p>
+	<br/>
+	<p>The first one was a notation of Entity-Relationship diagrams originally proposed as yet another database model. A graphical notation of Entity-Relationship diagrams (commonly called E-R diagrams) was published in 1976 by Peter Chen. in 1976 was too late compete with the relational database model and to convince large IT companies to drop their semi-implemented relational database systems and to switch to another data model. Luckily E-R diagrams appeared to be a prefect to for formal specification of database domains.</p>
+	<br/>
+	<p>A database domain is represented in a notation of E-R diagrams by the entity types, attributes describing entity types, relationships between the entity types and identifiers of entity types.</p>
+	<br/>
+	<p>In E-R diagram on the current slide, an entity type is visualised as a rectangle with the attached blobs labelled with attribute names. An entity type has a name located within a rectangle.</p>
+	<br/>
+	<p>A relationship is visualised as a diamond and it is connected by straight lines to the rectangles representing the entity types. A relationship can be describe with the attributes in the same way as an entity type.</p>
+	<br/>
+	<p>An attribute describing an entity type or a relationship is visualised as an oval with a name of attribute within an oval, and connected by a straight line to an entity type or to a relationship.</p>
+	<br/>
+	<p>An E-R diagram visualised on the slide represents a database domain, where customers submit orders that consists of items. Items are produced by companies. Items are stored by the customers in their shopping carts. The orders are shipped to the customers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Graphical Notations for Conceptual Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Entity-Relationship (ER) diagrams (1976)
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-03-1.png" width="800" alt="ER" title="ER"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A graphical notation of Object Modelling Technique diagrams (commonly called OMT diagrams) was developed in 1991 by Rumbaugh, Blaha, Premerlani, Eddy and Lorensen.</p>
+	<br/>
+	<p>A notation of OMT  diagrams consists of three types of models: object model, dynamic model and functional model.</p>
+	<br/>
+	<p>An object model can be used for conceptual modelling. A database domain is represented in a notation of object model of OMT diagrams by the classes of objects, properties describing classes of objects, associations between the classes of objects and generalisation hierarchies.</p>
+	<br/>
+	<p>A class of objects is visualised as  rectangle, that contains the name of a class of objects, the names of properties and the names of methods (operations) applicable to a class of objects.</p>
+	<br/>
+	<p>An association is visualised as a line connecting the classes of objects. An association has a name located close to a line and a direction indicator.</p>
+	<br/>
+	<p>A generalisation is visualised as a small triangle with the lines, that link subclasses and super classes of objects.</p>
+	<br/>
+	<p>An OMT diagram visualised on the slide represents a database domain, where the animators display drawable objects. There are two types of drawable objects: track segments and cars. Tracks consist of the track segments. Cars have the positions located on the track segments. The animators animate the animatees.</p>
+	<br/>
+	<p>A notation of OMT diagram is quite similar to a notation of E-R diagrams. A class of objects is equivalent to an entity type, a property is equivalent to an attribute, an association is equivalent to a relationship. Both notations share a concept of generalization hierarchy.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Graphical Notations for Conceptual Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Object Modelling Technique (OMT) diagrams (1991)
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-04-1.png" width="500" alt="OMT" title="OMT"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A graphical notation of Unified Modelling Language  (commonly called as UML diagrams), has been developed between 1994 and 1995 by Booch, Jacobson and Rumbaugh at Rational Software. UML consists of three types of diagrams: structure diagrams, behaviour diagrams and interaction diagrams.</p>
+	<br/>
+	<p>Structure diagrams consist of component diagrams and object class diagrams.</p>
+	<br/>
+	<p>A simplified notation of object class diagrams can be used for conceptual modelling.</p>
+	<br/>
+	<p>A database domain is represented in a notation of simplified object class diagrams by the classes of objects, properties describing classes of objects, identifiers of the classes of objects, associations between the classes of objects, association classes, qualifications, and generalisation hierarchies.</p>
+	<br/>
+	<p>A class of objects is visualised as  a rectangle, that contains a name of a class of objects and the names of properties. A set of properties that can be used for identification purposes is denoted by ID tags.</p>
+	<br/>
+	<p>An association is visualised as a line connecting the classes of objects. An association has a name located close to a line and a direction indicator.</p>
+	<br/>
+	<p>A generalisation is visualised as a small triangle with the lines that link subclasses and super classes of objects.</p>
+	<br/>
+	<p>A qualification is visualised as a rectangle attached to a class of objects and connected to an association.</p>
+	<br/>
+	<p>A UML diagram visualised on the slide represents a database domain, where the customers submit orders, that consist of lines. A line contains a description of a part included in an order and supplied by a supplier. A part consists of other parts. A class of frequent customers is a subset of a class of customers. A line in an order is uniquely identified by an order number and line number.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Graphical Notations for Conceptual Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>(Simplified) Unified Modelling Language (UML) Object Class diagrams (1994)
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-05-1.png" width="800" alt="UML" title="UML"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A graphical notation of Object Role Modeling  (commonly called as ORM diagrams), was developed in mid-1970s by Nijssen.</p>
+	<br/>
+	<p>ORM diagrams can be used for conceptual modelling. A database domain is represented in ORM notation by the facts, objects involved in the facts, and roles played by the objects in the facts.</p>
+	<br/>
+	<p>ORM notation is attribute free, unlike E-R notation or UML classes of objects notation.</p>
+	<br/>
+	<p>A fact is a proposition, like James plays a football game today.</p>
+	<br/>
+	<p>Ovals are used for visualisation of objects.</p>
+	<br/>
+	<p>Pairs of adjacent rectangles are used for visualisation of roles played by the objects in facts.</p>
+	<br/>
+	<p>An ORM diagram visualised on the slide represents a database domain, where the employees have employee numbers and occupy a room. An employee works for a department and has an extension number and access level code. An employee is contracted or tenured.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Graphical Notations for Conceptual Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Object Role Modeling (ORM) diagrams
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-06-1.png" width="700" alt="ORM" title="ORM"/></p>
+	  </ul>
+	</li>
+	<li> ... and many, many, ... other graphical notations</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a class="red" href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Assume, that a sample database is supposed to contain information about people.</p>
+	<br/>
+	<p>A rectangular box visible at the top of the p[resent slide, with a header that includes a name of a class PERSON, represents a simplified class of objects. In the future, we shall refer to the simplified class of  objects as a class of objects.</p>
+	<br/>
+	<p>Assume, that a person is described by the properties/attributes like  social security number, name, date of birth and address. The names of propreties/attributes are listed within a rectangular box, that represents a class of objects, just below a header, one name of property/attribute, per row. The meanings of the names of properties/attributes are the following: ssno represents a social security number, name represents a name of a person, dob represents a date of birth, and finally, address represents an address of a person.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A database suppose to contain information about <strong class="red">people</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-08-1.png" width="170" alt="ER" title="ER"></img></p>
+	  </ul>
+	</li>
+	<li>A rectangular box with a header and a name of class (<strong class="blue prettyprint28">PERSON</strong>) inside a header represents a <strong class="red">(simplified) class of objects</strong></li>
+	<li>A <strong class="red">person</strong> is described by a <strong class="blue">social security number</strong>, <strong class="blue">name</strong>, <strong class="blue">date of birth</strong> and <strong class="blue">address</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-08-2.png" width="170" alt="ER" title="ER"></img></p>
+	  </ul>
+	</li>
+	<li>The names of attributes are listed within a rectangular box one name of attribute per row</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now assume, that a person has no more than five email addresses and none or more mobile phone numbers. How do we represent such constraints imposed on the values of properties/attributes ? </p>
+	<br/>
+	<p>The attributes like: email, and phone, are multivalued property/attributes. The complex values of multivalued properties/attributes are the sets of atomic values. The minimum and maximum total number of atomic values within a complex value of a multivalued property/attribute, is called as multiplicity of an property/attribute.</p>
+	<br/>
+	<p>A suffix like [ 1 .. 5 ] within the square brackets, at the end of the property/attribute name indicates a multivalued property/attribute and means, that multiplicity of a property/attribute is from 1 to 5. A suffix [ 1 ..  5 ] means, that a complex value of a multivalued property/attribute, must have at least one atomic value and no more than 5 atomic values.</p>
+	<br/>
+	<p>A suffix like [ * ] or [ 0 .. * ] denotes a complex value, that consists of zero or more atomic values. </p>
+	<br/>
+	<p>A suffix like [ 1 .. * ] means a complex value, that consists of at least one or more atomic values.</p>
+	<br/>
+	<p>A suffix like [ m .. n ] where m < n means a complex value that consists of at least m atomic values and at most n atomic values.</p>
+	<br/>
+	<break time="0.3s"/>
+	<p>Default multiplicity of a property/attribute is [ 1 ].</p>
+	<br/>
+	<p>It means that all properties/attributes, that do not have a suffix, like for example, social security number, name, date of birth, must have a precisely one value.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">person</strong> has from one to five <strong class="blue">email addreses</strong> and zero or more <strong class="blue">phone numbers</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-09-1.png" width="200" alt="ER" title="ER"/></p>
+	  </ul>
+	</li>
+	<li><strong class="red">Multiplicity of attribute</strong> like <strong class="blue prettyprint28">[1..5]</strong> (from one to five), zero or more (<strong class="blue prettyprint28">[*]</strong> or <strong class="blue prettyprint28">[0..*]</strong>), one or more (<strong class="blue prettyprint28">[1..*]</strong>), optional (zero or one, <strong class="blue prettyprint28">[0..1]</strong>), from "m" to "n" (<strong class="blue prettyprint28">[m..n]</strong>) follows a name of attribute</li>
+	<li>Default <strong class="red">multiplicity</strong> is "one" (<strong class="blue prettyprint28">[1]</strong>)</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now assume, that additionally, a person is described by an optional property/attribute country of origin, and by a property/attribute age.</p>
+	<br/>
+	<p>A suffix [ 0 .. 1 ] appended at the end of a name of attribute country, means that a value of the attribute is optional.</p>
+	<br/>
+	<p>The minimum multiplicity equal to zero means, that a property/attribute may have no value at all. For example a value is missing, or a property/attribute does not apply to a description of a class. The notation does not provide any information why minimum multiplicity is equal to zero. One denote maximum multiplicity. It simple means that a property/attribute is a single valued and not multivalued.</p>
+	<br/>
+	<p>In our case, it means, that a name of a country can be provided or not. An optional attribute may have at most 1 value, or no values at all. </p>
+	<br/>
+	<p>A forward slash in front of an attribute, age, means that an attribute is derived. A value of derived attribute, can be computed from the values of the other attributes or constants. A value of an attribute age, can be computed using a value of the attribute date of birth, and the current date.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">person</strong> is described by an <strong class="blue">optional country of origin</strong> and <strong class="blue">age</strong> (<strong class="blue prettyprint28">/</strong> in front of attribute name <strong class="blue prettyprint28">age</strong> denotes a <strong class="red">derived attribute</strong>)
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-09-2.png" width="200" alt="ER" title="ER"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>Assume, that in our database domain,  a person is identified by a social security number, and independently by a triple of the properties/attributes that consists of a name, date of birth, and address.</p>
+	<br/>
+	<p>Such identification means, that in this case no two people a database domain can have the same social security number and the same triple of values of the properties/attributes name, date of birth and address. It is possible that two or more people have the same date of birth and the same name, it is possible that two or more people have the same name and date of birth, and it is also possible two or more people have the same name and the same address. However, it is not possible that two or more people have the same name, date of birth and address.</p>
+	<br/>
+	<p>A tag ID followed by a digit attached to name of a property/ attribute means, that such property/attribute is an identifier of all instances of objects that belong to a given class.</p>
+	<br/>
+	<p>For example, a tag ID1 following a name of a property/attribute social security number, means that a social security number is an identifier. Indeed, in the reality, all people have different social security numbers.</p>
+	<br/>
+	<p>If the same tag, for example ID2  follows the names of several properties/attributes then, it means that an identifier consists of several properties/attributes each marked with a tag ID2. If an identifier consists of several attributes, then it means that each object in a class is identified by a tuple of values of such properties/attributes. An identifier, that consists of several properties/attributes is called as a composite identifier.</p>
+	<br/>
+	<p>For example, a triple of properties/attributes (name, data of birth, address) is a single composite identifier.</p>
+	<br/>
+	<p>It is important to note, that when we find the identifiers fro the classes of objects we also try to find minimal identifiers, i.e. the identifiers that consists of the smallest number of properties/attributes. A social security number if a minimal identifier, because we cannot remove any property/attribute from such identifier and still have a valid identifier. A triple of properties/attributes ((name, data of birth, address) is a minimal identifier because as we mentioned earlier any proper subset of of two elements of the triple is not an identifier. A pair of properties/attributes (social security number, date of birth) is not a minimal identifier because a date of birth can be removed from is and still social security number alone is an identifier.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">person</strong> is identified by a <strong class="blue">social security number</strong> and independently by a triple (<strong class="blue">name</strong>, <strong class="blue">date of birth</strong>, <strong class="blue">address</strong>)
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-10-1.png" width="210" alt="IDs" title="IDs"/></p>
+	  </ul>
+	</li>
+	<li>A tag <strong class="blue prettyprint28">IDx</strong> following a name of attribute denotes an <strong class="red">identifier</strong></li>
+	<li>If the same tag (e.g. <strong class="blue prettyprint28">ID2</strong>) follows the names of several attributes then it means that an <strong class="red">identifier</strong> consists of several attributes</li>
+	<li>If an <strong class="red">identifier</strong> consists of several attributes then it means, that each object in a class is identified by a <strong class="red">tuple of values</strong> of the attributes</li>
+	<li>An <strong class="red">identifier</strong> which consists of several attributes is called as a <strong class="red">composite identifer</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>Let us consider another example of a class of objects.</p>
+	<br/>
+	<p>Assume, that a database is supposed to contain information about vehicles. Assume, that a vehicle is described by a registration number, manufacturer, model, year when manufactured and optional fuel consumption.</p>
+	<br/>
+	<p>Our knowledge of  the database domain being modelled (the reality) contributes to a fact that each vehicle has a different registration number. A class vehicle visualised on the slide, is described by 5 properties/attributes: rego number, (registration number), manufacturer, model, year and fuel.</p>
+	<br/>
+	<p>A property/attribute fuel is an optional attribute. It means, that its value can be omitted. All other properties/attributes are compulsory. It means, that their values must be provided.</p>
+	<br/>
+	<p>All propertties/attributes being the identifiers or being the components of identifiers, must be compulsory.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">vehicle</strong> is described by a <strong class="blue">registration number</strong>, <strong class="blue">manufacturer</strong>, <strong class="blue">model</strong>, <strong class="blue">year when manufactured</strong> and <strong class="blue">optional fuel consumption</strong></li>
+	<li>Each <strong class="red">vehicle</strong> has a <strong class="blue">different registration number</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-11-1.png" width="250" alt="VEHICLE" title="VEHICLE"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now, we present a short summary of how to create a class of objects, and how to provide properties/attribute to describe a class of objects. We also look at the different types of properties/attributes.</p>
+	<br/>
+	<p>A class of objects represents a set of homogeneous real world objects, described by the same set of properties/attributes, and related to other classes of objects by the same set of associations.</p>
+	<br/>
+	<p>A class of objects is visualised as a single column table with a name of a class in  a header of the table and a list of property/attribute names below a header.</p>
+	<br/>
+	<p>[ m .. n] tags following the names of properties/attributes indicate a multiplicity of a property/attribute. If a property/attribute does not have [ m..n ] tag the its default multiplicity is [1..1]. It means,  that it is a single valued mandatory property/attribute and its multiplicity is equal to 1.</p>
+	<br/>
+	<p>[ 0 .. 1 ] tags following the names of properties/attributes indicate that such attributes are optional attributes. It means that a property/attribute may have a value or not. It is still a single valued property/attribute.</p>
+	<br/>
+	<p>ID  followed by a digit tags attached to the names of properties/attributes indicate, that such properties/attributes are the identifiers, or they are the members of identifiers. if more than one property/attribute is followed by ID digit tag then it denotes a composite identifier that consists of several properties/attributes.</p>
+	<br/>
+	<p>A forward slash preceding a name of property/attribute indicates, that such property/attribute is a derived attribute. It means that value of such attribute can be derived/computes from the values of one of more properties/attributes describing a class of objects.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">(Simplified) Class of Objects</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Summary
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-12-1.png" width="950" alt="ER" title="ER"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a class="red" href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>The next component of a notation of simplified UML class diagram is an association. Let us assume, that a database is supposed to contain information about peoples, vehicles, and owners of vehicles. To represent people and vehicles, we create the classes of objects: PERSON and VEHICLE. The same classes of objects have already been created, and described in the previous presentation.</p>
+	<br/>
+	<p>A fact, that a person owns a car, can be represented by an abstract link between an instance of a class person and an instance of a class car. When the instances of the objects are represented as the icons on a computer screen, then an abstract link is a line connecting two icons. In this case it is an icon of a person  and an icon of a car. A collection of the homogeneous links between the objects, is called an association.</p>
+	<br/>
+	<p>An association is visualised as a solid line that connects the visualisation of two classes of objects. A name above an association line is an association name. In our case association name is, Owns, and the association can be interpreted as PERSON Owns VEHICLE. A direction of interpretation is determined by a small solid triangle, that follows a name of an association. So, in this case, it is definitely not, VEHICLE Owns PERSON.</p>
+	<br/>
+	<p>A star symbol located on the right hand side of association, is a multiplicity of association, and in this case, it means that a person owns zero or more cars.</p>
+	<br/>
+	<p>A default value of multiplicity is one. It also means that a car has only one owner and, that each car must have an owner.</p>
+	<br/>
+	<p>Multiplicities of associations will be more thoroughly discussed later in this presentation.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="blue">person</strong> <strong class="red">owns</strong> a <strong class="blue">vehicle</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-14-1.png" width="599" alt="Owns" title="Owns"/></p>
+	  </ul>
+	</li>
+	<li>A solid line that connects two classes represents an <strong class="red">association</strong></li>
+	<li>A name above a line is an <strong class="red">association name</strong></li>
+	<li>An <strong class="red">association name</strong> if followed (preceeded or located above or below) by a small solid triangle, that represents a <strong class="red">direction of interpretation</strong> of an association</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 16 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>The topmost conceptual schema in this slide, represents a bit of an unrealistic situation, where each person owns precisely one car, and where each car has one owner.</p>
+	<br/>
+	<p>The multiplicities on both sides of an association Has, take the default value of one.</p>
+	<br/>
+	<p>Locations of classes and associations in a diagram are immaterial, however incorrect placement of the visualisations of classes of objects may contribute to poor readability of a conceptual schema. One of the important constraints imposed on visualisation of associations is such that association lines must not cross each other. In exceptional situation when a binary undirected graph of a conceptual schema is not planar we must minimise the total number of intersection of association lines.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="blue">vehicle</strong> <strong class="red">has</strong> an <strong class="blue">owner</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-15-1.png" width="599" alt="Owns" title="Owns"/></p>
+	  </ul>
+	</li>
+	<li>Locations of classes and associations in a diagram are immaterial
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-15-2.png" width="599" alt="Owns" title="Owns"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Both conceptual schemas visualised in the slide, represent a situation, where a person owns zero or more vehicles, and a vehicle has precisely one owner. In this case, we do not take under consideration vehicles after very serious accidents, whose owners unfortunately did not survive an accident. </p>
+	<br/>
+	<p>In the upper diagram, we use a default value of a multiplicity of an association has owner, on an, owner, side of association.</p>
+	<br/>
+	<p>In the lower diagram, the multiplicities of an association, has owner, are located at both ends of a line that represents the association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="blue">person</strong> <strong class="blue">owns</strong> <strong class="red">zero or more</strong><strong class="blue"> vehicles</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-16-1.png" width="500" alt="Owns" title="Owns"/></p>
+	  </ul>
+	</li>
+	<li>A <strong class="blue">vehicle</strong> <strong class="blue">has</strong> <strong class="red">one</strong> <strong class="blue">owner</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-16-2.png" width="500" alt="Owns" title="Owns"/></p>
+	  </ul>
+	</li>
+	<li><strong class="red">Multiplicities of association</strong> are located at both ends of a line that represents an association</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 18 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Now, we shall look at the details of the multiplicities of associations.</p>
+	<br/>
+	<p>We start from one to one association. One to one, means that multiplicity on both sides of an association is at most one. as a simple example, we consider a conceptual schema, that represents a database domain, where departments have managers. In our case, a department has exactly one manager, and a person who is a manager, manages exactly one department.</p>
+	<br/>
+	<p>An instance diagram, below a conceptual schema, shows the instances objects in a class department visualised as the small black ovals, and the instances of objects in a class manager also visualised as the small black ovals.</p>
+	<br/>
+	<p>The abstract links between the instances of departments, and the instances of managers, represent information who is a  manager of which department. The abstract links, are visualised in the instance diagram, as straight lines linking the black ovals, representing the instances of objects. t is clearly visible that multiplicity of an association: Has, is one to one because each instance of an object in a class department is linked exactly to one instance of an object in a class manager. And each instance of an object in a class manager, is linked to exactly one instance of an object in  class department.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">One-to-one</strong> association
+	  <ul class="build">
+	    <li>A department <strong class="red">has</strong> a manager</li>
+	    <li>A department has exactly <strong class="red">one</strong> manager</li>
+	    <li>A person who is a manager manages exactly <strong class="red">one</strong> department</li>
+	  </ul>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-17-1.png" width="500" alt="One-to-one" title="One-to-one"/></p>
+	    <p style="text-align:center;"><img src="images/slide-17-2.png" width="500" alt="One-to-one" title="One-to-one"/></p>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Now, we look at an example of a conceptual schema, that represents a database domain, where companies employ employees. A company employs many employees, and an employee is employed by zero or more companies. It is also possible, that a company has no (zero) employees. It is an example of one to many association, or many to one, well, it really does not matter, because in both cases, it is the same association. One to many means, that multiplicity of an association on one side is one, or, zero or one, and multiplicity of the same association on the other side is many, or zero or many.</p>
+	<br/>
+	<p>An instance diagram below a conceptual schema shows the instances objects in a class company, visualised as the small black ovals and the instances of objects in a class employee, also visualised as the small black ovals.  The abstract links between the instances of companies, and the instances of employees, represent information who is employed by which company. The abstract links are visualised in the instance diagram, as straight lines linking the black ovals representing the instances of objects. It is clearly visible that multiplicity of an association, employs, is one to many because the instances of an object in a class company, are linked to none or many instances of an object in a class employee. And each instance of an object in a class employee, is linked at most to one instance of an object in a class company.</p>
+	<br/>
+	<p>It is possible that a company does not employ any employees and some employees, hopefully temporary, are not employed by any company. The answers to the questions why a person is called as an Employee even if he/she is not employed and how it is possible that a company does not employ anyone depends on our view of the reality. In some situations it is possible that an employee moves from one company to another and such transfer happens in a certain no zero period of time. In such a case it is possible to say that a person is still an employe because his/her employment with another company is guaranteed in a moment when information is recorded in a database. In the sam way w may argue that a completely new company in a moment when it is registered does not really have any employees, however, it is registration can be sued as a proof of its existence. So, minimal multiplicity very frequently depends on our subjective view of the reality.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">One-to-many</strong> association
+	  <ul class="build">
+	    <li>A company <strong class="red">employs</strong> an employee</li>
+	    <li>A company employes <strong class="red">many</strong> employees</li>
+	    <li>An employee works for <strong class="red">none or one</strong> company</li>
+            <li>It is possible that a company has <strong class="red">no (zero)</strong> employees</li>
+	  </ul>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-18-1.png" width="500" alt="One-to-many" title="One-to-one"/></p>
+	    <p style="text-align:center;"><img src="images/slide-18-2.png" width="500" alt="One-to-many" title="One-to-one"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Next, we look at an example of a conceptual schema, that represent a database domain where suppliers supply parts. A supplier supplies zero or more parts, and a part can be supplied by zero or more suppliers. It important to more precisely determine what a name of association "Supply" really mean. In this context it means "potentials" and not a fact that some parts have been supplied by suppliers. It means that a supplier has access to the parts manufactured by manufacturer and when he/she is asked about such parts can be delivered.</p>
+	<br/>
+	<p>In such context "Supply" association is an example of "many-to-many" association. Many to many means, that multiplicity of an association on its both sides is zero or many, if an association is optional on both sides. If many to many association is not optional on one its sides, then a multiplicity on such side is one or many.</p>
+	<br/>
+	<p>An instance diagram below a conceptual schema, shows the instances objects in a class supplier, visualised as the small black ovals, and the instances of objects in a class part, also visualised as the small black ovals.  The abstract links between the instances of suppliers, and the instances of parts, represent information which supplier supplies which part. The abstract links are visualised in the instance diagram, as straight lines linking the black ovals representing the instances of objects.</p>
+	<br/>
+	<p>It is clearly visible, that a multiplicity of an association, supplier supplies parts, is many to many, because the instances of an object in a class supplier are linked to none or many instances of an object in a class part. And each instance of an object in a class parts is linked to zero or more objects in a class supplier.</p>
+	<br/>
+	<p>It is possible that a supplier does not supply any part, for example, a supplier is on leave just now. It is also possible that a part is not supplied by any supplier because manufacturing of such part as been terminated by a manufacturer. It means that an association, supplier supplies parts, is optional at both of its sides.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Many-to-many</strong> association
+	  <ul class="build">
+	    <li>A supplier <strong class="red">supplies</strong> a part</li>
+	    <li>A supplier supplies <strong class="red">zero or more</strong> parts</li>
+	    <li>A part is supplied by  <strong class="red">zero or more</strong> suppliers</li>
+	  </ul>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-19-1.png" width="500" alt="Many-to-many" title="One-to-one"/></p>
+	    <p style="text-align:center;"><img src="images/slide-19-2.png" width="500" alt="Many-to-many" title="One-to-one"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>The present slide contains a short summary of different types of multiplicities of associations.</p>
+	<br/>
+	<p>If there is no symbol at a location where a line representing an association is connected to a class of objects, then the multiplicity on this side of association is one.</p>
+	<br/>
+	<p>A star symbol in the same location means, that multiplicity on this side of association is zero or many.</p>
+	<br/>
+	<p>A symbol 0..1, means, that multiplicity on this side of association is zero or one, or it is optional.</p>
+	<br/>
+	<p>A symbol 1..*, means, that multiplicity on this side of association is one or many.</p>
+	<br/>
+	<p>A symbol 2..4, means that minimum multiplicity is 2 and maximum multiplicity is 4. Two nice examples of the associations, where a numerical specification multiplicity must be used, are given on the next slide.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Summary
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-20-1.png" width="501" alt="Summary" title="Summary"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 22 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>First, we consider a database domain where football teams consist of players. In such database domain, football means a game where two teams, that consist of eleven players on a field, play with a round ball, and not with an egg.  In a general case, a football team consists of 22 players, because so many players can be registered for a major tournament. </p>
+	<br/>
+	<p>A player belongs to only one team. Therefore, a multiplicity of an association, team consists of players, is one to 22 if we look at it from the teams side. It is 22 to 1 if we look at it from the players side. In the example below, we consider a database domain, where football games are played by the players.</p>
+	<br/>
+	<p>A game is played by a minimum of 11 players (in fact it can be less than 11 but, it would be a shame to start a football game with less than 11 players),  plus a maximum of 3 substitutes. It makes the maximum number of players that can participate in a game equal to 14.</p>
+	<br/>
+	<p>On the other hand a player can participate in zero (typical bench warmer) or more games, and such multiplicity is represented by a star symbol. Therefore, a multiplicity of an association, game is played by player is many to 11 or 12 or 13 or 14 if we look at it from  a game's point of view.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>More examples:</li>
+	<li>A team consists of <strong class="red">22</strong> players</li>
+	<li>A player belongs to only <strong class="red">one</strong> team
+          <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-21-1.png" width="500" alt="Example" title="Example"/></p>
+	  </ul>
+	</li>
+        <li>A game is played by <strong class="red">11</strong>players plus maximum <strong class="red">3 </strong>substitutes</li>
+	<li>A player participates in <strong class="red">zero or more</strong> games
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-21-2.png" width="500" alt="Example" title="Example"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 23 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a class="red" href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 24 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In this slide, we look at a sample conceptual schema, that represents a database domain where students enrol in subjects. The conceptual schema consists of two classes of objects, student and, subject, linked with an association enrols. A multiplicity of association enrols is, many to many, because a students is allowed to enrol in many subjects and a subject can be enrolled by many students.</p>
+	<br/>
+	<p>We would like to add to a conceptual schema, information about enrolment date of each enrolment, performed by a student. If we add an attribute enrolment date to a class student, then such attribute must be a multivalued attribute, because a student can enrol in many subjects on many different days. Additionally, we are not able to represent information what subject was enrolled on what date, because a conceptual schema does not represent the links between the values of multivalued attributes, and the instance of objects in another class.</p>
+	<br/>
+	<p>An idea to add an attribute, enrolment date, to a class subject, fails because of the same reasons. The attribute becomes multivalued attribute, because a subject may have many enrolments. Additionally, the values of the attribute cannot be associated with the objects from a class student. A correct solution to the problem is to add an attribute, enrolment date, as a link attribute.</p>
+	<br/>
+	<p>A link attribute is an attribute that describes an association. In our case, an association, student enrols in a subject, is described by a link attribute, enrolment date. Such solution is correct, because enrolment fact is related to both object classes, student and subject. An enrolment in a subject is performed by a student on a given day. It means that enrolment is described by enrolment date.</p>
+	<br/>
+	<p>A link attribute is visualised as a "class-like" rectangular box without a name of class in a header connected with a dashed line to a line representing an association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link Attribute</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">link attribute</strong> is an attribute that describes an <strong class="red">association</strong></li>
+	<li>A <strong class="blue">student</strong> <strong class="red">enrols</strong> a <strong class="blue">subject</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-23-1.png" width="470" alt="Link Attribute" title="Example"/></p>
+	  </ul>
+	</li>
+	<li>An enrolment is performed on a given day, it means, that an enrolment is described by an <strong class="red">enrolment date</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-23-2.png" width="470" alt="Link Attribute" title="Example"/></p>
+	  </ul>
+	</li>
+	<li>A <strong class="red">link attribute</strong> is graphically represented by a "class-like" rectangular box without a name of class in a header</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 25 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Why an attribute enrolment date, must be represented by a link attribute ? For example, what about an attribute enrolment date describing a class student ? Such design is incorrect, because information about the subjects enrolled by a student on a given date, is missing. This is because a value of an attribute cannot be directly connected to another class of objects. A student is associated with a set of enrolment dates, however there is no link between the values of an attribute, enrolment date and the objects in a class SUBJECT</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link Attribute</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Why an atribute <strong class="blue prettyprint28">enrolment-date</strong> must be a represented by a <strong class="red">link attribute</strong> ?</li>
+	<li>For example, what about an attribute <strong class="blue prettyprint28">enrolment-date</strong> describing a class <strong class="blue prettyprint28">STUDENT</strong> ?
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-24-1.png" width="300" alt="Link Attribute ?" title="Example"/></p>
+	  </ul>
+	</li>
+	<li>Such design <strong class="red">is incorrect</strong> because information about which subject has been enrolled by a student and on what date is missing</li>
+	<li>A student is associated with a set of <strong class="blue prettyprint28">enrolment-date</strong>s, however ...</li>
+	<li>... there is no link between the values of an attribute <strong class="blue prettyprint28">enrolment-date</strong> and the objects in a class <strong class="blue prettyprint28">SUBJECT</strong></li> 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 26 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>So, what about another option, where an attribute enrolment date describes a class subject ? Such design is also incorrect, because information about who enroled in a subject on a given date, is missing. A subject is associated with a set of enrolment dates, however there is no link between the values of an attribute enrolment date, and the objects in a class student.</p>
+	<br/>
+	<p>Therefore, the only option, for an attribute enrolment date, is  a link attribute describing an association, student enrols in  given subject.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link Attribute</h2> 
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>So what about another option where an atribute <strong class="blue prettyprint28">enrolment-date</strong> describes a class <strong class="blue prettyprint28">SUBJECT</strong> ?
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-25-1.png" width="290" alt="Link Attribute ?" title="Example"/></p>
+	  </ul>
+	</li>
+	<li>Such design <strong class="red">is also incorrect</strong> because information about who enrolled in a subject and on what date is missing again</li>
+	<li>A subject is associated with a set of <strong class="blue prettyprint28">enrolment-date</strong>s, however ...</li>
+	<li>... there is no link between the values of an attribute <strong class="blue prettyprint28">enrolment-date</strong> and the objects in a class <strong class="blue prettyprint28">STUDENT</strong></li> 
+	<li>Therefore, the only option for an attribute <strong class="blue prettyprint28">enrolment-date</strong> is to be a <strong class="red">link attribute</strong> that describes an asociation between  a class <strong class="blue prettyprint28">STUDENT</strong> and a class <strong class="blue  prettyprint28">SUBJECT</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 27 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A link attribute, enrolment date, is correct, because the attribute describes an association between the classes student and subject.</p>
+	<br/>
+	<p>The association is a collection of homogeneous links between the pairs of objects that belong to the classes student and subject.</p>
+	<br/>
+	<p>A value of link attribute can be visualised as a label attached to a link, connecting the instances of classes of objects student and subject. The labels cannot be moved to one of the classes of objects because if a subject is enrolled by many students then an instance of such subject would get many labels (multivalued attribute). If a student enrols many subjects then when the labels are moved to an instance of an object student such object will also get many labels (multivalued attribute).</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link Attribute</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>If an attribute <strong class="blue prettyprint28">enrolment-date</strong> describes an association <strong class="blue prettyprint28">Enrols</strong> between the classes <strong class="blue prettyprint28">STUDENT</strong> and <strong class="blue prettyprint28">SUBJECT</strong> then its values are like labels attached to attached to the links between the objects from the classes <strong class="blue prettyprint28">STUDENT</strong> and <strong class="blue prettyprint28">SUBJECT</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-26.png" width="900" alt="Link Attribute" title="Link Attribute"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 28 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	  <p>Now, we consider one more example where application of link attribute is necessary.</p>
+	<br/>
+	<p>Assume, that we would like to present information, about suppliers supplying parts, and about the dates and quantities of shipments.</p>
+	<br/>
+	<p>If a shipment of a part is performed on a given day, then it can be described by an attribute shipment date. </p>
+	<br/>
+	<p>If a shipment contains a given number of parts, then a shipment is also described by an attribute quantity.</p>
+	<br/>
+	<p>Both attributes, shipment date, and, quantity are the link attributes, describing an association supplies.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link Attribute</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Another example of <strong class="red">link attribute</strong></li>
+	<li>A <strong class="blue">supplier</strong> <strong class="red">supplies</strong> a <strong class="blue">part</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-26-1.png" width="500" alt="Link Attribute" title="Link Attribute"/></p>
+	  </ul>
+	</li>
+	<li>A shipment of a part is performed on a given day, it means, that a shipment is described by an attribute <strong class="blue prettyprint28">shipment date</strong></li>
+	<li>A shipment contains a given number of parts and it means, that a shipment is also described by an attribute <strong class="blue prettyprint28">quantity</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-26-2.png" width="500" alt="Link Attribute" title="Link Attribute"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a class="red" href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 30 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A class of objects is a collection of homogeneous instances of objects, described by almost the same set of attributes. If we consider the links as objects, then a collection of homogeneous links, described by almost the same set of attributes becomes a class of objects. Such class of objects consists of a collection of objects (links) that represents an association between two classes of objects. This is why, a class of objects that consists of links, is called as, an association class.  It is correct to say, that an association class is a class that represents an association.</p>
+	<br/>
+	<p>Let’s consider a database domain, where students enrol in subjects. Such domain can be represented by a conceptual schema, where the classes, student and subject, are linked with an association, enrols. If we would like to consider the links between students and subjects as objects, then a collection of such links becomes an association class called as enrolment. If we record a fact that enrolment is performed on a given day, then the association class is described by an attribute enrolment date.</p>
+	<br/>
+	<p>An association class enrolment is graphically represented in the same way as a class of objects with a dashed line connecting a class box with an association and a name of a class in a header. An association class, is the same class as other classes of objects, and it can be involved in the associations with other classes of objects. It is also possible to upgrade a link attribute to an association class. To do so, we apply a procedure of reification, that transforms an attribute into a class of objects.In our case a link attribute or a group of link attributes is promoted into a class of objects, enrolment.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association Class</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>An <strong class="red">association class</strong> is a class that represents an <strong class="red">association</strong></li>
+	<li>A <strong class="blue">student</strong> <strong class="red">enrols</strong> in a <strong class="blue">subject</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-28-1.png" width="450" alt="Association Class" title="Association Class"/></p>
+	  </ul>
+	</li>
+	<li>An enrolment is performed on a given day, it means, that an enrolment is described by an attribute <strong class="blue prettyprint28">enrolment-date</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-28-2.png" width="450" alt="Association Class" title="Association Class"/></p>
+	  </ul>
+	</li>
+	<li>An <strong class="red">association class</strong> <strong class="blue prettyprint28">ENROLMENT</strong> is graphically represented in the same way as a class of objects</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 31 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An interesting problem related to an association classes, is a question about an identifier of association class. From where, do we get an identifier of an association class ?</p>
+	<br/>
+	<p>An association class may have its own identifiers, for example, an attribute enrolment number in a class enrolment. </p>
+	<br/>
+	<p>An association class always has one or more default and composite identifier. A default identifier is created in a process similar to deriving an identifier using a qualification (explained later in this presentation). An association class, that represents many to many association has a default identifier, that consists of the identifiers of classes from both sides of the association.</p>
+	<br/>
+	<p>For example, in the present slide a pair of attributes: (student number,subject code), is a default composite identifier of a class enrolment. A default identifier is created by concatenation of an identifier from a class student (student number), and identifier from a class subject, (subject code).</p>
+	<br/>
+	<p>Another default identifier can be also created from a pair of attributes: (student number, subject title), can also be used as an identifier of a class enrolment.</p>
+	<br/>
+	<p>It is possible to always create a default identifier for an association class and because of that there is no need to include an artificial identifier, like enrolment number, into a description of a class of objects.</p>
+	<br/>
+	<p>In what circumstances a pair of identifiers taken from the classes of objects linked by an association is an identifier of the respective association class ? Assume, that each pair of object instances is linked by at most one link. Hence, a pair of identifiers of the linked object instances is completely sufficient to identify each link. However, sometimes two instances of object can be linked by more than one link. For example a student enrols a subject and participation in the subject is unsuccessful and the student must enrol the subject one more time. It is so called "pessimistic view of the reality" ;). Then, two object instances are connected by two links and a pair of identifiers of the objects is not sufficient to distinguish between the links. Then, association must be qualified by one or more additional attributes. A concept of qualification will be discussed later in this presentation.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association Class</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>What about an <strong class="red">identifier</strong> of an <strong class="red">association class</strong> ?</li>
+	<li>An <strong class="red">association class</strong> may have its own identifiers, for example <strong class="blue prettyprint28">enrolment-number</strong> in a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	<li>An <strong class="red">association class</strong> that represents many-to-many association has a <strong class="red">default identifier</strong> that consists of identifiers of the classes from both sides of association, for example a pair <strong class="blue prettyprint28">(snumber, code)</strong> in a class <strong class="blue prettyprint28">ENROLMENT</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-29-1.png" width="500" alt="Association Class" title="Association Class"/></p>
+	  </ul>
+	 </li>
+         <li>There is no need to include a <strong class="red">default identifier</strong> into a description of a class of objects</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 32 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now, let us look at another example of association class. We consider a database domain, where suppliers supply parts. This time, we would like to record in a database information about all shipments of parts by suppliers. Such database domain can be represented by a conceptual schema, where the classes of objects, supplier and part, are linked with an association supplies.</p>
+	<br/>
+	<p>A link between an instance of an object in a class supplier and an object in a class part represents a fact that the supplier supplied the part. If we consider the links between suppliers and parts as instances of objects, then a collection of such links becomes an association class shipment.</p>
+	<br/>
+	<p>If a shipment of a part is performed on a given day, then the shipment is described by an attribute as: shipment date. If a shipment includes many parts, then it is also described by attribute: quantity. Them in such context, an association class, shipment represents and association supplies.</p>
+	<br/>
+	<p>A problem what is a default identifier of a class shipment will be considered later. In this case a simple default composite identifier that consists of identifier from a class supplier and an identifier of a class part is not correct. It is because as supplier can supply the same part many times. To reveal a part of a solution, if we assume that a supplier does not supply the same part on the same day then an identifier of a class shipment is a triple of attribute (supplier number, part number, shipment date). We shall return to this problem later.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association Class</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Another example of <strong class="red">association class</strong></li>
+	<li>A <strong class="blue">supplier</strong> <strong class="red">supplies</strong> a <strong class="blue">part</strong></li>
+	<li>A shipment of a part is performed on a given day, it means, that a shipment is described by an attribute <strong class="blue prettyprint28">shipment-date</strong></li>
+	<li>A shipment contains a given number of parts, it means, that a shipment is also described by an attribute <strong class="blue prettyprint28">quantity</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-30-1.png" width="500" alt="Association Class" title="Association Class"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 33 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Why do we need association classes ?  Can we benefit from the existence of an association class and if we can  how can we benefit from it ?</p>
+	<br/>
+	<p>Let us extend a database domain described in the previous slide, with information about shipments delivered to customers. We assume, that apart information about shipment performed by suppliers a database must contain information about a customer who ordered a shipment and where the good have been delivered.</p>
+	<br/>
+	<p>Without a class shipment it would be impossible to represent such information without a ternary association. A binary association is not a good solution. If we create a binary association between supplier and customer classes only the we loose information about product being shipped to customer. On the other hand we create a binary association between product and customer classes only then we would loose information about supplier involved in a shipment. A solution is ot wrap information about part and supplier such that it can be related to class customer later on.</p>
+	<br/>
+	<p>In a general case, it is possible to create associations between association classes, and other classes of objects, and even between association classes and other association classes.</p>
+	<br/>
+	<p>A concept of association class, also allows for modelling of associations between more then two classes of objects.</p>
+	<br/>
+	<p>A conceptual schema given in the present slide, uses an association class shipment to represent a ternary association, whose arguments are suppliers, parts, and customers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association Class</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>What can we use <strong class="red">association classes</strong> for ?</li>
+	<li>A <strong class="blue">shipment</strong> <strong class="red">is delivered to</strong> a <strong class="blue">customer</strong></li>
+	<li>An association <strong class="blue prettyprint28">Delivered-to</strong> connects the classes <strong class="blue prettyprint28">SHIPMENT</strong> and <strong class="blue prettyprint28">CUSTOMER</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-31-1.png" width="700" alt="Association Class" title="Association Class"/></p>
+	  </ul>
+	</li>
+	<li>In a general case, it is possible to create associations between association classes and other classes of objects and between association classes and association classes</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 34 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a class="red" href="#34">Qualification</a></li>
+	<li><a href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 35 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Let us consider a database domain of a university campus, where buildings are located at campus, and rooms are located within each building. A building at a university campus is described by a unique building number, optional building name and the total number of floors. A room is described by a room number and an area. A building consists of rooms.  A conceptual schema of the database domain is visible in the middle of the present slide. if someone would tell you that a lecture class in a subject is in room 125 then you would says: all right but which building are you tallking about ?</p>
+	<br/>
+	<p>A building is identified by an attribute building number (bnumber attribute in a class building). What is an identifier of a class room ? An attribute room number (rnumber attribute in a class room) is not an identifier, because many different buildings may have the rooms with the same numbers.  Is it worth to create, and to use an artificial identifier, like for example roomid ?n Such identifier is completely useless in practice, because it does not provide information which building hosts a room with a given roomid. For example, it would be hard to find a location of a room 546 because such number does not provide any information about the building number, and searching for a room by traversing the buildings one by one would be too time consuming.</p>
+	<br/>
+	<p>In the reality, an identifier of a class room is a composite identifier, that  consists of the attributes building number from a class building, and room number from a class room. It is why, when someone says, that a lecture class in in a room 125 then you ask which building is it ? </p>
+	<br/>
+	<p>Unfortunately, we cannot add an attribute building number to a description of a class room. It is because in conceptual modelling an attribute can be used fro a description of one class only. So, how do we represent the composite identifiers that consist of the attributes from more than one class ?</p>
+	<br/>
+	<p>We use a new concept called "qualification".</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="blue">building</strong> at a university campus is described by a unique <strong class="blue">number</strong>, optional <strong class="blue">name</strong> and the <strong class="blue">total number of floors</strong></li>
+	<li>A <strong class="blue">room</strong> is described by a <strong class="blue">number</strong> and <strong class="blue">area</strong></li>
+	<li>A <strong class="blue">building</strong> consists of <strong class="blue">rooms</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-33-1.png" width="430" alt="Qualification" title="Qualification"/></p>
+	  </ul>
+	</li>
+	<li><strong class="red">What is an identifier of a class</strong> <strong class="blue prettyprint28">ROOM</strong><strong class="red"> ?</strong></li>
+	<li>Identifier of a class <strong class="blue prettyprint28">ROOM</strong> is a <strong class="red">composite identifier</strong> and it consists of the attributes <strong class="blue prettyprint28">bnumber</strong> from a class <strong class="blue prettyprint28">BUILDING</strong> and <strong class="blue prettyprint28">rnumber</strong> from a class <strong class="blue prettyprint28">ROOM</strong></li>
+        <li><strong class="red">How do we represent composite identifiers that consist of attributes from more than one class ?</strong></li>
+	<li>We use a <strong class="red">qualification</strong> !</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 36 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A qualification is visualised in a simplified class diagram as a rectangular box, that contains one or more attribute names. A box with the attribute names is on one side attached to a class of objects, and on the other side to an association. The other side of association is attached to a class of objects, that does not have its own identification system, for example a class of objects room.</p>
+	<br/>
+	<p>A qualification of a class building, and association consists of, with an attribute room number (rnumber attribute) means, that in each building there is at most one room with a given number. </p>
+	<br/>
+	<p>Please, note 0 ..1 (optional) multiplicity of an association "Consists of" on its right hand side. It means, that for example, there is a most one room number 17 in a building number 35. Such rule applies to all buildings on a campus and to all rooms in the buildings. Inn the other words, we can say, that an attribute, room number, is a local identifier in a class room, because all rooms in a given building must have different numbers. Saying it in yet another way, if we pick a building and we pick a room number than there is at most one room with such number in the building.</p>
+	<br/>
+	<p>It also means that a pair of attributes building number and room number, is a global identifier of a class, room. This is how an identifier of a class, room is created from concatenation of identifier of a class building and an attribute taken from a class, room, and included in a qualification box. The names of attributes located within a qualification box, together with an identifier of class the box is attached to, become an identifier of a class on the other side of qualified association.</p>
+	<br/>
+	<p>This is why a pair of attributes room number and building number is an identifier of a class room. In a general case, qualification should be used in a situation, when a class of objects does not have its own identification system, like in a case of rooms located in university buildings.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="blue">building</strong> at a university campus is described by a unique <strong class="blue">number</strong>, optional <strong class="blue">name</strong> and the <strong class="blue">total number of floors</strong>. A <strong class="blue">room</strong> is described by a <strong class="blue">number</strong> and <strong class="blue">area</strong>. A <strong class="blue">building</strong> consists of <strong class="blue">rooms</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-34-1.png" width="500" alt="Qualification" title="Qualification"/></p>
+	  </ul>
+	</li>
+	<li>A <strong class="red">qualification</strong> is represented by a rectangle with one or more attribute names</li>
+        <li>In the example above a <strong class="red">qualification</strong> means that in a given <strong class="blue">building</strong> there is at most one <strong class="red">room</strong> with a given <strong class="blue">number</strong></li>
+        <li>It also means that an attribute <strong class="blue prettyprint28">rnumber</strong> is a <strong class="red">local identifier</strong> in a class <strong class="blue prettyprint28">ROOM</strong>, i.e. all <strong class="blue">rooms</strong> in a given <strong class="blue">building</strong> have different <strong class="blue">number</strong>s</li> 
+	<li>A pair of attributes <strong class="blue prettyprint28">(bnumber, rnumber)</strong> is a <strong class="red">default identifier</strong> of a class <strong class="blue prettyprint28">ROOM</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 37 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now, we shall consider few more examples, where a qualification is used to determine an identifier of a class of objects.</p>
+	<br/>
+	<p>First, we look at a database domain, where banks host bank accounts. A conceptual schema of such domain consists of two classes of objects, bank, and account. An association, bank consists of account, links the classes of objects bank and account.</p>
+	<br/>
+	<p>A question is, what is an identifier of a bank account ? Definitely, an account number is not an identifier because the banks do not synchronise among themselves the numbers of bank accounts. On the other hand, an account number is a local identifier within a bank. This is why we use qualification to express a fact, that an account is identified by a pair of attributes, bank name and account number.</p>
+	<br/>
+	<p>In the next example, we consider a database domain where a university has a number of campuses, buildings are located at campuses, and rooms are located within buildings. This time we ask about the identifiers of the classes building and room. An identifier of a building is a pair of attributes campus name (cname attribute) and building number. This is because each building at a campus has a unique number. This is why a class campus is qualified with an attribute, building number.</p>
+	<br/>
+	<p>Next, we ask about an identifier of a class room ? If each room has a unique number within a building, then a global identifier of a class room, consists of identifier of a building, and  a local identifier room number. Therefore, an identifier of a class room is a triple of attributes, campus name, building number, and room number.</p>
+	<br/>
+	<p>In the last example we look at a database domain where companies are listed on the stock exchange.  An identifier of a class company is obtained from qualification of a class stock exchange and association, is listed at, with an attribute ticker symbol. It means that a company is uniquely identified by a location of the stock exchange and its ticker symbol at a stock exchange where the company is located. Note, that in this particular domain, a company can be listed on many different stock exchanges, and because of that stock exchange side of association, is listed at is one or many and entire association, is listed at, is many to many.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>More examples:</li>
+	<li>A bank account is located at a bank
+	      <ul class="build">
+		<p style="text-align:center;"><img src="images/slide-35-1.png" width="500" alt="Qualification" title="Qualification"/></p>
+	      </ul>
+	</li>
+	<li>A campus consists of buildings and buildings consist of rooms
+	      <ul class="build">
+		<p style="text-align:center;"><img src="images/slide-35-2.png" width="800" alt="Qualification" title="Qualification"/></p>
+	      </ul>
+	</li>
+	<li>A company is listed at stock exchange
+	      <ul class="build">
+		<p style="text-align:center;"><img src="images/slide-35-3.png" width="700" alt="Qualification" title="Qualification"/></p>
+	      </ul>
+	</li>
+    </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 38 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In this slide we return to a problem what is a default identifier of an association class ? As we discussed this problem earlier, sometime a pait of identifier from the classes of obejcts on both sides of many-to-many association visible as an association class is not sufficient to be a default identifier. Sometimes, a qualification must be applied to both sides of many to many association.</p>
+	<br/>
+	<p>As a simple example, consider a database domain, where students enrol subjects, and subjects are enrolled by students. A conceptual schema for such domain is visible in the middle of a slide. A question is, what is an identifier of an association class enrolment ? As it has been mentioned earlier, a default identifier of an association class enrolment, consist of a pair of attributes, student number and subject code.</p>
+	<br/>
+	<p>But, what if a student must enrol in the same subject twice ? If we consider a pessimistic view of the reality, then sometimes a student must enrol in the same subject more than once, (well, ... I guess that everyone knows when it happens and why it is a "pessimistic" view of the reality). In such a case, a pair of attributes, student number and subject code, is no longer an identifier of an enrolment, because two enrolments have the same values of the attributes, student number and subject code.</p>
+	<br/>
+	<p>If the enrolments of the same subject by the same student are repeated several times, than a pair of attributes  student number and code, is no longer an identifier of a class enrolment ! To solve this problem, we append an attribute enrolment date to the identifier, and we assume that a student cannot on the same day enrol a subject, drop it, end enrol in it again.</p>
+	<br/>
+	<p>It means that the left hand size of an association enrols must be qualified with the attributes subject code and enrolment date, and the right hand size of an association, must be qualified with a student number and enrolment date. And it is how it is visualised on slide 40. Double qualification is graphically a bit awkward because it requires replacement of many-to-many association and association class with one-to-many association, a class of objects the same as association class and many-to-one association. To simplify a graphical notation we make it possible to represent it a qualification of the middle part of many-to-many association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Sometimes qualification is needed for <strong class="red">many-to-many</strong> associations</li>
+	<li>For example, if we consider a pessimistic view of <strong class="red">students</strong> who <strong class="red">enrol</strong> in <strong class="red">subjects</strong> then sometimes a student
+	  must enrol in the same subject more than one time (<strong class="blue">well, ... you know when it happens and
+	  why it is a "pessimistic" view of reality</strong>)</li>
+	<li>Some time ago we created the following design
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-36-1.png" width="500" alt="Qualification" title="Qualification"/></p>
+	  </ul>
+	</li>
+	<li>But, ... if enrolment is repeated several times then a pair of attributes <strong class="blue prettyprint28">(snumber, code)</strong> is no longer an identifier of a class <strong class="blue prettyprint28">ENROLMENT</strong> ! </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+</slide>
+<!-- slide 39 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>To avoid the qualifications on both sides of an association, we attach a qualification box in the middle of the association line, and we connect it with a dashed line to an association class.</p>
+	<br/>
+	<p>If enrolment is repeated several times, then an identifier of an association class enrolment is a triple: student number, subject code, and enrolment date. Such identifier is  represented by a qualification box in the middle of an association enrols.</p>
+	<br/>
+	<p>Qualification of the middle part of many-to-many association, means that identifier of an association class, consists of an identifier of a class on the left hand side of association, identifier of a class on the right hand side of association, and the attributes included in a qualification box.</p>
+	<br/>
+	<p>A solution that adds an attribute enrolment date  to solve a problem of a default identifier of association class is correct under an assumption, that a student cannot enrol the subject more than one time per day. What if a student is allowed to enrol, drop, and enrol the same subject on the same day  and we would like to keep in a database all information about enrolments and drops ? A simple solution to such problem is to "upgrade" and attribute enrolment date to enrolment date and time and to measure time with a precision of a computer clock up to a single millisecond. A student will not be able to enrol, drop, and enrol a subject during a single millisecond. Another solution is to add an attribute enrolment  number to distinguish between the enrolment performed on the same day.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>If enrolment is repeated several times then an identifier of a class <strong class="blue prettyprint28">ENROLMENT</strong>
+	  is a triple <strong class="blue prettyprint28">(snumber, code, enrolment-date)</strong></li>
+        <li><strong class="red">How is this represented graphically ?</strong></li>	  
+        <li>It is represented by a <strong class="red">qualification</strong> of the middle part of the association <strong class="blue prettyprint28">Enrols</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-37-1.png" width="500" alt="Qualification" title="Qualification"/></p>
+	  </ul>
+	</li>
+	<li><strong class="red">Qualification of the middle part of many-to-many association</strong> means, that
+	  an identifier of <strong class="red">association class</strong> consists of an <strong class="blue">identifier of a class on
+	  the left hand side of association</strong>, <strong class="blue">identifier of a class on the right hand side of association</strong>, and
+	  <strong class="blue">qualification attribute(s)</strong></li>	
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 40 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>As we mentioned earlier a qualification of the middle part of association is a graphical shortcut. A qualification box located in the middle part of many to many association, is equivalent to the following two single side qualifications, of one-to-many association and many-to-one association.</p>
+	<br/>
+	<p>Does it mean that a class enrolment has two identical identifier coming from both qualifications ? Of course not. A class has a set of identifiers and because of that we cannot have the repetitions of exactly the same identifiers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualification</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A qualification of the middle part of many-to-many-association is equivalent to the following two single-side qualifications of one-to-many association and many-to-one association
+	  <ul class="build">
+	      <p style="text-align:center;"><img src="images/slide-38-1.png" width="900" alt="Qualification" title="Qualification"/></p>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 41 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Object Data Model</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Graphical Notations for Conceptual Modeling</a></li>
+	<li><a href="#7">(Simplified) Class of Objects</a></li>
+	<li><a href="#14">Association</a></li>
+	<li><a href="#23">Link Attribute</a></li>
+	<li><a href="#29">Association Class</a></li>
+	<li><a href="#34">Qualification</a></li>
+	<li><a class="red" href="#41">Generalization</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 42 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>We have already discussed a concept of generalisation in the previous presentation. Do to refresh you memory  we can say, that a generalisation hierarchy, represents is a subset relation between the sets of object instances.</p>
+	<br/>
+	<p>For example, a set of all undergraduate students, is a subset of a set of students. It means, that every undergraduate student is a student.</p>
+	<br/>
+	<p>A set of all postgraduate students, is also a subset of a set of students, and it also means, that a postgraduate student is a student.</p>
+	<br/>
+	<p>A generalisation hierarchy is visualised as arrows pointing from a subclass of objects to a superclass of objects.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalization</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A <strong class="red">generalization hierarchy</strong> represents <strong class="red">Is-a-subset</strong> relation between the classes of objects</li>
+	<li>A set of all undergraduate students is a subset of a set of students, it means, that an undergraduate student <strong class="red">IS-A</strong> student</li>
+	<li>A set of all postgraduate students is a subset of a set of students, it means, that a postgraduate student <strong class="red"></strong> <strong class="red">IS-A</strong> student
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-40-1.png" width="480" alt="Generalization" title="Generalization"/></p>
+	  </ul>
+	</li>
+	<li>A <strong class="red">generalization hierarchy</strong> is built with arrows pointing from a <strong class="red">subclass</strong> to a <strong class="red">superclass</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 43 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>This slide presents another visualisation of  generalisation hierarchy, where each car is a vehicle, and each truck is a vehicle.</p>
+	<br/>
+	<p>To create a nice visualisation, the subclasses are connected to the super classes by the arrows joined in the middle into a single arrow.</p>
+	<br/>
+	<p>If we distinguish different types of generalisation then a notation, that joins the arrows is more appropriate than a notation where we use the single disjoint arrows only.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalization</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Another graphical notation for <strong class="red">generalization hierarchy</strong>:</li>
+	<li>A car <strong class="red">IS-A</strong> vehicle and a truck <strong class="red">IS-A</strong> vehicle
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-41-1.png" width="500" alt="Generalization" title="Generalization"/></p>
+	  </ul>
+	</li>
+	<li>To create a nice effect the arrows can be "joined" into a single arrow</li> 
+     </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 44 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>At the end, we present a short comparison of the graphical widgets use by the Entity Relationship notation, and the notation of Simplified Object Classes.</p>
+	<br/>
+	<p>Entity relationship notation is presented in your textbook and it is very similar to a notation  of Simplified Object Classes.</p>
+	<br/>
+	<p>The following concepts are equivalent:</p>
+	<br/>
+	<p>Class of objects is equivalent to  Entity type.</p>
+	<br/>
+	<p>Object instance is equivalent to Entity instance.</p>
+	<br/>
+	<p>Link is equivalent to Relationship instance.</p>
+	<br/>
+	<p>Association is equivalent to  Relationship.</p>
+	<br/>
+	<p>Identifier is equivalent to Primary key or Candidate key.</p>
+	<br/>
+	<p>Qualification is equivalent to Weak entity type.</p>
+	<br/>
+	<p>Both notations have an identical concept of generalisation.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Entity-Relationship Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Entity-Relationship Modeling</strong> is another graphical conceptual modeling notation</li>
+	<li>It is presented in your texbook</li>
+	<li>Graphically it is very similar to <strong class="red">Object Data Model</strong></li>
+	<li>The following concepts from the notations are equivalent:
+	  <ul class="build">
+            <li><strong class="red">Class of objects</strong> = <strong class="blue">Entity type</strong></li>
+	    <li><strong class="red">Object</strong> = <strong class="blue">Entity instance</strong></li>
+	    <li><strong class="red">Association</strong> = <strong class="blue">Relationship</strong></li>
+	    <li><strong class="red">Identifier</strong> = <strong class="blue">Primary key or Candidate key</strong></li>
+	    <li><strong class="red">Qualification</strong> = <strong class="blue">Weak entity type</strong></li>
+	  </ul>
+	</li>
+     </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 45 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapters 2, 3, and 4 Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/JQLjCgZ0JJUw4DEmFoG32h?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 12 Entity-Relationship Modeling, Chapter 13.1 Specialization/Generalization, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+<!-- Slide templates (to be removed) ========================================================== -->
+
+</slides>
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/dUFOCjZ1RRUGZVo3u5kQEm?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+

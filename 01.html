@@ -1,0 +1,1314 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/2aOSCzvkppUwRLrku4TEs7?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>01 Introduction</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;Data Management and Security</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Data ? What is it ?</a></li>
+        <li><a href="#4">Electronic Storage Devices</a></li>
+        <li><a href="#7">Persistent Storage Devices</a></li>
+        <li><a href="#16">File Systems</a></li>
+	<li><a href="#20">Database Systems</a></li>
+	<li><a href="#28">Database Management Systems</a></li>	
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+  <slide>
+    <aside class="note">
+      <section>
+	<p>We start with a few simple definitions of the basic concepts. Accordingly to Wikipedia, data is a set of values of qualitative or quantitative variables; restated, pieces of data are individual pieces of information</p>
+	<br/>
+	<p>Data can be measured, collected and reported, and analysed, whereupon it can be visualised using graphs or images</p>
+	<br/>
+	<p>Data as a general concept refers to the fact that some existing information or knowledge is represented or coded in some form suitable for better use or processing</p>
+	<br/>
+	<p>A bit is the smallest unit of data</p>
+	<br/>
+	<p>Accordingly to Wikipedia, a bit is the basic unit of information in computing and digital communications</p>
+	<br/>
+	<p>A bit can have only one of two values, and may therefore be physically implemented with a two-state device</p>
+	<br/>
+	<p>These values are most commonly represented as either a 0 or 1</p>
+	<br/>
+	<p>A byte is a sequence of 8 bits</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Data ? What is it ?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Data</strong> is a set of values of qualitative or quantitative variables; <br/>
+	  The pieces of <strong class="red">data</strong> are the individual elements of <strong class="red">information</strong></li>
+        <li><strong class="red">Data</strong> can be measured, collected and reported, and analyzed, whereupon it can be visualized using graphs or images</li>
+        <li><strong class="red">Data</strong> as a general concept refers to the fact that some existing information or knowledge is represented or coded in some form suitable for better usage or processing</li>
+        <li>A <strong class="red">bit</strong> is the smallest unit of <strong class="red">Data</strong></li>
+        <li>A <strong class="red">bit</strong> is the basic unit of information in computing and digital communications</li>
+	<li>A <strong class="red">bit</strong> can have only one of two values, and may therefore be physically implemented with a two-state device</li> 
+	<li>These values are most commonly represented as either a <strong class="green prettyprint28">0</strong> or <strong class="green prettyprint28">1</strong></li>
+        <li>A <strong class="red">byte</strong> is a sequence of <strong class="green prettyprint28">8</strong> <strong class="red">bits</strong></li>
+      </ul>
+      <footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">
+TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Data ? What is it ?</a></li>
+        <li><a class="red" href="#4">Electronic Storage Devices</a></li>
+        <li><a href="#7">Persistent Storage Devices</a></li>
+        <li><a href="#16">File Systems</a></li>
+	<li><a href="#20">Database Systems</a></li>
+	<li><a href="#28">Database Management Systems</a></li>		
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>As it has been mentioned earlier, electronic storage devices can be used to store the values of bits. Additionally, such devices allow us to change the already stored values, i.e perform write operation on a bit and discover what value has been stored in a particular bit, i.e. to perform a read operation of bit.  In the reality, due to the practical reasons, electronic storage devices allow us to access a single byte in one read/write operation or a block of bytes in one read/write operation</p>
+	<br/>
+	<p>There are two types of storage devices: transient (volatile) storage devices and persistent storage devices.</p>
+	<br/>
+	<p>Transient (volatile) storage device is computer memory that requires power to maintain the stored information. It retains its contents while powered on but when the power is interrupted the stored data is lost very rapidly or immediately.</p>
+    <p>Random-access memory (RAM) device allows data items to be accessed (read or written) in almost the same amount of time irrespective of the physical location of data inside the memory,</p>
+	<br/>
+	<p>All transient storage devices in a computer system are commonly call as "transient memory. Persistent storage devices in a computer system are commonly called as "persistent storage".<p>
+	<br/>
+	<p>A single read operation on transient memory can access one byte at a time.</p>
+	<br/>
+	<p>A single operation on persistent storage must access entire block of bytes where a size of a block is either 2*1024 bytes, or 4 * 1024 bytes, or 8 * 1024 bytes or 16 * 1024 bytes or 23* 1024 bytes. It means that to read/write a single byte we must read entire block.
+</p>
+	<br/>
+	<p>It is almost the same as with transient memory where to read/write a single bit we must read/write entire byte.</p>
+	<br/>
+	<p>Transient memory devices are called "transient" because they are able to keep data only in a period of time when supplied with electric power. After power is turned of the contents of transient memory "evaporates into fresh air". </p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Electronic Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Electronic storage devices</strong> provide read/write access to the sequences of bytes</li>	
+        <li><strong class="red">Transient (volatile) storage device</strong> is computer memory that requires power to maintain the stored information; it retains its contents while powered on but when the power is interrupted the stored data is lost very rapidly or immediately
+        <li><strong class="red">Random-access memory</strong> (RAM) device allows data items to be accessed (read or written) in almost the same amount of time irrespective of the physical location of data inside the memory</li>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-05-1.png" alt="RAM" title="RAM" width="450" height="200"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+ <aside class="note">
+      <section>
+	<p>Persistent storage (nonvolatile) device is any method or apparatus for efficiently storing data structures such that they can continue to be accessed using memory instructions or memory APIs even after the end of the process that created or last modified them.</p>
+	<br/>
+	<p>It means that the contents of persistent storage is able to survive lack of power. It is why persistent storage devices is called as "persistent".</p>
+	<br/>
+	<p>Persistent storage (nonvolatile) devices include:
+    <br/>Hard Disk Drives (HDD) (1960s)
+    <br/>Solid State Drives (SSD) (late 1990s)
+    <br/>Non-Volatile Memory (NVM) (2019)
+    <br/>Optical Disk Drives (ODD) (early 1980s)</p>
+	<br/>
+	<p>Hard disk drives, solid state drives, and optical disk drives are block storage device. It means that read/write operations are always performed on data blocks.
+</p>
+	<br/>
+	<p>Non-Volatile Memory is hybrid device. It allows for access to single bytes like transient memory devices and it makes the memory contents non-volatile (persistent).</p>
+	<br/>
+	<p>Non-volatile memory devices became commercially available in 2019, for example Intel Optane persistent memory.</p>
+	<br/>
+	<p>It is expected that in the future Non-Volatile Memory will revolutionise the architectures of persistent data processing systems.
+</p>
+	<br/>
+	<p></p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Electronic Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Persistent storage (nonvolatile) device</strong> is any method or apparatus for efficiently storing data structures such that they can continue to be accessed using memory instructions or memory APIs even after the end of the process that created or last modified them</li>	
+        <li><strong class="red">Persistent storage (nonvolatile) devices</strong> include:
+	  <ul class="build">
+	    <li><strong class="blue">Hard Disk Drives (HDD)</strong></li>
+	    <li><strong class="blue">Solid State Drives (SSD)</strong></li>
+	    <li><strong class="blue">Non-Volatile Memory (NVM)</strong></li>	    
+	    <li><strong class="blue">Optical Disk Drives (ODD)</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+       <li><a href="#2">Data ? What is it ?</a></li>
+        <li><a href="#4">Electronic Storage Devices</a></li>
+        <li><a class="red" href="#7">Persistent Storage Devices</a></li>
+        <li><a href="#16">File Systems</a></li>
+        <li><a href="#20">Database Systems</a></li>
+	<li><a href="#28">Database Management Systems</a></li>	       
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Hard Disk Drive (HDD) is a persistent storage device commonly used for storing and retrieving digital information.</p>
+	<br/>
+	<p>HDD is categorised as an electro-mechanical device. It means that data recording and reading is performed through "cooperation" of mechanical and electronic components.</p>
+	<br/>
+	<p>Hard disk drive consist of one or more rapidly rotating disks covered with magnetic material and one or more disk heads located on the movable arms.</p>
+	<br/>
+	<p>Disks covered with magnetic material are used to record data. When rotating, the disks create the air "pillows" that support read/write disk heads at the ends of movable arms.</p>
+	<br/>
+	<p>A moveable arm with the disk heads is visible below just above disk platters.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Hard Disk Drive</strong> (<strong class="red">HDD</strong>) is a data storage device used for storing and retrieving digital information</li>
+	<li>Hard disk drive consist of one or more rapidly rotating disks covered with magnetic material and one or more disk heads located on the movable arms</li>
+	<li>A moveable arm with the disk heads is visible below just above disk platters</li>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-07-1.png" alt="HDD" title="HDD" width="350"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A simple model of HDD consists of a number of disk platters and read/write disk heads that can change positions over the platters.</p>
+	<br/>
+	<p>The moveable arms move forward and backward to change a location of disk heads over the magnetic platters. </p>
+	<br/>
+	<p>A disk platter consists of a number of tracks and each track consists of a sequence of sectors</p>
+	<br/>
+	<p>All tracks located on different platters and equally distant from a centre of platters is called as a cylinder.</p>
+	<br/>
+	<p>It means that the contents of cylinder can be read/written without movement of the arms with disk heads.</p>
+	<br/>
+	<p>It provides are of persistent storage that can be accessed in the fastest way. It is why the large amounts of data are distributed over HDD in a "cylinder by cylinder" mode.</p>
+	<br/>
+	<p>A concept of cylinders can be considered as a logical data model at the lowest level of abstraction.</p>
+	<br/>
+	<p>It determines the granulation of data at the lowest level of abstraction.</p>
+	<br/>
+	<p>For example, large amounts of data data that span over long sequence of bytes are recorded in "cylinder by cylinder" mode. An optimisation objective is to access all required data with the minimum number arm and disk heads movement. Preseving such organization can be impossible when long sequences of bytes are frequently updated</p>
+	<br/>
+	<p>It is why HDDs must be from time to time "defragmented" to re-record data in "cylinder by cylinder" mode.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A simple model of HDD consists of a number of <strong class="red">disk platters</strong> and <strong class="red">read/write disk heads</strong> that can change  positions over the platters
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-07-2.png" alt="HDD-schema" title="HDD-schema" width="350"/></p>
+ 	  </ul>
+	</li>
+	<li>A disk platter consists of a number of <strong class="red">tracks</strong> and each track consists of a sequence of <strong class="red">sectors</strong></li>
+	<li>All tracks located on different platters and equally distant from a center of platters is called as a <strong class="red">cylinder</strong></li>
+	<li>A concept of cylinders can be considered as a <strong class="red">logical data model</strong> at the lowest level of abstraction</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Physical parameters of HDD are the following.</p>
+	<br/>
+	<p>Seek time: time needed to move disk arm to a given cylinder position (from ~15 to ~2 msec)</p>
+	<br/>
+	<p>In the worst case a movement from the outermost to the innermost position is needed and it takes the longest time.</p>
+	<br/>
+	<p>Rotational latency: time needed to rotate a platter to a given position (~4 msec)</p>
+	<br/>
+	<p>In the worst case a disk head must wait a full rotation of a platter to access data.</p>
+	<br/>
+	<p>Transfer time: time needed to read/write data from/to a platter (~13 Mbytes per sec)</p>
+	<br/>
+	<p>Transfer time depends how large data transmission is. A single transmission of long sequence of data blocks is always faster than transmission of the same number of data blocks one by one.</p>
+	<br/>
+	<p>Average disk access time: an average time needed to transfer a block of data (~10msec = 0.001 sec)</p>
+	<br/>
+	<p>For a comparison main memory (transient memory, RAM) access time, time needed to read 1 byte from RAM (~10nanosec = 0.000000001 sec)</p>
+	<br/>
+	<p>Access to transient memory is 10^6 times faster than access to persistent storage on HDD. It is why modern data management systems tend to keep as much data as possible in transient memory.</p>
+	<br/>
+	<p>Operations: read sector, write sector, move disk head</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Physical parameters of <strong class="red">HDD</strong>:
+	  <ul class="build">
+	    <li><strong class="red">Seek time</strong>: time needed to move disk arm to a given cylinder position (from ~15 to ~2 msec)</li>
+	    <li><strong class="red">Rotational latency</strong>: time needed to rotate a platter to a given position  (~ 4 msec)</li>
+	    <li><strong class="red">Transfer time</strong>: time needed to read/write data from/to a platter (~13 Mbytes per sec)</li>
+	    <li><strong class="red">Average disk access time</strong>: an average time needed to transfer a block of data (~10msec = 0.001 sec)</li>
+	    <li>For a comparison <strong class="red">main memory access time</strong>, time needed to read 1 byte from RAM (~10nanosec = 0.000000001 sec)</li>
+	    <li>Operations: <strong class="red">read sector</strong>, <strong class="red">write sector</strong>, <strong class="red">move disk head</strong></li>
+	  </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Solid State Drive (SSD) uses nonvolatile memory, e.g. NAND flash or recently NVM as its storage media.</p>
+	<br/>
+	<p>SSD has no moving mechanical components and it only uses silicon as its media.It is why it is called as "solid state".</p>
+	<br/>
+	<p>SSDs are common today in mobile devices such as smartphones and digital cameras; SD (Secure Digital) and CF (CompactFlash) memory cards are smaller and less complex versions of an SSD.</p>
+	<br/>
+	<p>Both HDD and SSD are part of a class of storage called block devices.</p>
+	<br/>
+	<p>Block devices use logical addressing to access data and abstract the physical media, using small, fixed, contiguous segments of bytes (data blocks) as the addressable units</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Solid State Drive</strong> (<strong class="red">SSD</strong>) uses nonvolatile memory, i.e., NAND flash as its storage media
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-09.png" width="250" alt="SSD" title="SSD"/></p>	    
+          </ul>
+        </li>
+	<li><strong class="red">SSD</strong> has no moving parts and it only uses silicon as its media</li>
+	<li><strong class="red">SSD</strong>s are common today in mobile devices such as smartphones and digital cameras; SD (Secure Digital) and CF (CompactFlash) memory cards are smaller and less complex versions of an SSD
+</li>
+	<li>Both <strong class="red">HDD</strong>and <strong class="red">SSD</strong> are part of a class of storage called <strong class="red">block devices</strong></li>
+	<li><strong class="red">Block devices</strong> use logical addressing to access data and abstract the physical media, using small, fixed, contiguous segments of bytes as the addressable unit</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Physical parameters of SSD are the following.</p>
+	<br/>
+	<p>Random access time: time needed to retrieve data from various locations in memory (under 0.1 msec)</p>
+	<br/>
+	<p>It is 100 times faster than HDD.</p>
+	<br/>
+	<p>Transfer time: reading up to 400 Mb/sec, writing at only 10-20 Mb/sec because all bits must be set to 0 before setting to 1, transfer is slower when a lot of individual blocks are accessed.</p>
+	<br/>
+	<p>Like for HDDs, transfer time depends how large data transmission is. A single transmission of long sequence of data blocks is always faster than transmission of the same number of data blocks one by one.</p>
+	<br/>
+	<p>Capacity: 16Gb per chip, SSD consists of from 8 to 226 chips.</p>
+	<br/>
+	<p>Due to strong sensitivity to temperature SSG can have only the limited number of chips.</p>
+	<br/>
+	<p>For a comparison main memory access time, time needed to read 1 byte from RAM (~10nanosec = 0.000000001 sec)</p>
+	<br/>
+	<p>Operations: read a sequence of bytes, write a sequence of bytes</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Physical parameters of <strong class="red">SSD</strong>:
+	  <ul class="build">
+	    <li><strong class="red">Random access time</strong>: time needed to retrieve data from various locations in memory (under 0.1 msec)</li>
+	    <li><strong class="red">Transfer time</strong>: reading up to 400 Mb/sec, writing at only 10-20 Mb/sec because all bits must be set to 0 before setting to 1, transfer is slower when a lot of individual blocks are accessed</li>
+	    <li><strong class="red">Capacity</strong>: 16Gb per chip, SSD consists of from 8 to 226 chips</li>
+	    <li>For a comparison <strong class="red">main memory access time</strong>, time needed to read 1 byte from RAM (~10nanosec = 0.000000001 sec)</li>
+	    <li>Operations: <strong class="red">read a sequence of bytes</strong>, <strong class="red">write a sequence of bytes</strong></li>
+	  </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Non-Volatile Memory (NVM) is the name for a group of new technologies such as Phase-Change RAM, Magnetic RAM and Resistive RAM that enable non-volatile (persistent), memory chips that require low energy, and have density and latency closer to current DRAM chips.</p>
+	<br/>
+	<p>NVM has 4 times faster input/output operations per second than SSD and seek time for data and is ten times faster than SSD.</p>
+	<br/>
+	<p>NVM supports byte-addressable accesses and stores with a lower latency than SSD.</p>
+	<br/>
+	<p>The important properties of NVM include:<br/>
+	byte-addressability, NVM supports byte-addressable loads and stores, no need to transfer data in blocks.<br/>
+	high write throughput, NVM delivers more than an order of magnitude higher write throughput compared to SSD.<br/>
+	read-write asymmetry, in certain NVM technologies, write take longer to complete when compared to read and excessive writes to a single memory cell can destroy it.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Non-Volatile Memory</strong> (<strong class="red">NVM</strong>) is the name for a group of new technologies such as Phase-Change RAM, Magnetic RAM and Resistive RAM that enable non-volatile (persistent), memory chips that require low energy, and have density and latency closer to current DRAM chips</li>
+	<li><strong class="red">NVM</strong> has 4 times faster input/output operations per second than SSD and seek time for data and is ten times faster than SSD</li>
+	<li><strong class="red">NVM</strong> supports byte-addressable accesses and stores with a lower latency than SSD</li>
+	<li>The important properties of <strong class="red">NVM</strong> include:
+	  <ul class="build">
+	    <li><strong class="red">byte-addressability</strong>, <strong class="red">NVM</strong> supports byte-addressable loads and stores, no need to transfer data in blocks</li>
+	    <li><strong class="red">high write throughput</strong>, <strong class="red">NVM</strong> delivers more than an order of magnitude higher write throughput compared to SSD</li>
+    	    <li><strong class="red">read-write asymmetry</strong>, in certain <strong class="red">NVM</strong> technologies, write take longer to complete when compared to read and excessive writes to a single memory cell can destroy it</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Optical Disk Drive (ODD) is a disk drive that use laser light or electromagnetic waves within or near the visible light spectrum as part of the process of reading or writing data to or from optical discs.</p>
+	<br/>
+	<p>Compact discs, DVDs, and Blu-ray discs are common types of optical media which can be read and recorded by such drives</p>
+	<br/>
+	<p>DVD writer drive is the most common for desktop PCs and laptops.</p>
+	<br/>
+	<p>ODDs are not used by database systems to store data, that is frequently accessed in a short period of time. It is because replacement of an optical disk takes too much time even in the devices were no manual intervention is needed. </p>
+	<br/>
+	<p>Due to a very low costs of an optical disk ODD is perfect device old and very rarely accessed backups. HDDs are much faster for implementation of relatively fresh backup. It is why a role of ODD as a persistent storage device is severely limited.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Optical Disk Drives</strong> (ODD)is a disk drive that use laser light or electromagnetic waves within or near the visible light spectrum as part of the process of reading or writing data to or from optical discs.
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-11.png" width="400" alt="ODD" title="ODD"/></p>
+          </ul>
+	</li>
+	<li>Compact discs, DVDs, and Blu-ray discs are common types of optical media which can be read and recorded by such drives</li>
+	<li>DVD writer drive is the most common for desktop PCs and laptops</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A logical model of persistent storage is a sequence of fixed size data blocks.</p>
+	<br/>
+	<p>A software implements a mapping of physical persistent storage structures like sectors, tracks cylinders of HDDs and sequences of bytes of SSDs and NVMs into a logical view where long sequences of bytes are divided into shorter sequences called as data blocks.</p>
+	<br/>
+	<p>A mapping is performed in such a way that adjacent data blocks in a sequence can be accessed in the minimum period of time.</p>
+	<br/>
+	<p>It is why in HHDs cylinders are always mapped into the adjacent data blocks,</p>
+	<br/>
+	<p>The mapping of an entire persistent storage device into a sequence of data blocks is performed in a way that minimize the total time needed for reading all bytes available on the device.</p>
+	<br/>
+	<p>A size of a data block can be different on different persistent storage devices.</p>
+	<br/>
+	<p>A data block is a contiguous sequence of 2 Kbytes (2*1024bytes), or 4 Kbytes (4*1024bytes), or 8 Kbytes (8*1024bytes), or 16 Kbytes (16*1024bytes), or 32 Kbytes (32*1024bytes).</p>
+	<br/>
+	<p>Each data block is identified by a block address.</p>
+	<br/>
+	<p>A logical model of persistent storage provide the following operations: read or write a data block at a given address, read or write the next data block after a data block the most recently accessed.</p>
+	<br/>
+	<p>Such set of operations allow for random access to data blocks and sequential access to data blocks.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Persistent Storage Devices</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Logical model of persistent storage</strong>:
+	  <ul class="build">
+	    <li>Persistent storage is a sequence of fixed size <strong class="red">data blocks</strong></li>
+	    <p style="text-align:center;"><img src="images/slide-12.png" width="450" alt="Logical model" title="Logical model"/></p>	    	    
+	  </ul>
+        </li>
+	<li>A <strong class="red">data block</strong> is a contiguous sequence of 2 Kbytes, or 4 Kbytes, or 8 Kbytes, or 16 Kbytes, or 32 Kbytes</li>
+	<li>A data block is identified by a <strong class="red">block address</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 16 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Data ? What is it ?</a></li>
+        <li><a href="#4">Electronic Storage Devices</a></li>
+        <li><a href="#7">Persistent Storage Devices</a></li>
+        <li><a class="red" href="#16">File Systems</a></li>
+	<li><a href="#20">Database Systems</a></li>
+	<li><a href="#28">Database Management Systems</a></li>		
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A logical view of persistent storage as a sequence of fixed sizes data blocks is still too simplistic for implementation of more advanced data applications.</p>
+	<br/>
+	<p>Operating systems provide a view of persistent storage where a sequence of data blocks is partitioned into the variable size subsequences of data blocks called as files.</p>
+	<br/>
+	<p>The names associated with the files uniquely identify each file.</p>
+	<br/>
+	<p>A data block that belongs to a file contains one or more records. From such perspective a file is a collection of records.</p>
+	<br/>
+	<p>A record can be stored in one or more data blocks and a data block can contain a number of records.</p>
+	<br/>
+	<p>A record is a sequence of fields.</p>
+	<br/>
+	<p>A field is a pair [address, value] where value is implemented as sequences of bytes located in a data block and address consists of file name, block number, offset within a block.</p>
+	<br/>
+	<p>A file definition determines the names of fields and the length of each field. A file definition is not stored within a file.</p>
+	<br/>
+	<p>A file system has a hierarchical structure where a folder consist of a number of files. A file consists of records. A record consists of fields.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">File systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">data block-based</strong> logical model of persistent storage is too simplistic for adavanced data processing applications</li>
+	<li>A sequence of data blocks is partitioned into variable subsequence of data blocks called as <strong class="red">files</strong> and the <strong class="red">names</strong> associated with the <strong class="red">files</strong> uniquely identify each <strong class="red">file</strong></li>
+	<li>A <strong class="red">file</strong> is a collection of <strong class="red">records</strong></li>
+	<li>A <strong class="red">record</strong> can be stored in one or more data blocks and data block can contain a number of <strong class="red">records</strong></li>
+	<li>A <strong class="red">record</strong> is a sequence of <strong class="red">fields</strong></li>
+	<li>A <strong class="red">field</strong> is a pair <strong class="blue">[address, value]</strong> where <strong class="blue">value</strong> is implemented as sequences of bytes located in a data block  and <strong class="blue">address</strong> consists of <strong class="red">file name</strong>, <strong class="red">block number</strong>, <strong class="red">offset within a block</strong></li>
+	<li>A <strong class="red">file definition</strong> determines the <strong class="red">names of fields</strong> and the <strong class="red">length of each field</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 18 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A file system provides the following operations on files: open file, close file read/write a record at a given address read/write the next record.</p>
+	<br/>
+	<p>Open file operation binds a name  of a file with a file handle later on used by the other operations, verifies access rights, and allocates a buffer in a transient memory for transmission of data from persistent storage.</p>
+	<br/>
+	<p>Read/write operations transfer records from/to persistent storage to /from transient memory.</p>
+	<br/>
+	<p>Close operation releases a data transmission buffer in transient memory.</p>
+	<br/>
+	<p>An example of a simple file system that consists of 3 files STUDENT, SUBJECT and ENROLMENT file.</p>
+	<br/>
+	<p>A STUDENT file consists of the fields: number, firstname, lastname, date-of-birth, and degree</p>
+	<br/>
+	<p>A SUBJECT file consists of the fields: code, title, and credits.</p>
+	<br/>
+	<p>An ENROLMENT file consists of the fields: student-number, subject-code, enrolment-date, and status.</p>
+	<br/>
+	<p>A file system contains information about students, subjects and enrolments of subject by students.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">File systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Operations on files: 
+	  <ul class="build">
+	    <li><strong class="red">open file</strong></li> 
+	    <li><strong class="red">close file</strong></li>
+	    <li><strong class="red">read/write a record at a given address</strong></li>
+	    <li><strong class="red">read/write the next record</strong></li>
+	  </ul>
+	</li>
+	<li>An example of a simple file system:
+	  <ul class="build">
+	    <li><strong class="blue prettyprint28">STUDENT</strong> file</li>
+	    <pre class="prettyprint" data-lang="A file with information about students">
+
+STUDENT(number, firstname, lastname, date-of-birth, degree)</pre>
+	    <li><strong class="blue prettyprint28">SUBJECT</strong> file</li>	   
+ 	    <pre class="prettyprint" data-lang="A file with information about subjects">
+
+SUBJECT(code, title, credits)</pre>
+	    <li><strong class="blue prettyprint28">ENROLMENT</strong> file</li>	   
+ 	    <pre class="prettyprint" data-lang="A file with information about enrolments">
+
+ENROLMENT(student-number, subject-code, enrolment-date, status)</pre>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>File systems have the following limitations:</p>
+	<br/>
+	<p>Separation and isolation of data: it means, that is is impossible to automatically join information located in two different files, for example if we would like to find all enrolments of Harry Potter then we must retrieve his student number from STUDENT file and later on access ENROLMENT files to find the enrolments.
+</p>
+	<br/>
+	<p>Data dependence: it means, that the physical structures of the data files and records are defined in the application code, there is no other place from where it is possible to find how data is structured.</p>
+	<br/>
+	<p>Incompatible formats of files: it means, that different organizations can use different physical structures of files, it is impossible to have a place from where a unified physical structures are available to all organizations.</p>
+	<br/>
+	<p>Fixed queries/proliferation of application programs: it means, that to implement a new query a new database application must written from very beginning, there is no standard query language, that can be applied to query different databases.</p>
+	<br/>
+	<p>No provision for security or integrity: it means, that file systems do not provide any mechanisms that allow for implementation of security systems and data integrity systems, </p>
+	<br/>
+	<p>No recovery from hardware or software: it means, when a file is corrupted then a file system does not provide any mechanisms that can be used to bring a file to a consistent state.</p>
+	<br/>
+	<p>No provision for shared access: it means that a file can be updated by one user at a time, no matter what updates would be perfromed by different users, when a file is updated access to a file is granted to only one user.
+</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">File systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Limitations of file systems
+	  <ul class="build">
+	    <li><strong class="red">Separation</strong> and <strong class="red">isolation</strong> of data</li>
+	    <li><strong class="red">Data dependence</strong></li>
+	    <li><strong class="red">Incompatible formats</strong> of files</li>
+	    <li><strong class="red">Fixed queries/proliferation</strong> of application programs</li>
+	    <li>No provision for <strong class="red">security</strong> or  <strong class="red">integrity</strong></li>
+	    <li>No <strong class="red">recovery</strong> from hardware or software failures</li>
+	    <li>No provision for <strong class="red">shared access</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+ <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Data ? What is it ?</a></li>
+        <li><a href="#4">Electronic Storage Devices</a></li>
+        <li><a href="#7">Persistent Storage Devices</a></li>
+        <li><a href="#16">File Systems</a></li>
+	<li><a class="red" href="#20">Database Systems</a></li>
+	<li><a href="#28">Database Management Systems</a></li>		
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Database systems eliminate the following important limitations of file systems:</p>
+	<br/>
+	<p>Database systems store the definitions of data stored together with data, it eliminates a problem of "data dependence" of file systems. A data dictionary contains information about the logical structures of data. There is no need to learn such information from database applications accessing data.</p>
+	<br/>
+	<p>Database systems provide a universal query language that can used for quick implementation of ad-hoc access to data. A query langauge is independent on the contents and the logical structures of a database. I means, that the same language can be used to formulate queries to a university database, banking database, sport database, etc.</p>
+	<br/>
+	<p>Database systems implement a standard and unified collection of different types of data, like for example, integer, float, string, date, and the others. Database system provide different interpretations of the sequence of bytes stored in data blocks. There is no need to implement a specialised software that interprets the sequences of bytes in a give way, for example 8 bytes as a long positive integer number.</p>
+	<br/>
+	<p>Database systems provide the mechanism to enforce security and integrity of data. Database software allows for granting access rights  to data to individual users. It is possible to define the roles as the new types of access rights created from the combinations of basic access rights and other roles.</p>
+	<br/>
+	<p>Database systems implement the mechanism to automatically restore data after hardware or software failures. database systems provide the mechanism of taking backup and using backup during the recovery processes. </p>
+	<br/>
+	<p>Database systems implement the mechanism for shared and concurrent access to data by many different users. Database system is able to control shared access to common data by many database users. Typically, shared access is granulated at a level of a row in a tabular data model. Database system is able to detect and avoid the situations when shared access to common data item may corrupt the contents of a database.</p>
+	<br/>
+	<p></p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+	<li><strong class="red">Database systems</strong> eliminate the following important limitations of <strong class="blue">file systems</strong>:
+	  <ul class="build">
+	    <li><strong class="red">Database systems</strong> store the definitions of data stored together with data</li>
+	    <li><strong class="red">Database systems</strong> provide a universal query language that can used for quick implementation of ad-hoc access to data</li>
+	    <li><strong class="red">Database systems</strong> implement a standard and unified collection of different types of data, like for example, integer, float, string, date, and the others</li>
+	    <li><strong class="red">Database systems</strong> provide the mechanism to enforce security and integrity of data</li>
+	    <li><strong class="red">Database systems</strong> implement the mechanism to automatically restore data after hardware or software failures</li>
+	    <li><strong class="red">Database systems</strong> implement the mechanism for shared and concurrent  access to data by many different users</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 22 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>At a logical level a database is a shared collection of logically related data designed to meet the information needs of an organisation. A view of a database at a logical level is usually a reflection of physical data structures used to store data. For example, tree structure, linked structures, arrays et.</p>
+	<br/>
+	<p>At a conceptual level it is possible to say, that a database is a description of selected fragment of the reality. For example information stored in a university database describes the real world objects like students, lectures, courses, assignments, etc. It is also possible to represent the association between the objects and detailed descriptions of objects through the values of attributes.</p>
+	<br/>
+	<p>The real world objects can be grouped with the homogenous classes of objects and classes of objects can be included one in another.
+</p>
+	<br/>
+	<p>Typically, a database may have different views at a conceptual (also called as abstract) level and at a logical (also called as implementation) level.
+</p>
+	<br/>
+	<p>Usually, at a conceptual level (abstract level) a database is a collection of objects (entities) described by the values of properties (attributes) and related to each other through associations (relationships)</p>
+	<br/>
+	<p>A diagram at the bottom of a slide represents the classes of SUPPLIERS and PARTS. An association SUPPLIES represents information which part is supplied by which supplier.</p>
+	<br/>
+	<p>A diagram provide information about the identifiers of both SUPPLIERS and PARTS and about the attributes used for their description.</p>
+	</section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">database</strong> is a shared collection of logically related data designed to meet the information needs of an organization</li>
+	<li>We can also say that at a higher level of abstraction a <strong class="red">database</strong> is a description of selected fragment of the reality</li>
+	<li>A <strong class="red">database</strong> may have different views at a conceptual (abstract) level and at a logical level</li>
+	<li>Usually, at a <strong class="red">conceptual level</strong> (abstract level) a <strong class="red">database</strong> is a collection of objects (entities) described by the values of properties (attributes) and related to each other through associations (relationships)</li>
+	<li>A diagram below represents “suppliers” and “parts” (objects) and an association “supplies” that links “suppliers” and “parts”
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-20-1.png" width="550" alt="Table" title="Table"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 23 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>In this subject, a logical level a database is a collection of tables that consist of headers, rows, and columns. A database system provides its user with an impression that data is stored in two-dimensional tables. A database system also provides its user with implementation of data definition, data manipulation, query and data administration tools. The user can create, change drop the tables, insert modify, delete data, search the table and manage the tables.</p>
+	<br/>
+	<p>Another logical level views of a database are possible. It is possible that at a logical level a database is visible as a collection of records linked with pointers, it means a database is a collection of hierarchical structures.</p>
+	<br/>
+	<p>It is also possible, that a database is visible as a logical level as a network of recores linked with pointers.</p>
+	<br/>
+	<p>At a conceptual level a view of a database is almost identical to a view of the reality. For example, a conceptual view shows a database that contains information about suppliers, parts, and shipments of parts done by suppliers. A conceptual schema of such database is given at the bottom of the current slide.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Usually, at a <strong class="red">logical level</strong> a database is a collection of  <strong class="blue">tables</strong> that consist of <strong class="blue">headers</strong>, <strong class="blue">rows</strong>, and  <strong class="blue">columns</strong></li>
+	<li>It is also possible that at a <strong class="red">logical level</strong> a database is a collection of  <strong class="blue">records</strong> linked with pointers or it is a collection of  <strong class="blue">hierarchical structures</strong></li>
+	<li>Example of a  <strong class="red">conceptual view</strong> of a database:
+	  <ul class="build">
+	    <li>A database contains information about <strong class="red">suppliers</strong>,  <strong class="red">parts</strong>, and  <strong class="red">shipments</strong> of parts done by suppliers</li>
+	    <li>A  <strong class="red">conceptual schema</strong>:</li>
+	    <p style="text-align:center;"><img src="images/slide-20-1.png" width="600" alt="Table" title="Table"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 24 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>An important component of a conceptual view of a database is an instance diagram. An instance diagram uses the graphical icons to represent the instances of objects and lines to represent the links between the objects. An instance diagram on the present slide represents suppliers, parts, and the links n=between suppliers and parts. A link between a supplier and a part mans that a supplier supplies a part.</p>
+	<br/>
+	<p>An oval surrounding the supplier icons represents a class of objects called SUPPLIER. An oval surrounding the part icons represents a class of objects called PART.</p>
+	<br/>
+	<p>Note, that it is possible to have a supplier who is not linked to any part. It means, that at the moment a supplier supplies no parts. It is also possible to have a part not linked to any supplier. It means that some parts are not supplied by any supplier.</p>
+	<br/>
+	<p>An instance diagram is a perfect graphical tool to understand the complex multi-argument associations between the classes of objects.</p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>Example of a  <strong class="red">conceptual view</strong> of a database:
+	  <ul>
+	    <li>A database contains information about <strong class="red">suppliers</strong>,  <strong class="red">parts</strong>, and  <strong class="red">shipments</strong> of parts done by suppliers</li>
+	    <li>An  <strong class="red">instance diagram</strong>:</li>
+	    <p style="text-align:center;"><img src="images/slide-20-2.png" alt="Table" title="Table" width="500"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 25 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>One of the logical views of data  is so called "tabular view of data". In the tabular view of data the descriptions of instances of objects and links between the objects are represented by the rows in two-dimensional tables. Each table has a header with the names of attributes describing the instance of objects. The same attributes in different relational tables implement the links between the rows.</p>
+	<br/>
+	<p>For example, an attribute s# in SUPPLIER table is the same as an attribute s# in SHIPMENT table. It means that same value of an attribute s# in both table create "link by value" connections between the rows in the tables SUPPLIER and SHIPMENT. In the same way the rows in a table PART are linked to the rows in a table SHIPMENT.</p>
+	<br/>
+	<p>A tabular view of data  is the most commonly used logical view of data in database systems. It is simple to comprehend and it is simple in implementations. Simplicity of tabular view of data is one of its biggest advantages. </p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Example of a <strong class="red">logical view</strong> of a database:
+	  <ul class="build">
+	    <li>A database contains information about <strong class="red">suppliers</strong>,  <strong class="red">parts</strong> , and  <strong class="red">shipments</strong> of parts done by suppliers</li>
+	    <p style="text-align:center;"><img src="images/slide-21.png" width="500" alt="Tabular view" title="Tabular view"/></p>
+	    <li> A logical view above is also called as a <strong class="red">tabular view of data</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 26 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Another logical view of data is called "hierarchical view". Hierarchical view of data is a reflection of many hierarchical structures in the reality. For example, a typical managerial structure is a hierarchy where a higher level manager supervises a lower level managers. "Consists of" is another example of hierarchical structure where an object consists of smaller objects and smaller objects consist of even small objects, and so on.</p>
+	<br/>
+	<p>An example, visualised in the present slide puts a shipment in a root of a hierarchy and both supplier and shipped part at the lower levels.</p>
+	<br/>
+	<p>Hierarchical view of data was historically the first logical view of data available in database systems.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Another example of a <strong class="red">logical view</strong> of a database:
+	  <ul class="build">
+	    <li>A database contains information about <strong class="red">suppliers</strong>,  <strong class="red">parts</strong> , and  <strong class="red">shipments</strong> of parts done by suppliers</li>
+	    <p style="text-align:center;"><img src="images/slide-22.png" width="600" alt="Hierarchy" title="Hierarchy"/></p>
+	    <li> A logical view above is also called as a <strong class="red">hierarchical view of data</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 27 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Yet another logical view of the database contents is a network view.</p>
+	<br/>
+	<p>In a network view a database consists of records linked with pointers to the locations in a persistent storage.  All records that contain information about the objects from the same class, for example, suppliers, are linked into a circular linked list.</p>
+	<br/>
+	<p>The links between the records from different circular linked lists represent the links between the objects that belong to different classes. The links between the objects that belong to different classes represent associations.</p>
+	<br/>
+	<p>For example, a link between a record describing suppliers, and a record describing shipment, represents a fact, that a supplier performed a shipment.</p>
+	<br/>
+	<p>The pointers are the physical locations of the records. A pointer consists of a file name, and location of a record in a file. </p>
+	<br/>
+	<p>Locations of the fields within the records are represented as a directory of offsets located at the beginning of each record.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Yet another example of a <strong class="red">logical view</strong> of a database:
+	  <ul class="build">
+	    <li>A database contains information about <strong class="red">suppliers</strong>,  <strong class="red">parts</strong> , and  <strong class="red">shipments</strong> of parts done by suppliers</li>
+	    <p style="text-align:center;"><img src="images/slide-23.png" width="500" alt="Network" title="Network"/></p>
+	    <li>A logical view above is also called as a <strong class="red">network view of data</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 28 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Now it is a good moment for a short summary of different views of the database contents we presented so far. The contents of a database can be viewed at a number of different abstraction levels.</p>
+	<br/>
+	<p>At a hardware level (the lowest level of abstraction) the contents of a database is a sequence of bits, grouped into bytes, sectors, tracks and cylinders.</p>
+	<br/>
+	<p>At a physical level, a software used to operate the hardware devices provide the users with a view of a database as a sequence fixed size data blocks each one consisting of a sequence of bytes.</p>
+	<br/>
+	<p>Another layer of software, provides a view of a database as a collection files that consist of records.</p>
+	<br/>
+	<p>The records consist of fields with data.</p>
+	<br/>
+	<p>It is a file view of a database and it is commonly available in many of the procedural programming languages.</p>
+	<br/>
+	<p>Yet another layer of software, creates the logical views of a database, that consists of the tables with rows filled with the sequences of values, or hierarchies or networks of records linked with pointers.</p>
+	<br/>
+	<p>These are so called, tabular, hierarchical, and network data models.</p>
+	<br/>
+	<p>At the highest level of abstraction (conceptual level) the contents of a database are visible as the collections of homogeneous objects, called as classes of objects, described by the attributes (properties) and linked with associations.</p>
+	<br/>
+	<p>This level is usually implemented in object-oriented programming languages as an object-oriented view of data on a top of one of the logical views.</p>
+	<br/>
+	<p>In the future, we shall use a view of a database at a conceptual level and we shall implement it at a logical level as a tabular view of data.</p>
+	<br/>
+	<p>Such approach makes a design of a database independent on a particular logical data model, and it brings a view of the database contents closer to the reality. </p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li> <strong class="red">Abstraction levels</strong>:
+	  <ul class="build">
+	    <li style="text-align:center;"><strong class="red">Hardware level</strong>: bit, byte, sector, track, cylinder</li>
+	    <p style="text-align:center;"><img src="images/slide-24.png" width="50" alt="Network" title="Network"/></p>
+	    <li style="text-align:center;"><strong class="red">Physical level</strong>: byte, data block, sequence of data blocks</li>
+	    <p style="text-align:center;"><img src="images/slide-24.png" width="50" alt="Network" title="Network"/></p>
+	    <li style="text-align:center;"><strong class="red">File level</strong>: field, address of field, record, file</li>
+	    <p style="text-align:center;"><img src="images/slide-24.png" width="50" alt="Network" title="Network"/></p>
+	    <li style="text-align:center;"><strong class="red">Logical level</strong>: attribute, value, row, column, link, table, hierarchy, network</li>
+	    <p style="text-align:center;"><img src="images/slide-24.png" width="50" alt="Network" title="Network"/></p>
+	    <li style="text-align:center;"><strong class="red">Conceptual level</strong>: object, property, value, link, class of objects, association</li>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Introduction</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Data ? What is it ?</a></li>
+        <li><a href="#4">Electronic Storage Devices</a></li>
+        <li><a href="#7">Persistent Storage Devices</a></li>
+        <li><a href="#15">File Systems</a></li>
+	<li><a href="#19">Database Systems</a></li>
+	<li><a class="red" href="#29">Database Management Systems</a></li>		
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>  
+<!-- slide 30 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Database Management System, commonly abbreviated as DBMS, is a software system that allows its users to define, to create, to maintain, and to control access to a database.</p>
+	<br/>
+	<p>Database Management System implements the following languages: data definition language,(DDL), data manipulation language,(DML) query language, access control language, and database administration language.</p>
+	<br/>
+	<p>A functionality of these languages strongly depends on a logical view of data used fro a particular database.</p>
+	<br/>
+	<p>Data definition language allows the users to formally determine the database structures at a logical level. For example, when a tabular view of data is used, the commands of data definition language allow for creation of empty tables, determining the types of values stored in the rows and columns, changing the structures of tables, and dropping the tables.</p>
+	<br/>
+	<p>Data manipulation language allows the users to insert, modify, delete the contents of a database. When a tabular view of data is used, the command of data manipulation language allow for inserting news rows, deleting the rows and updating the contents of rows.</p>
+	<br/>
+	<p>Query language allows the users to search the contents of a database. In a tabular data models it is possible to retrieve the sets of rows that satisfy given conditions in the tables and to join the tables over many different conditions.</p>
+	<br/>
+	<p>Access control language allows the users to determine many different levels of access to data at a logical level. In a tabular view of data access control language can be use to grant to the users access to data located in the tables in a given mode and to grant to the users access to the operation on data in many different modes.</p>
+	<br/>
+	<p>Database administration language allows the users to administer database at either logical or physical levels. When a tabular view of data is used, a database administrator can create the additional persistent storage structures like indexes, clusters, etc to improve performance of a database system. It is also possible to decide which persistent storage devices will be used to store data located in the tables.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Management Systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Database Management System</strong> (<strong class="red">DBMS</strong>) is a software system that allows its users to define, create, maintain, and control access to a database</li>
+	<li><strong class="red">DBMS</strong> implements the following languages:
+	  <ul class="build">
+	    <li><strong class="red">Data Definition Language</strong> (<strong class="red">DDL</strong>) allows the users to specify database structures at either conceptual or logical levels</li>
+	    <li><strong class="red">Data Manipulation Language</strong> (<strong class="red">DML</strong>) allows the users to insert, modify, delete the contents of a database at either conceptual or logical levels</li>
+	    <li><strong class="red">Query Language</strong> (<strong class="red">QL</strong>) allows the users to retrieve the contents of a database at either conceptual or logical levels</li>
+	    <li><strong class="red">Access Control Language</strong> (<strong class="red">ACL</strong>) allows the users to determine many different levels of access to data at either conceptual or logical levels</li>
+	    <li> <strong class="red">Database Administration Language</strong> (<strong class="red">DAL</strong>) allows the users to administer database at either logical or physical levels</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 31 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Database management systems are a one of the most complex software systems implemented over the many years.</p>
+	<br/>
+	<p>The complexity of a database management systems, and its efficient applications requires involvement of the various and highly skilled computing and information technology experts.</p>
+	<br/>
+	<p>A database management system needs highly qualified system analysts and database designers to find the appropriate applications of a system in an enterprise, and to correctly design the conceptual, logical, and physical structures of a database.</p>
+	<br/>
+	<p>Implementation of database applications needs highly skilled application developers and database programmers.</p>
+	<br/>
+	<p>Smooth and seamless applications of a database management systems at production stages, requires well qualified database and data security administrators.</p>
+	<br/>
+	<p>At the moment, database systems are used almost everywhere, and because of that all of us also belong to a group of so called "database people" as the end users of database systems.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Management Systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>All <strong class="red">people</strong> of <strong class="blue">Database Management Systems</strong>
+	  <ul class="build">
+	    <li>System analyst</li>
+	    <li>Database designer</li>
+	    <li>Application developer</li>
+	    <li>Database administrator</li>
+	    <li>Security administrator</li>
+	    <li>End-user</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 32 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Database management systems have a lot of advantages over traditional file systems.</p>
+	<br/>
+	<p>The appropriate database design techniques, supported by database software, allow for  elimination of redundancie,s and automatic control of data consistency and integrity.</p>
+	<br/>
+	<p>Sophisticated concurrency control and transaction processing subsystems, incorporated into database management systems, support correct and concurrent sharing of data by many users.</p>
+	<br/>
+	<p>A central management of data at a logical level, allows for significantly improved data security.<br/>
+<break time="0.3s"/></p>
+	<br/>
+	<p>A standarised data definition, data manipulation and query languages allow for fast implementation of efficient database applications.</p>
+	<br/>
+	<p>Various tools available within a database management systems, like data loaders, data cleaning tools, data compression tools, data application generators, and the others, significantly increase productivity, in the environments where storing accessing and using data is of prime importance.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Mangement Systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li> <strong class="red">Advantages</strong> of <strong class="blue">Database Management Systems</strong>
+	  <ul class="build">
+	    <li>Control of data redundancy</li>
+	    <li>Control of data consistency</li>
+	    <li>Sharing of data</li>
+	    <li>Improved security</li>
+	    <li>Improved performance (not always)</li>
+	    <li>Increased productivity</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 33 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Database management systems have some disadvantages that limits a scope of their applications.</p>
+	<br/>
+	<p>In the past we called a database management system as a complex software system, and its complexity is one of the main disadvantages.</p>
+	<br/>
+	<p>A database management system is too complicated too large to be applied for implementation of simple applications that process small amounts of data.</p>
+	<br/>
+	<p>Complexity of a database system also contributes to the high running and maintenance costs.</p>
+	<br/>
+	<p>Implementation of a logical view of data, requires implementation of additional software on top of operating system files.</p>
+	<br/>
+	<p>It increases a data transfer path from physical storage, through operating system buffers, to data buffer caches of a database system.</p>
+	<br/>
+	<p>As a consequence, it decreases performance of the system.</p>
+	<br/>
+	<p>For example, a direct implementation of database system, on top of physical persistent storage devices and bypassing operating system can increase performance by approximately 20 percent.</p>
+	<br/>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Management Systems</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li> <strong class="red">Disadvantages</strong> of <strong class="blue">Database Management Systems</strong>
+	  <ul class="build">
+	    <li>Complexity</li>
+	    <li>Size</li>
+	    <li>Running and maintenance costs</li>
+	    <li>Performance</li>
+	    <li>Incompatibilities between different systems</li>
+	    <li>High cost of failure</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 34 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+	<br/>
+	<p></p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapter 1, Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/5ZTGCANpDDtl9YRwt8UQwy?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 1 Introduction to Databases, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/uq3PCBNqBBtRVonwTNg_dJ?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+

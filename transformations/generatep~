@@ -1,0 +1,25 @@
+rm temp.tex
+rm temp.html
+rm temp.pdf
+sed -e 's|&emsp;||g' \
+    -e 's|&nbsp;||g' \
+    -e 's|data-config-title| |g' \
+    -e 's|data-config-subtitle| |g' \
+    -e 's|data-config-presenter| |g' \
+    -e 's|<li><a|<lia |g' \
+    -e 's|</a></li>|</lia>|g' \
+    -e 's|</strong>|}|g' \
+    -e 's|<slide class="title-slide segue nobackground">|<slide>|g' \
+    -e 's|<strong class="prettyprint">|\\tt |g' \
+    -e 's|<strong class="blue">| \\textcolor{RoyalBlue}{ |g' \
+    -e 's|<strong class="green">| \\textcolor{Green}{ |g' \
+    -e 's|<strong class="blue prettyprint28">| \\textcolor{RoyalBlue}{ \\tt |g' \
+    -e 's|<strong class="red">| \\textcolor{Red}{ |g' ../03ObjectModeling.html > temp.html
+xsltproc transform.xsl temp.html > temp.tex
+sed -e 's/\_/\\char`\\_/g' temp.tex > 03ObjectModeling.tex
+pdflatex 03ObjectModeling.tex
+mv 03ObjectModeling.pdf ..
+rm *log
+rm *aux
+rm temp*
+rm 03ObjectModeling.tex

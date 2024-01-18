@@ -1,0 +1,1221 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/OqyVCxngkkSRqjYnu8pZL3?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>04ConceptualModeling</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;Data Management and Security</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Conceptual Modeling</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Methodology</a></li>
+        <li><a href="#5">Example 1</a></li>
+        <li><a href="#13">Example 2</a></li>
+        <li><a href="#21">Example 3</a></li>
+	<li><a href="#31">Example 4</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A conceptual modelling methodology used in this subject, transforms a specification of database domain, into a conceptual schema expressed in a graphical notation of object modelling.</p>
+	<br/>
+	<p>A transformation is performed in several steps.</p>
+	<br/>
+	<p>In each step a specification of database domain is traversed and the new components, like classes of objects, attributes, associations, are added to a conceptual schema.</p>
+	<br/>
+	<p>In each step, a conceptual schema is extended by only one type of component.</p>
+	<br/>
+	<p>A transformation is consistent with a principle "one step at a time", that according to the Cambridge Dictionary means, doing things slowly and carefully, doing just a little at a time.</p>
+	<br/>
+	<p>At the end of the process,  we obtain a complete conceptual schema expressed as a simplified object class diagram.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Methodology</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Input:</strong> Specification of the requirements (usually a natural language description of a database domain)</li>
+        <li><strong class="red">Tools:</strong> Object Modeling graphical notation</li>
+	<li><strong class="red">Methods:</strong> Systematic transformation of individual components of specification of requirements into the components of Object Modeling notation</li>
+        <li><strong class="red">Output:</strong> Conceptual schema - simplified object class diagram</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A sequence of transformations of a specification of database domain, is performed in the following way.</p>
+	<br/>
+	<p>First, we read a specification, we identify the classes of objects and we create an initial conceptual schema, that contains only the classes of objects. </p>
+	<br/>
+	<p>Then, we read a specification again, and we add to a conceptual schema the associations and association classes.</p>
+	<br/>
+	<p>Next, we read a specification again, and we add to a conceptual schema the attributes and link attributes describing classes of objects and association classes.</p>
+	<br/>
+	<p>Next, we read a specification again, and we add to a conceptual schema the identifiers of classes of objects.</p>
+	<br/>
+	<p>At this step, we also identify the classes of objects, that do not have their own identification systems.</p>
+	<br/>
+	<p>Next, we read a specification again, and we create the qualifications, that provide the identifiers for the classes, that do not have their own identification systems.</p>
+	<br/>
+	<p>Finally, we read a specification again, oh, maybe there is no need to read it one more time, we probably memorised a specification thus far, and we add to a conceptual schema the generalisation hierarchies.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Methodology</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>The transformations of specifications are performed in the following sequence of steps:
+	  <ul class="build">
+            <li><strong class="red">Step 1:</strong> Creating classes of objects</li>
+            <li><strong class="red">Step 2:</strong> Creating associations and association classes</li>
+            <li><strong class="red">Step 3:</strong> Creating attributes and link attributes</li>
+            <li><strong class="red">Step 4:</strong> Creating identifiers</li>
+            <li><strong class="red">Step 5:</strong> Creating qualifications</li>
+            <li><strong class="red">Step 6:</strong> Creating generalizations</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Conceptual Modeling</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Methodology</a></li>
+        <li><a class="red" href="#5">Example 1</a></li>
+        <li><a href="#13">Example 2</a></li>
+        <li><a href="#21">Example 3</a></li>
+	<li><a href="#31">Example 4</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An objective of the current design is to create a conceptual schema, of a small database, that contains information about employees and projects. A detailed specification is the following.</p>
+	<br/>
+	<p>A group of employees works on the projects. Some of the employees supervise other employees. Employees are described by their employee numbers and full names. A project is described by a project title, completion date, and budget. Employees are identified by their employee numbers and projects are identified by the titles.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>An objective is to create a conceptual schema of a small database that contains information about employees and projects</li>
+	<li>A detailed specification is the following:
+	  <ul class="build">
+	    <li><strong class="blue">A group of employees works on the projects</strong></li>
+	    <li><strong class="blue">Some of employees supervise other employees</strong></li>
+	    <li><strong class="blue">An employee is described by  an employee number and full name</strong></li>
+	    <li><strong class="blue">A project is described by a project title, completion date and budget</strong></li>
+	    <li><strong class="blue">Employees are identified by their employee numbers and projects are identified by titles</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the first step, we read a specification and  we decide what classes of objects are described in the specification. In the other words, we create the first version of conceptual schema, that consists only of classes of objects.</p>
+	<br/>
+	<p>When I read the specification I decided to create two classes of objects: EMPLOYEE and PROJECT. Of course it was my subjective decision and another designer may decide to create only one class of objects: EMPLOYEE and to consider the projects as a multivalued attribute describing employees. Unfortunately, such decision creates a problem how to add information like project title, completion date an budget. We cannot treat such attributes as multivalued attributes because these attributes a er semantically related. On the other hand we cannot have nested single valued or multivalued attributes. Now, we can see that decision to represent projects as multivalued attribute was not the best one. Each time we find ourselves in "no through road" situation we have have to reconsider a design decision, that lead to such situation. In this case, we should accept a fact, that the projects are the instances of objects and as a logical consequences we should create a class PROJECT.</p>
+	<br/>
+	<p>It is possible to create more classes of objects, for example the class TITLE, DATE, and BUDGET. Then, such decision would contribute to creation of few one-to-one associations and many-to-one associations between a class PROJECT and classes described by the single attributes. Each time, we get a class described by a single attribute related by one-to-one association with another class we should ask a question: maybe it is possible to merge such classes into one. The same situation happens when a class described by a single attribute is involved in many-to-one association with another classes. Maybe such class can be "demoted" to a single valued attribute.</p>
+	<br/>
+	<p>A design is always a process where very frequently to steps forward are followed by one step backward.</p>
+	<br/>
+	<p>So, at the end I decided  to create two new classes of objects, EMPLOYEE and PROJECT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Step 1:</strong> Creating classes of objects</li>
+	<li>A group of <strong class="red">employee</strong>s works on the <strong class="red">project</strong>s. Some of <strong class="red">employee</strong>s supervise other <strong class="red">employee</strong>s. An <strong class="red">employee</strong> is described by  an employee number and full name. A <strong class="red">project</strong> is described by a project title, completion date and budget. <strong class="red">Employee</strong>s are identified by their employee numbers and projects are identified by the titles
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-06-1.png" width="500" alt="Step 1" title="Step 1"/></p>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the second step, we create, and we append to the conceptual schema, associations and association classes.</p>
+	<br/>
+	<p>We find two associations: EMPLOYEE Works-on PROJECT, and EMPLOYEE Supervises EMPLOYEE. We append the associations to the conceptual schema and we get a class diagram given on the present slide.</p>
+	<br/>
+	<p>Next, we must provide the multiplicities for each association. An association Works-on is many-to-many because an employee can work on many projects, and a project can be implemented by many employees. To find we imagine to be an employee and we ask ourselves a question: how many projects I can work on ? In this domain, we are allowed to work on many projects. Then, we imagine to be a project and we ask ourselves a question: how many employees can participate in my implementation. In the present domain, a project can be implemented by many employees. </p>
+	<br/>
+	<p>Next we can look at minimal multiplicities of the associations. Does every employee must work on at least one project ? We assume that it makes sense to have all employees working on at least one project. The second question: Do we have projects with no employees ? Well, our assumption is: no, every project must have at least one employee assigned to it.</p>
+	<br/>
+	<p>We assume, that participation of both classes in the association is compulsory. As a consequence,  an employee must work on at least one projects, and a project must be implemented by at least one employee and an association Works-on is mandatory on both sides.</p>
+	<br/>
+	<p>An association, EMPLOYEE Supervise EMPLOYEE is zero-to-many, because an employee can supervise zero or more employees. Bottom level employees in a managerial hierarchy supervise no employees. On the other side a multiplicity of the same association expressed in a way EMPLOYEE Is-supervised-by EMPLOYEE is optional because every employee except ceo has at most one supervisor. A ceo does not have any supervisors. It is why an association Is-supervised by has multiplicity zero-or-one.</p>
+	<br/>
+	<p>It is important to note, that a decision whether minimal multiplicity of association is zero or one strongly depends on our subjective view of the reality. For a single domain it is possible to argue that minimal multiplicity is zero and not one. If we decide that a minimal multiplicity is one then the existence of a link is strongly bound with the existence of an instance of an object. An instance of an object cannot exists with out a link and whenever a new instance of an object is added we also must add a link. In our case one may argue that when a project is created then for certain period of time no employees are assigned and because of that an association PROJECT Has EMPLOYEE is optional on PROJECT side. Luckily, minimal multiplicity does not have an important impact during a stage of logical design where a conceptual schema is converted into implementation schema of a particular database system.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 2:</strong> Creating associations and association classes</li>
+	<li>A group of <strong class="blue">employee</strong>s <strong class="red">works on</strong> the <strong class="blue">project</strong>s. Some of <strong class="blue">employee</strong>s <strong class="red">supervise</strong> other <strong class="blue">employee</strong>s. An <strong class="blue">employee</strong> is described by an employee number and full name. A <strong class="blue">project</strong> is described by a project title, completion date and budget. <strong class="blue">Employee</strong>s are identified by their employee numbers and projects are identified by the titles
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-07-1.png" width="500" alt="Step 2" title="Step 2"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the third step, we find and we create attributes and link attributes. After we decided what classes of objects we plan to consider in a design, we read a specification one more time and one by one we find the description of the classes. </p>
+	<br/>
+	<p>In our case, we find, that employees are described by their employee numbers and full names. We add both attributes to a description of the class employee. It is important to decide a multiplicity of each attribute and whether an attribute is optional or mandatory. Each employee has one employee number and one full name and both values must be provided. It means that both attributes are single valued and mandatory. andWe can skip a tag [1].</p>
+	<br/>
+	<p>We also find, that a project is described by a project title, completion date, and budget. We add three attributes, project title, completion date, and budget, to a description of the class project. Like before we find that all attributes describing a project are single valued and mandatory.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 3:</strong> Creating attributes and link attributes</li>
+	<li>A group of <strong class="blue">employee</strong>s <strong class="blue">works on</strong> the <strong class="blue">project</strong>s. Some of <strong class="blue">employee</strong>s <strong class="blue">supervise</strong> other <strong class="blue">employee</strong>s. An <strong class="blue">employee</strong> is described by  an <strong class="red">employee number</strong> and <strong class="red">full name</strong>. A <strong class="blue">project</strong> is described by a <strong class="red">project title</strong>, <strong class="red">completion date</strong> and <strong class="red">budget</strong>. <strong class="blue">Employee</strong>s are identified by their employee numbers and projects are identified by the titles
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-08-1.png" width="600" alt="Step 3" title="Step 3"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now, when we have attributes and associations we can find identifiers fro each class. A class may have its own identification system like for example a student number attribute describing a class STUDENT. A class may have a default identifier created from identifiers of the other classes, like for example a pair(student number, subject code) describing a class ENROLMENT. A class may have a derived identifier that consists of its own attribute and identifier borrowed from another class, like for example a pair of attributes (building number, room number) being an identifier of a class ROOM. Finally, a class may have an identifier inherited from a superclass in a generalisation hierarchy, like for example an attribute student number being an identifier of a class UNDERGRADUATE STUDENT and inherited from a class STUDENT.</p>
+	<br/>
+	<p>In the fourth step, we read the specifications again and we find identifiers, and we mark identifiers in a conceptual schema, with IDn tags where n is empty if there only one identifier or it is 1, or 2, or , ... when we are able to find more identifiers.</p>
+	<br/>
+	<p>We find, that employees are identified by their employee numbers, and we add a tag ID to an attribute enumber in a class EMPLOYEE.</p>
+	<br/>
+	<p>Next, we find, that projects are identified by the titles, and we add a tag ID to an attribute title in a class PROJECT.</p>
+	<br/>
+	<p>No more identifiers can be discovered from the specification. Sometimes, we can use our own knowledge of the reality to discover an identifier. For example, a class CAR has an identifier registration number.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 4:</strong> Creating identifiers</li>
+	<li>A group of <strong class="blue">employee</strong>s <strong class="blue">works on</strong> the <strong class="blue">project</strong>s. Some of <strong class="blue">employee</strong>s <strong class="blue">supervise</strong> other <strong class="blue">employee</strong>s. An <strong class="blue">employee</strong> is described by  an <strong class="blue">employee number</strong> and <strong class="blue">full name</strong>. A <strong class="blue">project</strong> is described by a <strong class="blue">project title</strong>, <strong class="blue">completion date</strong> and <strong class="blue">budget</strong>. <strong class="blue">Employee</strong>s are identified by their <strong class="red">employee number</strong>s and projects are identified by the <strong class="red">title</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-09-1.png" width="600" alt="Step 4" title="Step 4"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>It is possible, that for some classes we are no able to find their own identification system because such classes do not have  own identification system. For example, if we look at a domain of rooms at university buildings then rooms do not have a global identification system, or something like "roomid". In such cases we are looking for so called "derived identifiers" created from identifiers of associated classes and own local identifiers of the class.  Derived attributes are graphically represented as "qualifications".
+</p>
+	<br/>
+	<p>So, next, we try to find qualifications. A specification does not contain any information about qualifications. Both  classes have their own identification systems and there is no need to create any qualifications.</p>
+	<br/>
+	<p></p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 5:</strong> Creating qualifications</li>
+	<li>A group of <strong class="blue">employee</strong>s <strong class="blue">works on</strong> the <strong class="blue">project</strong>s. Some of <strong class="blue">employee</strong>s <strong class="blue">supervise</strong> other <strong class="blue">employee</strong>s. An <strong class="blue">employee</strong> is described by  an <strong class="blue">employee number</strong> and <strong class="blue">full name</strong>. A <strong class="blue">project</strong> is described by a <strong class="blue">project title</strong>, <strong class="blue">completion date</strong> and <strong class="blue">budget</strong>. <strong class="blue">Employee</strong>s are identified by their <strong class="blue">employee number</strong>s and projects are identified by the <strong class="blue">title</strong>s
+	  <ul class="build">
+            <p style="text-align:center;"><img src="images/slide-10-1.png" width="600" alt="Step 5" title="Step 5"/></p>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Finally, in the last step, we look for generalisation hierarchies. Information about generalisation hierarchies is usually hidden in the statements like "... there are two types of X: a type Y and a type Z...", for example "... there are two types of students: postgraduate students and undergraduate students. Such information does not contribute to an attribute "type" in a description of a class STUDENT. We already created such attribute then we must replace it with a generalisation hierarchy UNDERGRADUATE STUDENT ISA STUDENT and POSTGRADUATE STUDENT ISA STUDENT. It is not a mistake to make a design better. We always apply a rule saying that "better is an enemy of good".</p>
+	<br/>
+	<p>Our sample database domain does not contain any information, about subsets or supersets of objects. Therefore, we conclude, that there are no generalisation hierarchies in the conceptual schema. The final conceptual schema is visible at the bottom of a slide.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 1</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 6:</strong> Creating generalizations</li>
+	<li>A group of <strong class="blue">employee</strong>s <strong class="blue">works on</strong> the <strong class="blue">project</strong>s. Some of <strong class="blue">employee</strong>s <strong class="blue">supervise</strong> other <strong class="blue">employee</strong>s. An <strong class="blue">employee</strong> is described by  an <strong class="blue">employee number</strong> and <strong class="blue">full name</strong>. A <strong class="blue">project</strong> is described by a <strong class="blue">project title</strong>, <strong class="blue">completion date</strong> and <strong class="blue">budget</strong>. <strong class="blue">Employee</strong>s are identified by their <strong class="blue">employee number</strong>s and projects are identified by the <strong class="blue">title</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-11-1.png" width="600" alt="Step 6" title="Step 6"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Conceptual Modeling</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Methodology</a></li>
+        <li><a href="#5">Example 1</a></li>
+        <li><a class="red" href="#13">Example 2</a></li>
+        <li><a href="#21">Example 3</a></li>
+	<li><a href="#31">Example 4</a></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the present example, an objective is to create a conceptual schema of a small database, that contains information about research publications, such as, journals and conference proceedings, and about authors of published research papers. A detailed specification is the following:</p>
+	<br/>
+	<p>Publishing company publishes the journals and conference proceedings. The research papers are included in the journals and proceedings. The company employs the general editors who take responsibility for editing the research papers. A research paper is written by one or more authors.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>An objective is to create a conceptual schema of a small database that contains information about publications such as journals and conference proceedings, published research papers and authors</li>
+	<li>A detailed specification is the following:
+	  <ul class="build">
+	    <li><strong class="blue">A publishing company publishes the journals and conference proceedings</strong></li>
+	    <li><strong class="blue">The research papers are included in the journals and proceedings</strong></li>  
+	    <li><strong class="blue">The company employs the general editors who take responsibility for editing the research papers</strong></li>
+	    <li><strong class="blue">A research paper is written by one or more authors</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Like in the previous example, in the first step, we create classes of objects, and we add classes of objects to an initial conceptual schema.</p>
+	<br/>
+	<p>After reading and analysing a sample database domain, we decide to add to a conceptual schema the following classes of objects: PROCEEDINGS, JOURNAL, PAPER, EDITOR and AUTHOR. The decisions to pick such classes of objects is based on identification of the instances of real world objects, that can seen, touched, read, talk to etc in the reality./</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Step 1:</strong> Creating classes of objects</li>
+	<li>A publishing company publishes the <strong class="red">journal</strong>s and <strong class="red">conference proceeding</strong>s. The <strong class="red">research paper</strong>s are included in the <strong class="red">journal</strong>s and <strong class="red">proceeding</strong>s. The company employs the general <strong class="red">editor</strong>s who take responsibility for editing the <strong class="red">research paper</strong>s. A <strong class="red">research paper</strong> is written by one or more <strong class="red">author</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-14-1.png" width="800" alt="Step 1" title="Step 1"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 16 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step, we add to a conceptual schema, associations and association classes.</p>
+	<br/>
+	<p>A statement: research papers are included in journals and proceedings contributes to the following associations: PAPER Is-included-in JOURNAL, and PAPER Is-included-in PROCEEDINGS. Due to the research integrity rules, a paper can be published only one time, and because of that both associations are one to many. Of course, journals, proceedings publish many research papers.</p>
+	<br/>
+	<p>A statement: the company employs the general editors, who take responsibility for the editing research papers, contributes to an association: PAPER Is-edited-by EDITOR. An editor can edit many papers, and a paper can be edited by many editors. Hence, the association has a multiplicity many to many.</p>
+	<br/>
+	<p>A statement: a research paper is written by one or more authors, contributes to an association: PAPER Is-written-by AUTHOR. Such association has a multiplicity many to many, because a paper can be written by many authors, and an author can write many papers. An updated conceptual schema is given at the bottom of a slide.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 2:</strong> Creating associations and association classes</li>
+	<li>A publishing company publishes the <strong class="blue">journal</strong>s and <strong class="blue">conference proceeding</strong>s. The <strong class="blue">research paper</strong>s <strong class="red">are included in</strong> the <strong class="blue">journal</strong>s and <strong class="blue">proceeding</strong>s. The company employs the general <strong class="blue">editor</strong>s who take responsibility for <strong class="red">editing</strong> the <strong class="blue">research paper</strong>s. A <strong class="blue">research paper</strong> is <strong class="red">written</strong> by one or more <strong class="blue">author</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-15-1.png" width="700" alt="Step 2" title="Step 2"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step, we are looking for attributes, and link attributes.</p>
+	<br/>
+	<p>After reading a specification we find, that a specification does not have any information, about attributes and links attributes.  In the reality, in such situation we have to return to our stakeholders, and ask the questions related to the descriptions of classes of objects and associations. In our case, we progress to the next step.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 3:</strong> Creating attributes and link attributes</li>
+	<li>A publishing company publishes the <strong class="blue">journal</strong>s and <strong class="blue">conference proceeding</strong>s. The <strong class="blue">research paper</strong>s <strong class="blue">are included in</strong> the <strong class="blue">journal</strong>s and <strong class="blue">proceeding</strong>s. The company employs the general <strong class="blue">editor</strong>s who take responsibility for <strong class="blue">editing</strong> the <strong class="blue">research paper</strong>s. A <strong class="blue">research paper</strong> is <strong class="blue">written</strong> by one or more <strong class="blue">author</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-16-1.png" width="700" alt="Step 3" title="Step 3"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>>
+    </article>
+  </slide>
+<!-- slide 18 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step, we try to find identifiers of the classes of objects created so far.</p>
+	<br/>
+	<p>After reading a specification again, we find, that it  does not contain any information about identifiers. It is why we skip this step as well.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 4:</strong> Creating identifiers</li>
+	<li>A publishing company publishes the <strong class="blue">journal</strong>s and <strong class="blue">conference proceeding</strong>s. The <strong class="blue">research paper</strong>s <strong class="blue">are included in</strong> the <strong class="blue">journal</strong>s and <strong class="blue">proceeding</strong>s. The company employs the general <strong class="blue">editor</strong>s who take responsibility for <strong class="blue">editing</strong> the <strong class="blue">research paper</strong>s. A <strong class="blue">research paper</strong> is <strong class="blue">written</strong> by one or more <strong class="blue">author</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-17-1.png" width="700" alt="Step 3" title="Step 3"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In this step we try to create qualifications.</p>
+	<br/>
+	<p>Missing information about attributes and identifiers, creates a situation, where it is impossible to say anything about qualifications.</p>
+	<br/>
+	<p>We move to the next step.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 5:</strong> Creating qualifications</li>
+	<li>A publishing company publishes the <strong class="blue">journal</strong>s and <strong class="blue">conference proceeding</strong>s. The <strong class="blue">research paper</strong>s <strong class="blue">are included in</strong> the <strong class="blue">journal</strong>s and <strong class="blue">proceeding</strong>s. The company employs the general <strong class="blue">editor</strong>s who take responsibility for <strong class="blue">editing</strong> the <strong class="blue">research paper</strong>s. A <strong class="blue">research paper</strong> is <strong class="blue">written</strong> by one or more <strong class="blue">author</strong>s
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-18-1.png" width="700" alt="Step 3" title="Step 3"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Finally, we are looking for the generalisation hierarchies.</p>
+	<br/>
+	<p>To create a generalisation, we introduce a new concept of publication. Both, proceedings, and journals are publications.</p>
+	<br/>
+	<p>Therefore, we can create a generalisation: PROCEEDINGS ISA PUBLICATION, and JOURNAL ISA PUBLICATION, see visualisation at the bottom of a conceptual schema.</p>
+	<br/>
+	<p>Therefore, we can create a generalisation: PROCEEDINGS ISA PUBLICATION, and JOURNAL ISA PUBLICATION, see visualisation at the bottom of a conceptual schema.</p>
+	<br/>
+	<p>Generalisation allows us to replace the associations, PAPER Is-included-in PROCEEDINGS, and PAPER Is-included-in Journal, with one association: PAPER Is-included-in PUBLICATION. It is a commonly used solution to a problem, when many associations with the same names, link a class of objects with many other classes of objects, that can be generalised into a super class. In such a case, generalisation to a super class, allows for elimination of the repetitions of the same associations.</p>
+	<br/>
+	<p>In our case, it eliminates of the repetitions of an association:  Is-included-in.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 2</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 6:</strong> Creating generalizations</li>
+	<li>A publishing company publishes the <strong class="blue">journal</strong>s and <strong class="blue">conference proceeding</strong>s. The <strong class="blue">research paper</strong>s <strong class="blue">are included in</strong> the <strong class="blue">journal</strong>s and <strong class="blue">proceeding</strong>s. The company employs the general <strong class="blue">editor</strong>s who take responsibility for <strong class="blue">editing</strong> the <strong class="blue">research paper</strong>s. A <strong class="blue">research paper</strong> is <strong class="blue">written</strong> by one or more <strong class="blue">author</strong>s</li>
+	<li>Journal, proceedings <strong class="red">IS-A</strong> publication
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-19-1.png" width="650" alt="Step 3" title="Step 3"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Conceptual Modeling</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Methodology</a></li>
+       <li><a href="#5">Example 1</a></li>
+        <li><a href="#13">Example 2</a></li>
+       <li><a class="red" href="#21">Example 3</a></li>
+		<li><a href="#31">Example 4</a></li>
+      </ul>
+<footer class="source"></strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 22 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An objective of the next example, is to create a conceptual schema of a small database, that contains information about the construction companies, and about the buildings erected by the construction companies.</p>
+	<br/>
+	<p>A detailed specification is the following: A group of construction companies is involved in construction of industrial buildings. A building is located at a different address, it has a unique name, and completion date. A number of construction stages apply to each building. A construction stage is described by its name, the names of construction companies involved together with the start date, completion date, and the total costs. A construction company is usually involved in many construction stages of the same building. Many construction companies are involved in one construction stage.</p>
+	<br/>
+	<p>In this example, we shall mainly concentrate on minimal set of associations and on identification of object classes with the derived identifiers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>An objective is to create a conceptual schema of a small database that contains information about the construction companies and buildings built by the companies</li>
+	<li>A detailed specification is the following:
+	  <ul class="build">
+	    <li><strong class="blue">A group of construction companies is involved in the construction of industrial buildings</strong></li>
+	    <li><strong class="blue">A building is located at a different address, it has a unique name and completion date</strong></li>  
+	    <li><strong class="blue">A number of construction stages apply to each building</strong></li>
+	    <li><strong class="blue">A construction stage is described by its name, the names of the construction companies involved together with the start date, completion date and the total costs</strong></li>
+	    <li><strong class="blue">A construction company is usually involved in many construction stages of the same building</strong></li>
+	    <li><strong class="blue">Many construction companies are involved in one construction stage</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 23 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the first step, we read, and we analyse a database domain of companies and buildings,  and we try to identify the classes of objects.</p>
+	<br/>
+	<p>An outcome from the first step is a conceptual schema, that consists of three classes of objects: COMPANY, BUILDING and (construction) STAGE.</p>
+	<br/>
+	<p>The facts, that lead to such collection of the classes of objects are the following. A database is supposed to contain information, about a number of construction companies working on the industrial buildings. A database is supposed to contain information, about the construction stages applied to the buildings, for example, excavations, laying foundations, concreting and the others.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Step 1:</strong> Creating classes of objects</li>
+	<li>A group of construction <strong class="red">companies</strong> is involved in the construction of industrial <strong class="red">building</strong>s. A <strong class="red">building</strong> is located at a different address, it has a unique name and completion date. A number of construction <strong class="red">stages</strong> apply to each <strong class="red">building</strong>. A construction <strong class="red">stage</strong> is described by  its name, the names of the construction <strong class="red">companies</strong> involved together with the start date, completion date and the total costs. A construction <strong class="red">company</strong> is usually involved in many construction <strong class="red">stages</strong> of the same <strong class="red">building</strong>. Many construction <strong class="red">companies</strong> are involved in one construction <strong class="red">stage</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-23-1.png" width="500" alt="Step 1" title="Step 1"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 24 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step, we read a specification again, and we try to find the associations, and association classes.
+</p>
+	<br/>
+	<p>The facts like, construction companies involved in construction of industrial buildings, construction stages applied to buildings, and construction companies involved in many construction stages, contribute to the following association: COMPANY Involved-in BUILDING. The multiplicities on both sides of such association are many to many because a company is involved in construction of many buildings, and a building is constructed by many companies.</p>
+	<br/>
+	<p>The next association is: STAGE Applies-to BUILDING. A stage applies to one building and a building requires many construction stages. Hence, the multiplicities are one to many from a building side.</p>
+	<br/>
+	<p>The third association is: COMPANY Involved-in STAGE. Such association is many to many, because a company is involved in many construction stages and a construction stage my need many companies.</p>
+	<br/>
+	<p>Note, that the associations create a cycle in a conceptual schema. Is it a problem ? Sometimes yes, sometimes not. it is a problem when one of the associations involved in a cycle can be logically derived from the other associations involved in a cycle. Then, storing derived information always means certain level or redundancies in a database. Redundancies are useful when allow fro processing of frequent queries faster. On the other hand, redundancies delay processing of data manipulation operations where modifications of data must be replicated to keep derived data up to date. If there is no improvements in performance data redundancies are always considered as harmful.</p>
+	<br/>
+	<p>Therefore, whenever we get a cycle in a conceptual schema, we always try to eliminate it. Redundancies can be always added to a database at the later stages when database applications are tested agains the performance constraints. In our case, a conclusion, that if a company is involved in the construction stage, then such company is involved in construction of a building allows for elimination of a cycle. We shall discuss it more thoroughly in the next slide.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 2:</strong> Creating associations and association classes</li>
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="red">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different address, it has a unique name and completion date. A number of construction <strong class="blue">stages</strong> <strong class="red">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by  its name, the names of the construction <strong class="blue">companies</strong> involved together with the start date, completion date and the total costs. A construction <strong class="blue">company</strong> is usually <strong class="red">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="red">involved in</strong> one construction <strong class="blue">stage</strong>
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-24-1.png" width="700" alt="Step 2" title="Step 2"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 25 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the same step we eliminate redundant association asn association classes.</p>
+	<br/>
+	<p>In the previous slide, we realised, that if a company is involved in a construction stage applied to a building, then such company must be involved in the construction of a building. It means, that association: COMPANY Involved-in BUILDING is not really needed, because it can be logically derived from an association: COMPANY Involved-in STAGE.  Then, it is possible to eliminate a cycle of associations through elimination of one of the associations involved in the cycle.</p>
+	<br/>
+	<p>Elimination of an association is possible, only if, such association can be logically derived from the other associations. Sometimes, it is impossible to eliminate a cycle without loosing information. For example, if we look at a database domain where sporting  teams play their games, then the associations: team plays a home game, and, team plays an away game form a cycle, that involves both associations. In such a case, it is impossible to break cycle, because we would loose information, who played a home game, or who played away game.</p>
+	<br/>
+	<p>It means, that sometimes it is impossible to derive an association from the other association, in order to break a cycle.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 2 (improved):</strong> Creating associations and association classes</li>	
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="red">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different address, it has a unique name and completion date. A number of construction <strong class="blue">stages</strong> <strong class="red">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by its name, the names of the construction <strong class="blue">companies</strong> involved together with the start date, completion date and the total costs. A construction <strong class="blue">company</strong> is usually <strong class="red">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="red">involved in</strong> one construction <strong class="blue">stage</strong></li> 	
+	<li>If a <strong class="blue">company</strong> <strong class="red">is involved in</strong> a <strong class="blue">construction stage</strong> that <strong class="red">applies to</strong> a <strong class="blue">building</strong> then such <strong class="blue">company</strong> <strong class="red">is involved in</strong> construction of the <strong class="blue">building</strong></li>
+    </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+ </slide> 
+ <!-- slide 26 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the previous slide we concluded, that an  association: COMPANY Involved-in BUILDING,  is not needed, because it can be logically derived from an association: COMPANY Involved-in STAGE.</p>
+	<br/>
+	<p>We removed from a conceptual schema an association:  COMPANY Involved-in BUILDING.</p>
+	<br/>
+	<p>A conceptual schema after elimination of a redundant association consists of two associations: COMPANY Involved-in STAGE, and, STAGE Applies-to BUILDING. </p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strong class="red">Step 2 (improved):</strong> Creating associations and association classes</li>	
+	<li>It means that we do not need an association <strong class="blue prettyprint28">Involved-in</strong> bettwen the classes <strong class="blue prettyprint28">COMPANY</strong> and <strong class="blue prettyprint28">BUILDING</strong> because such association can be derived from the other two associations
+	  <ul class="build">
+	    <p style="text-align:center;"><img src="images/slide-25-1.png" width="700" alt="Step 2 Improved" title="Step 2 Improved"/></p>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide> 
+<!-- slide 27 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step, we find the attributes describing classes of objects, and link attributes, describing associations. </p>
+	<br/>
+	<p>To do so, we read a description of a database domain again, and we find that a statement "A building is located at a different address, it has a unique name and completion date." indicates, that a building is described by an address, name and the completion date.</p>
+	<br/>
+	<p>We also find from a statement: "A construction stage is described by its name, the names of construction companies involved together with the start date, completion date and the total costs", that a construction stage is described by a name, start date, completion date and cost.</p>
+	<br/>
+	<p>An information about construction stage being described by the names of construction companies, contributes to an attribute name describing a construction company.</p>
+	<br/>
+	<p>We find no link attributes describing associations.</p>
+	<br/>
+	<p>A conceptual schema with the attributes describing the classes of objects is given at the bottom of the slide.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 3:</strong> Creating attributes and link attributes</li>
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="blue">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different <strong class="red">address</strong>, it has a unique <strong class="red">name</strong> and <strong class="red">completion date</strong>. A number of construction <strong class="blue">stages</strong> <strong class="blue">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by its <strong class="red">name</strong>, the <strong class="red">names</strong> of the construction <strong class="blue">companies</strong> involved together with the <strong class="red">start date</strong>, <strong class="red">completion date</strong> and the <strong class="red">total costs</strong>. A construction <strong class="blue">company</strong> is usually <strong class="blue">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="blue">involved in</strong> one construction <strong class="blue">stage</strong></li> 
+	<p style="text-align:center;"><img src="images/slide-26-1.png" alt="Step 3" title="Step 3"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 28 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next stage, we look at the attributes, to find the identifiers. </p>
+	<br/>
+	<p>It is mentioned in the specification, that each building has a unique name. Therefore, we nominate an attribute name as an identifier of a class: BUILDING.</p>
+	<br/>
+	<p>We know from reality, that construction companies have unique names and the buildings have unique addresses. It contributes to an identifier: name, for a class company and the second identifier: address, for a class BUILDING.</p>
+	<br/>
+	<p>A class stage does not have its real world identification system. Therefore, we use a qualification to create an identifier for a class STAGE. In the next step we use a qualification to create the identifiers for the classes that do not have their own real world identification systems.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 4:</strong> Creating identifiers</li>
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="blue">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different <strong class="blue">address</strong>, it has a <strong class="red">unique name</strong> and <strong class="blue">completion date</strong>. A number of construction <strong class="blue">stages</strong> <strong class="blue">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by its <strong class="blue">name</strong>, the <strong class="blue">names</strong> of the construction <strong class="blue">companies</strong> involved together with the <strong class="blue">start date</strong>, <strong class="blue">completion date</strong> and the <strong class="blue">total costs</strong>. A construction <strong class="blue">company</strong> is usually <strong class="blue">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="blue">involved in</strong> one construction <strong class="blue">stage</strong></li>
+<li>What we know about the reality is that construction <strong class="blue">companies</strong> have <strong class="red">unique names</strong></li>
+	<p style="text-align:center;"><img src="images/slide-27-1.png" alt="Step 4" title="Step 4"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In this step, we use the qualifications to create the identifiers.</p>
+	<br/>
+	<p>We know from reality, that a construction stage of a building is performed in a given moment in time. We also know, that a pair of attributes:, name of the construction stage and the start date, is a local identifier for a building. Therefore, a triple of attributes, that consists of the building name, construction stage, and the date when  the stage has been started, is a global identifier of a class STAGE.</p>
+	<br/>
+	<p>Such identifier can be expressed by a qualification of a class: BUILDING and an association: Applies-to, with a pair of attributes: stage name, and start date.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 5:</strong> Creating qualifications</li>
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="blue">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different <strong class="blue">address</strong>, it has a <strong class="blue">unique name</strong> and <strong class="blue">completion date</strong>. A number of construction <strong class="blue">stages</strong> <strong class="blue">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by its <strong class="blue">name</strong>, the <strong class="blue">names</strong> of the construction <strong class="blue">companies</strong> involved together with the <strong class="blue">start date</strong>, <strong class="blue">completion date</strong> and the <strong class="blue">total costs</strong>. A construction <strong class="blue">company</strong> is usually <strong class="blue">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="blue">involved in</strong> one construction <strong class="blue">stage</strong></li>
+<li>What we also know about the reality is that a construction <strong class="blue">stage</strong> of a <strong class="blue">building</strong> starts  <strong class="red">once</strong> at a given <strong class="blue">moment in time</strong></li>
+	<p style="text-align:center;"><img src="images/slide-28-1.png" alt="Step 5" title="Step 5"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 30 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In this step, we try to discover the generalisations.</p>
+	<br/>
+	<p>One more pass through a text of specification, confirms, that the specification does not contain any information about generalizations over the classes of objects.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 3</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 6:</strong> Creating generalizations</li>
+	<li>A group of construction <strong class="blue">companies</strong> <strong class="blue">is involved in the construction</strong> of industrial <strong class="blue">building</strong>s. A <strong class="blue">building</strong> is located at a different <strong class="blue">address</strong>, it has a <strong class="blue">unique name</strong> and <strong class="blue">completion date</strong>. A number of construction <strong class="blue">stages</strong> <strong class="blue">apply to </strong> each <strong class="blue">building</strong>. A construction <strong class="blue">stage</strong> is described by its <strong class="blue">name</strong>, the <strong class="blue">names</strong> of the construction <strong class="blue">companies</strong> involved together with the <strong class="blue">start date</strong>, <strong class="blue">completion date</strong> and the <strong class="blue">total costs</strong>. A construction <strong class="blue">company</strong> is usually <strong class="blue">involved in</strong> many construction <strong class="blue">stages</strong> of the same <strong class="blue">building</strong>. Many construction <strong class="blue">companies</strong> are <strong class="blue">involved in</strong> one construction <strong class="blue">stage</strong></li>
+	<p style="text-align:center;"><img src="images/slide-29-1.png" alt="Step 6" title="Step 6"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 31 ================================================================================= -->
+  <slide>
+      <hgroup>
+      <h2 class="green">Conceptual Modeling</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+         <li><a href="#2">Methodology</a></li>
+       <li><a href="#5">Example 1</a></li>
+        <li><a href="#13">Example 2</a></li>
+       <li><a href="#21">Example 3</a></li>
+	<li><a class="red" href="#31">Example 4</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 32 ================================================================================= -->
+  <slide>
+ <aside class="note">
+      <section>
+	<p>In the last example, show, that it is possible to create a conceptual schema practically for everything what can be categorised as a fragment of the reality.  Now, we shall look at a domain of caterpillars, birds, toads, and butterflies described as a short poem for kids. Such specification is a bit harder to interpret because it does not say a lot about the groups of objects and links. It mainly speaks about individual instances of objects and links between the objects. It is a task of a designer to "upgrade" the instances of objects to classes of objects and links to associations.</p>
+	<br/>
+	<p>An objective of the last example is to create a conceptual schema, for a database domain, described by the following poem for kids.</p>
+	<br/>
+	<p>"Caterpillar".</p>
+	<br/>
+	<p>by Christina Rossetti</p>
+	<br/>
+	<p>Brown and furry</p>
+	<br/>
+	<p>Caterpillar in a hurry,</p>
+	<br/>
+	<p>Take your walk</p>
+	<br/>
+	<p>To the shady leaf, or stalk,</p>
+	<br/>
+	<p>Or what not,</p>
+	<br/>
+	<p>Which may be the chosen spot.</p>
+	<br/>
+	<p>No toad spy you,</p>
+	<br/>
+	<p>Hovering bird of prey pass by you;</p>
+	<br/>
+	<p>Spin and die,</p>
+	<br/>
+	<p>To live again a butterfly.</p>
+	<br/>
+      </section>
+    </aside>
+	    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>An objective is to create a conceptual schema for a database domain described by the following poem for kids</li>
+	<li style="text-align:center"><strong class="red">"Caterpillar"</strong></li>
+	<li style="text-align:center">by Christina Rossetti</li>
+	  <ul class="build" style="text-align:center;unstyled">
+	    <li class="green">Brown and furry</li>
+	    <li class="green">Caterpillar in a hurry,</li>  
+	    <li class="green">Take your walk</li>
+	    <li class="green">To the shady leaf, or stalk,</li>
+	    <li class="green">Or what not,</li>
+	    <li class="green">Which may be the chosen spot.</li>
+            <li class="green">No toad spy you,</li>
+            <li class="green">Hovering bird of prey pass by you;</li>
+            <li class="green">Spin and die,</li>
+            <li class="green">To live again a butterfly.</li>
+	  </ul>
+      </ul>
+<!-- <footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer> -->
+    </article>
+  </slide>
+<!-- slide 33 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+  <p>In the first step, we read a specification of a database domain and we find the instance of objects and links and later on we use abstraction to discover the classes of objects.</p>
+	<br/>
+	<p>In this case, from the instances of objects like caterpillar, leaf, stalk spot, toad, bird, and butterfly we can discover quite a lot of classes of objects, such as:</p>
+	<br/>
+	<p>CATERPILLAR, LEAF, STALK SPOT, TOAD, BIRD, BUTTERFLY.</p>
+	<br/>
+	</section>
+    </aside>
+   <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Step 1:</strong> Creating classes of objects</li>
+	<li>Brown and furry <strong class="red">Caterpillar</strong> in a hurry Take your walk To the shady <strong class="red">leaf</strong>, or <strong class="red">stalk</strong>, Or what not, Which may be the chosen <strong class="red">spot</strong>. No <strong class="red">toad</strong> spy you, Hovering <strong class="red">bird</strong> of prey pass by you; Spin and die, To live again a <strong class="red">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-32-1.png" alt="Step 2" title="Step 2"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 34 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>In the next step, we read a specification again, to find the associations and association classes.</p>
+	<br/>
+	<p>Pretty large number of classes of objects are linked an instance of CATERPILLAR class. We can find the following associstions:</p>
+	<br/>
+	<p>TOAD Spies CATERPILLAR.</p>
+	<br/>
+	<p>BIRD Passes CATERPILLAR.</p>
+	<br/>
+	<p>CATERPILLAR Walks to LEAF.</p>
+	<br/>
+	<p>CATERPILLAR Walks to SPOT.</p>
+	<br/>
+	<p>CATERPILLAR  Walks to STALK.</p>
+	<br/>
+	<p>CATERPILLAR Spins and dies to live as BUTTERFLY.</p>
+	<br/>
+	<p>The multiplicities of all associations, except one, are many to many.</p>
+	<br/>
+	<p>An association: CATERPILLAR Spins and dies to live as BUTTERFLY, has multiplicities one-to-one.</p>
+	<br/>
+	<p>It is, because in a  process of metamorphosis, one caterpillar is transformed into one butterfly, and one butterfly arises from one caterpillar.</p>
+	<br/>
+	<p>Three repetitions of an association: Walks, suggest generalisation of the classes LEAF, SPOT, and STALK.</p>
+	<br/>
+	<p>We shall do it later on.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="blue">Step 2:</strong> Creating associations and association classes</li>
+	<li>Brown and furry <strong class="blue">Caterpillar</strong> in a hurry <strong class="red">Take your walk</strong> To the shady <strong class="blue">leaf</strong>, or <strong class="blue">stalk</strong>, Or what not, Which may be the chosen <strong class="blue">spot</strong>. No <strong class="blue">toad</strong> <strong class="red">spy</strong> you, Hovering <strong class="blue">bird</strong> of prey <strong class="red">pass by</strong> you; <strong class="red">Spin and die, To live again</strong> a <strong class="blue">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-33-1.png" alt="Step 2" title="Step 2"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 35 ================================================================================= -->
+ <slide>
+<aside class="note">
+      <section>
+	<p>Next, we search for the attributes, and link attributes.</p>
+	<br/>
+	<p>A caterpillar is brown and furry.  It is information about a colour, and texture of a caterpillar. Other caterpillars can also be described by the colour and texture.</p>
+	<br/>
+	<p>A fact, that the caterpillar is in a hurry contributes to an attribute: behaviour.</p>
+	<br/>
+	<p>No link attributes can be found.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 3:</strong> Creating attributes and link attributes</li>
+	<li><strong class="red">Brown</strong> and <strong class="red">furry</strong> <strong class="blue">Caterpillar</strong> in a <strong class="red">hurry</strong> <strong class="blue">Take your walk</strong> To the shady <strong class="blue">leaf</strong>, or <strong class="blue">stalk</strong>, Or what not, Which may be the chosen <strong class="blue">spot</strong>. No <strong class="blue">toad</strong> <strong class="blue">spy</strong> you, Hovering <strong class="blue">bird</strong> of prey <strong class="blue">pass by</strong> you; <strong class="blue">Spin and die, To live again</strong> a <strong class="blue">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-34-1.png" alt="Step 3" title="Step 3"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 36 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>Next, we search for the identifiers.</p>
+	<br/>
+	<p>A poem, does not say anything about any specific caterpillar, or bird, or toad.</p>
+	<br/>
+	<p>Hence, we conclude, that the specification does not provide any information about the identifiers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 4:</strong> Creating identifiers</li>
+	<li><strong class="blue">Brown</strong> and <strong class="blue">furry</strong> <strong class="blue">Caterpillar</strong> in a <strong class="blue">hurry</strong> <strong class="blue">Take your walk</strong> To the shady <strong class="blue">leaf</strong>, or <strong class="blue">stalk</strong>, Or what not, Which may be the chosen <strong class="blue">spot</strong>. No <strong class="blue">toad</strong> <strong class="blue">spy</strong> you, Hovering <strong class="blue">bird</strong> of prey <strong class="blue">pass by</strong> you; <strong class="blue">Spin and die, To live again</strong> a <strong class="blue">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-35-1.png" alt="Step 4" title="Step 4"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 37 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>
+	<p>Next, we look for the qualifications.</p>
+	<br/>
+	<p>We read the specifications again, and we find no information, that may contribute to qualification of the classes of objects and associations with the attributes.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 5:</strong> Creating qualifications</li>
+	<li><strong class="blue">Brown</strong> and <strong class="blue">furry</strong> <strong class="blue">Caterpillar</strong> in a <strong class="blue">hurry</strong> <strong class="blue">Take your walk</strong> To the shady <strong class="blue">leaf</strong>, or <strong class="blue">stalk</strong>, Or what not, Which may be the chosen <strong class="blue">spot</strong>. No <strong class="blue">toad</strong> <strong class="blue">spy</strong> you, Hovering <strong class="blue">bird</strong> of prey <strong class="blue">pass by</strong> you; <strong class="blue">Spin and die, To live again</strong> a <strong class="blue">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-36-1.png" alt="Step 5" title="Step 5"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 38 ================================================================================= -->
+ <slide>
+ <aside class="note">
+      <section>p
+	<p>Finally, we try to find the generalisations.</p>
+	<br/>
+	<p>A class SHADY LEAF can be generalised into a LEAF.</p>
+	<br/>
+	<p>Then, the classes STALK,  SPOT, and  LEAF can be generalised to, a class LOCATION.</p>
+	<br/>
+	<p>Such generalisations, allow us to replace three associations: CATERPILLAR Walks-to ... , with one association: CATERPILLAR Walks to LOCATION.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example 4</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Step 6:</strong> Creating generalizations</li>
+	<li><strong class="blue">Brown</strong> and <strong class="blue">furry</strong> <strong class="blue">Caterpillar</strong> in a <strong class="blue">hurry</strong> <strong class="blue">Take your walk</strong> To the <strong class="red">shady leaf</strong>, or <strong class="blue">stalk</strong>, Or what not, Which may be the chosen <strong class="blue">spot</strong>. No <strong class="blue">toad</strong> <strong class="blue">spy</strong> you, <strong class="red">Hovering bird</strong> of prey <strong class="blue">pass by</strong> you; <strong class="blue">Spin and die, To live again</strong> a <strong class="blue">butterfly</strong>.</li> 
+	<p style="text-align:center;"><img src="images/slide-37-1.png" alt="Step 6" title="Step 6"/></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 39 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapters 3 and 4, Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/a8QjCyojPPi2m3xqtMKFnO?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 16 Methodology - Conceptual Database Design, Pearson Education Ltd, 2015</li>
+		<li><a href="https://www.uow.edu.au/~jrg/115/COOKBOOK/e2-2-frame.html">How to ... ? Cookbook, How to use UMLetlet for conceptual modeling ? Recipe 2.1 How to create very simple conceptual schemas with UMLetlet ?</a></li>
+	    <li><a href="https://www.uow.edu.au/~jrg/115/COOKBOOK/e2-frame.html">How to ... ? Cookbook, How to use UMLetlet for conceptual modeling ? Recipes 2.2, 2.3, and 2.4 How to do design a conceptual schema with UMLetlet (Design 1, 2, and 3) ?</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/gPHJCzvkppUwNz5QFgv_6D?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+

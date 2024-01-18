@@ -1,0 +1,51 @@
+% Characters ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\mytilda{\char`\~}
+\def\mybackslash{\char`\\}
+\def\myunderscore{\char`\_}
+% Fonts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\font\sflarge = cmss15
+\font\sfsmall = cmss10
+\font\sfavg = cmss12
+\font\rmsmall = cmr6
+% Colours ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\linetozz{\special{ps: currentpoint moveto 0 0 lineto stroke showpage}}
+\def\red{\special{ps: 1 0 0 setrgbcolor}}
+\def\darkgreen{\special{ps: 0 0.7 0 setrgbcolor}}
+\def\blue{\special{ps: 0 0 1 setrgbcolor}}
+\def\redbrick{\special{color rgb 0.7 0.0 0.0}} %"
+\def\darkblue{\special{color rgb 0.0 0.0 0.7}}
+\def\black{\special{color rgb 0.0 0.0 0.0}}
+\def\redbricktt#1{\redbrick\tt #1\black\sfsmall}
+\def\darkbluett#1{\darkblue\tt #1\black\sfsmall}
+% Headers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\myheader#1{\par  \baselineskip = 5pt \noindent \rmsmall #1 \smallskip
+    \hrule width 4.8 in height 0.5 pt depth 0.1 pt \newline}
+\def\header#1{\par \baselineskip = 10pt
+    \noindent \sflarge #1 \hfill \break}
+\def\headercont#1{\par \noindent #1 \smallskip
+    \hrule width 4.8 in height 2 pt depth 1 pt \hfill \break}
+\def\subheader#1{\par 
+    \baselineskip = 15pt\noindent \sfavg #1 \newline}    
+\def\boldline{\par 
+    \hrule width 4.8 in height 2 pt depth 0.5 pt \hfill \newline}    
+% Table of contents ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\tocheader{\par \baselineskip = 5pt \noindent \sfavg Table of contents \hfill \break}
+\def\tocstep#1{\baselineskip = 13pt 
+    \noindent \sfsmall #1 \newline}
+% Paragraphs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\parbegin{\par \noindent \baselineskip = 12pt \sfsmall}
+\def\parend{\hfill \break}
+% Newlines ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\newline{\hfill\break}
+% References ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\refheader{\par
+    \hrule width 4.8 in height 2 pt depth 0.5 pt \hfill \break
+    \noindent \sfavg References \newline}
+\def\refitem#1#2{\noindent \sfsmall #1 \newline \darkbluett{\hyphenchar\font=\string"2F (#2)}\newline} %"
+\def\refend{  
+    \hrule width 4.8 in height 2 pt depth 1 pt \hfill \break}
+% sql ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\def\sql#1{\textcolor{Green}{\tt #1}}
+% Body~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\tolerance=10000
+\hsize 6.6in

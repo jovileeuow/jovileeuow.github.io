@@ -1,0 +1,553 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/g562CYW8EEtpAjnQSGZ99M?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>02DatabaseDesign</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;Data Management and Security</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Database Design Process</a></li>
+	<li><a href="#4">Database Domain</a></li>
+	<li><a href="#6">Database Schema</a></li>
+	<li><a href="#8">Object Modeling</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A simplified process of database design used in this subject, consists of the following stages:  conceptual modelling, logical design, and physical design.</p>
+	<br/>
+	<p>A stage of conceptual modelling, transforms a specification of database domain into a conceptual schema.</p>
+	<br/>
+	<p>Next, a stage of logical design, transforms a conceptual schema into a logical schema. If a tabular data model is used as a logical view of a database, a conceptual schema is transformed into a set of so called relational schemas. A relational schema consists of  sequence of attributes located at a header of table with data.</p>
+	<br/>
+	<p>Finally, a stage of physical design determines the implementation details, like for example, location of the tables with data on the persistent storage devices.</p>
+	<br/>
+	<p>A picture at the bottom of the slide visualises a process of database design. A real estate agency would like to have a database with information about the real estate properties available for sale. A database domain contains information about real estate properties, owners of the properties, and the specific features of the properties, like for example, a fact that a property is located among the trees.</p>
+	<br/>
+	<p>In the first stage of a design, a database domain is more formally represented by a conceptual schema. A conceptual schema is usually a diagram, that consists of the rectangular boxes representing classes of objects, labelled lines representing associations between the objects, and the attributes (properties) describing the classes of objects.</p>
+	<br/>
+	<p>At a stage of logical design the classes of objects, association and attributes are transformed into the relational tables, that contain the rows with information about people (owners), houses, and locations of houses.</p>
+	<br/>
+	<p>Finally, a stage of physical design determines the locations of tables on persistent storage devices, and the additional persistent storage structures like for example indexes or materialized views.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Design Process</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A simplified process of  <strong class="red">database design</strong> consists of the following stages:
+          <ul class="build">
+            <li><strong class="red">Conceptual modeling</strong></li>
+	    <li><strong class="blue">Conceptual modeling</strong> transforms a specification of a <strong class="red">database domain</strong> into a <strong class="red">conceptual schema</strong></li>
+	    <li><strong class="red">Logical design</strong></li>
+	    <li><strong class="blue">Logical design</strong> transforms a <strong class="red">conceptual schema</strong> into a  <strong class="red">logical schema</strong>, for example the headers of relational tables</li>
+	    <li><strong class="red">Physical design</strong></li>
+	    <li><strong class="blue">Physical design</strong> determines the implementation details and adds to a <strong class="red">logical schema</strong> <strong class="red">persistent storage structures</strong> that improve perfromance, for example the indexes, clusters, partitions, materialized views, and the others</li>
+          </ul>
+        </li>
+ <p style="text-align:center;"><img src="images/slide-03.png" alt="HDD-schema" title="HDD-schema" width="750" height="170"/></p>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Database Design Process</a></li>
+	<li><a class="red" href="#4">Database Domain</a></li>
+	<li><a href="#6">Database Schema</a></li>
+	<li><a href="#8">Object Modeling</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A database domain is a selected fragment of the real world, to be described by the contents of a database.</p>
+	<br/>
+	<p>For example, a typical simple business domain can be described in the following short story. A company would like to store and to maintain information about its suppliers and about the parts shipped by the suppliers. A supplier is described by a supplier name, date of birth, salary and city he or she lives in. A part is described by a part number, part name, colour and price. A shipment is described by a supplier number, part name and quantity ordered. A supplier is identified by its supplier number and a part is identified by its part number.</p>
+	<br/>
+	<p>A short story included in the present slide is not the only way how a database domain can be described. It is possible to create a functional description of a database domain. A functional description lists the database applications to be implemented. The database applications provide information about data to be retrieved from a database. For example find all supplier who supply a part with given name. It is contributes to specification of classes of objects and descriptions with attributes.</p>
+	<br/>
+	<p>Yet another way how a database domain can be described is to refer to an already existing database and to list the ways how an old database should be transformed into a new database. For example, we can take an already existing hospital database  and replace patients with vehicles, doctors with mechanics, nurses with junior mechanics to get a vehicle maintenance and repair facility database.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Domain</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A <strong class="red">database domain</strong> is a selected fragment of the real world to be described by the contents of a database</li>
+        <li>For example, a typical simple business domain can be described as a sequence of statements:
+          <ul class="build">
+            <li><strong class="blue">A company would like to store and to maintain information about its suppliers and the parts shipped by the suppliers</strong></li>
+	    <li><strong class="blue">A supplier is described by a supplier name, date of birth, salary,  and city he/she lives in</strong></li>
+	    <li><strong class="blue">A part is described by a part number, part name, colour and price</strong></li>
+	    <li><strong class="blue">A shipment is described by a supplier number, part name and the quantity of ordered parts</strong></li>
+	    <li><strong class="blue">A supplier is identified by its supplier number and a part is identified by its part number</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Database Design Process</a></li>
+	<li><a href="#4">Database Domain</a></li>
+	<li><a class="red" href="#6">Database Schema</a></li>
+	<li><a href="#8">Object Modeling</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A database schema is a description of data stored in a database expressed in the terms of a particular data abstraction level.</p>
+	<br/>
+	<p>For example, at the highest level of abstraction, a database schema is a conceptual schema. A conceptual schema is a description of stored data expressed in the terms of classes objects, properties of objects, identifiers of classes of objects, associations between the classes of objects and the others.</p>
+	<br/>
+	<p>At the middle level, a database schema is a logical schema. A logical schema based on tabular view of data  is a description of stored data expressed in the terms of attributes, values of attributes, rows, columns, headers and tables.</p>
+	<br/>
+	<p>At the lowest level, a database schema is a physical schema. A physical schema is a description of stored data expressed in the terms of files, indexes, clusters, data blocks, and the others.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Database Schema</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A <strong class="red">database schema</strong> is a description of stored data expressed in the terms of a particular data abstraction level
+	<ul class="build">
+          <li>For example, a <strong class="red">conceptual schema</strong> is a description of stored data expressed in the terms of <strong class="red">classes objects</strong>, properties of objects, <strong class="red">identifiers</strong> of classes of objects, <strong class="red">associations</strong> between the classes of objects, <strong class="red">multiplicities</strong> of attributes and associations and <strong class="red">generalization hierarchies</strong></li>
+          <li>For example, a <strong class="red">logical schema</strong> is a description of stored data expressed in the terms of <strong class="red">attributes</strong>, <strong class="red">values of attributes</strong>, <strong class="red">rows</strong>, <strong class="red">columns</strong>, <strong class="red">headers</strong> and <strong class="red">tables</strong></li>
+	  <li>For example, a <strong class="red">physical schema</strong> is a description of stored data expressed in the terms of <strong class="red">files</strong>, <strong class="red">indexes</strong>, <strong class="red">clusters</strong>, <strong class="red">partitions</strong>, <strong class="red">materializations</strong>, <strong class="red">segments</strong>, <strong class="red">extents</strong> and <strong class="red">data blocks</strong></li>
+	</ul>
+      </li>
+    </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Database Design Process</a></li>
+	<li><a href="#4">Database Domain</a></li>
+	<li><a href="#6">Database Schema</a></li>
+	<li><a class="red" href="#8">Object Modeling</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>The object modeling is a special kind of conceptual modeling, where a specification of database domain is transformed into a simplified class diagram (conceptual schema).</p>
+	<br/>
+	<p>The principles of object modeling are the following:</p>
+	<br/>
+	<p>Contents of a database is quantised into discrete objects. A database is a description of a selected fragment of the reality. The reality is full objects. Hence, objet modeling provides a view of the reality as a collection of linked objects. For example, a student is an object, a lecturer, is an object, etc</p>
+	<br/>
+	<p>Objects are described by the attributes (properties) and the operations (methods). In our case, there is no need to represent the operations on objects and attributes. It is possible to implement the operations, however, in our case we shall ignore the operations.</p>
+	<br/>
+	<p>Objects are identified by the values of selected attributes. Identification of the objects is a very important property of the model. Identification is a reflection of a simple rule use in the reality sayin that when we talk about an object then we must identify it well, such that  a listener knows well what we are talking about.</p>
+	<br/>
+	<p>A class of objects is a group of homogeneous objects with common properties, common semantics and common identifiers.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><strong class="red">Object modeling</strong> is a special kind of <strong class="blue">conceptual modeling</strong> where a <strong class="blue">specification of a database domain</strong> is transformed into a <strong class="red">simplified class diagram</strong> (<strong class="red">conceptual schema</strong>)</li>
+	<li>Principles of <strong class="red">object modeling</strong>:
+	  <ul class="build">
+	    <li>Contents of a database is quantised into <strong class="red">discrete objects</strong></li>
+	    <li><strong class="red">Objects</strong> are described by the <strong class="red">attributes</strong> (<strong class="red">properties</strong>) and <strong class="red">operations</strong> (<strong class="red">methods</strong>)</li> 
+	    <li><strong class="red">Good news: we ignore the operations !</strong></li>
+	    <li><strong class="red">Objects</strong> are <strong class="red">identified by</strong> the values of selected attributes</li>
+            <li>A <strong class="red">class of objects</strong> is a group of homogeneous objects with common properties, common semantics and common identifiers</li>
+	  </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Here are few examples of the concepts introduced on the previous slide.</p>
+	<br/>
+	<p>We usually start from identification of a single object. In our  example a student is an object, a lecturer is an object, and a lecture hall is an object.</p>
+	<br/>
+	<p>It is possible to think about  a shipment is an object. Well, it is not a solid object, we can touch, move, etc but still a process of transferring goods from one place to another can be considered as an object. If we consider a process as an object then even an accident can be considered as an object. </p>
+	<br/>
+	<p>Next, we are looking for a description of an object. In our case an object can be described as a collection of values of attributes. For example, a student can be described by the attributes like student number, first name, last name, date of birth and the others.</p>
+	<br/>
+	<p>Next, we have to pick the attributes, that can use fro a unique identification of an object. For example, a student is identified by an attribute student number, a lecture hall is identified by a pair of attributes (building number and room number), a shipment is identified by a triple of attributes (supplier, part, and shipment date).</p>
+	<br/>
+	<p>Now, we consider a group of instances of objects of the same kind, for example a group of students, and we call such group of homogeneous objects as a class objects STUDENT.</p>
+	<br/>
+	<p>In the same way, a group of lecturers forms a class of objects LECTURER, a group of shipments forms a class of objects SHIPMENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Examples:
+	  <ul class="build">
+	    <li>A <strong class="blue">student</strong> is an object, a <strong class="blue">lecturer</strong> is an object, a <strong class="blue">lecture hall</strong> is an object, a <strong class="blue">shipment</strong> is an object, an <strong class="blue">accident</strong> is an object, etc</li>
+	    <li>A student is described by the attributes  <strong class="blue">student number</strong>, <strong class="blue">first name</strong>, <strong class="blue">last name</strong>, <strong class="blue">date of birth</strong>, etc</li>
+	    <li>A student is identified by a <strong class="blue">student number</strong>, a lecture hall is identified by <strong class="blue">building number and room number</strong>, a shipment is identified by a <strong class="blue">supplier name</strong>, <strong class="blue">date</strong>, and <strong class="blue">time</strong>, etc</li>
+	    <li>A group of students forms a class <strong class="blue prettyprint28">STUDENT</strong>, a group of lecturers forms a class <strong class="blue prettyprint28">LECTURER</strong>, a group of shipments forms a class <strong class="blue prettyprint28">SHIPMENT</strong>, etc</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Now we define more object modeling concepts. A description of the selected portion of the reality with the classes of objects and attributes describing the classes is not sophisticated enough to represent relationships between the objects. Usually the instances of objects are linked one with each other. The links may represent interaction between the objects, dependency of one object on another,  transfer of information between the objects, etc.</p>
+	<br/>
+	<p>In general a link is a conceptual connection between two or more objects. For example, "James talks to Janusz", "Lecture 1 on Database Systems is in Building 3, Room 2", "Peter supplies bolts to James".</p>
+	<br/>
+	<p>Like with the instances of objects, we generalize a collection of homogeneous links into an association.  An association represents a group of homogeneous links with a common structure, common attributes, common semantics and common identifiers. For example the links  like  "James talks to Janusz",  "Jane talks to Willy", etc can be represented as an association  "STUDENT Talks-to LECTURER". In the same way we can create the associations like "LECTURE Is in BUILDING",  SUPPLIER Supplies PART to MANUFACTURER and so on. The first two associations are binary associations because each one of them involves only two classes of objects. The third association is a ternary association because it involves three classes of objects: SUPPLIER, PART and MANUFACTURER.</p>
+	<br/>
+	<p>It s possible that a binary association has the same left and right hand side. For example EMPLOYEE Supervises EMPLOYEE. Such association is still a binary association and it consists of links between the instances of objects in a class EMPLOYEE.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>More <strong class="red">object modeling</strong> concepts:
+	  <ul class="build">
+	    <li>A <strong class="red">link</strong> a conceptual connection between two or
+more objects</li>
+	    <li>An <strong class="red">association</strong> represents a group of homogeneous 
+links with a common structure, common attributes, common semantics and common identifiers</li>
+	  </ul>
+        </li>
+	<li>Examples of <strong class="red">links</strong>:
+	  <ul class="build">
+	    <li>James <strong class="blue">talks to</strong> Janusz</li>
+	    <li>Lecture 1 in <strong class="blue">is in</strong> building 3 room 2</li>
+	    <li>Peter <strong class="blue">supplies</strong> bolts <strong class="blue">to</strong> James</li>
+	  </ul>
+	</li>
+	<li>Examples of <strong class="red">associations</strong>:
+	  <ul class="build">
+	    <li><strong class="blue prettyprint28">STUDENT Talks-to LECTURER</strong></li>
+	    <li><strong class="blue prettyprint28">LECTURE Is-in BUILDING</strong></li>
+	    <li><strong class="blue prettyprint28">SUPPLIER Supplies PART To MANUFACTURER</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>An instance diagram is a very convenient visualization of instances of objects, links between the objects and classes of objects. An instance of an object is represented by an icon, for example, the icons of students represent instances of students and icons with the codes of subjects represent instances of subjects.</p>
+	<br/>
+	<p>The lines linking the icons represent the links between the instances of objects. Note, that in our example some students have to links to different subjects and some students do not have any links to the subjects. It means that some objects do not need to be linked to other objects. If in our case, the links represent the facts like "student enrolled subject" then student without any links enrolled no subjects.</p>
+	<br/>
+	<p>All icons representing instances of objects of the same type are included in a n oval representing a class of objects and a label representing a name of a class of objects. In our instance diagram, we have two classes of objects STUDENTS and SUBJECTS.</p>
+	<br/>
+	<p>A collection of homogeneous links represent an association between the classes of objects.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Visualizations of <strong class="red">objects</strong>, <strong class="red">links</strong>, <strong class="red">classes</strong>, and <strong class="red">associations</strong></li>
+	     <p style="text-align:center;"><img src="images/slide-12.png" alt="HDD-schema" title="HDD-schema" width="1000" height="500"/></p>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An important relation between the classes of objects is a "set inclusion" relation also called as "is a subset" relation or simply "is a" relation.</p>
+	<br/>
+	<p>A number of "set inclusion" or "is a subset" relations is represented as "generalization hierarchy". A single level in a generalisation hierarchy represents a single "set inclusion" or "is a subset" relation between the classes of objects. For example, if a set of all objects in a class X "is a subset" of a set of all a objects in a class of objects Y (or if X "is included in Y") , then class of objects Y is a generalization of class of objects X.</p>
+	<br/>
+	<p>In other words, if a class of objects Y is a generalisation of class of objects X, then a set of all objects in Y "includes" a set of all objects in X. If X is a generalization of Y then we shall simply say, that X "is a" Y.</p>
+	<br/>
+	<p>Here are a few examples of generalisation.</p>
+	<br/>
+	<p>A class of objects STUDENT is a generalization of classes UNDERGRADUATE STUDENT and POSTGRADUATE STUDENT.</p>
+	<br/>
+	<p>It is because, a set of all undergraduate students "is a subset" of a set of all students, and a set of all postgraduate students "is a subset "of a set of all students.</p>
+	<br/>
+	<p>In the other words, a set of all students includes a set of all postgraduate students, and it also includes a set of all undergraduate students.</p>
+	<br/>
+	<p>At the end we can simply say that UNDERGRADUATE STUDENT IS-A STUDENt and POSTGRADUATE-STUDENT IS-A STUDENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>More <strong class="red">object modeling</strong> principles:
+	  <ul class="build">
+	    <li>A <strong class="red">generalization hierarchy</strong> represents <strong class="red">Is-a-subset</strong> relation between the classes of objects</li>
+	    <li>If a set of all objects in a class X is a subset of a set of all objects in a class Y then class Y is a <strong class="red">generalization</strong> of class X</li>
+	    <li>In other words, if a class Y is a <strong class="red">generalization</strong> of class X then a set of all objects in Y includes a set of all objects in X</li>
+	  </ul>
+	</li>
+	<li>Example of <strong class="red">generalization</strong>:
+	<ul class="build">
+	  <li>A class <strong class="blue prettyprint28">STUDENT</strong> is a generalization of classes 
+<strong class="blue prettyprint28">UNDERGRADUATE STUDENT</strong> and <strong class="blue prettyprint28">POSTGRADUATE STUDENT</strong></li>
+	  <li>This is so, because a set of all undergraduate students <strong class="red">is a subset of</strong> a set of all students and a set of all postgraduate students is a <strong class="red">subset of</strong> a set of all students</li>
+	  <li>In other words, a set of all students <strong class="red">includes</strong> a set of all postgraduate students and it also <strong class="red">includes</strong> a set of all undergraduate students</li>
+	</ul>
+      </li>
+    </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An instance diagram can be used to visualize generalization hierarchies. The classes of objects visualized as blobs that includes all icons of instance of objects and with an attached class name label can be "nested" in each other. A single nesting represents a single level in a generalization hierarchy.</p>
+	<br/>
+	<p>An instance diagram given on the present slide visualises the concepts of classes of objects and generalization of classes of objects. A class STUDENT is a generalization of the classes UNDERGRADUATE STUDENT and POSTGRADUATE STUDENT. It is because every undergraduate student is a student, and every postgraduate student is a student as well. A blob with the icons of undergraduate students is included in a blob withe the icons of students. A blob with the icons of postgraduate students is included in a blob withe the icons of students.</p>
+	<br/>
+	<p>A class STUDENT is called as a superclass and the classes  UNDERGRADUATE STUDENT and POSTGRADUATE STUDENT are called as subclasses.</p>
+	<br/>
+	<p>Note, that the blobs of undergraduate students  and postgraduate students do not have common elements. It is because a student cannot be in the same moment an undergraduate and postgraduate student. If subclasses are disjoint then a generalization hierarchy is called as "disjoint". Otherwise it is called as 'overlapping". Fo example, a subclass of students who enrolled a subject and a subclass of students who enrolled a subject CSIT114 are overlapping because some students enrolled both classes.</p>
+	<br/>
+	<p>If a union of subclasses is equal to a superclass then such generalization is called as complete. Otherwise a generalization is partial. A generalization UNDERGRADUATE STUDENT IS-A STUDENT and POSTGRADUATE STUDENT IS-A STUDENT is complete because there are no other students who are not undergraduate and postgraduate,</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Visualizations of generalizations <strong class="blue prettyprint28">UNDERGRADUATE STUDENT ISA STUDENT</strong>  
+and <strong class="blue prettyprint28">POSTGRADUATE STUDENT ISA STUDENT</strong></li>
+	     <p style="text-align:center;"><img src="images/slide-14.png" alt="HDD-schema" title="HDD-schema" width="700" height="350"/></p>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A few more examples of generalisation.</p>
+	<br/>
+	<p>A class HUMAN is a generalization of classes STUDENT and LECTURER.</p>
+	<br/>
+	<p>It is so because a set of all students is a subset of a set of all humans, and a set of all lecturers is a subset of a set of all humans</p>
+	<br/>
+	<p>In other words, a set of all humans includes a set of all students, and it also includes a set of all lecturers (what some students do not believe that it is possible).</p>
+	<br/>
+	<p>We can also say that SUDENT IS-A HUMAN and (surprise, surprise, ...) LECTURER IS-A HUMAN as well.</p>
+	<br/>
+	<p>My favorit example of generalizationis the followinfg.</p>
+	<br/>
+	<p>A class BAT is a generalization of classes GREY-BAT, VAMPIRE-BAT, and BATMAN</p>
+	<br/>
+	<p>It is so because a set of all grey bats is a subset of a set of all bats, and a set of all vampire bats is a subset of a set of all bats,and a set of all batmen is a subset of a set of all bats.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Object Modeling</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Another example of <strong class="red">generalization</strong>:
+	  <ul class="build">
+	    <li>A class <strong class="blue prettyprint28">HUMAN</strong> is a generalization of classes 
+<strong class="blue prettyprint28">STUDENT</strong> and <strong class="blue prettyprint28">LECTURER</strong></li>
+	    <li>This is so because a set of all students is a <strong class="red">subset of</strong> a set of all humans and a set of all lecturers is a <strong class="red">subset of</strong> a set of all humans</li>
+	    <li>In other words, a set of all humans <strong class="red">includes</strong> a set of all students and it also <strong class="red">includes</strong> a set of all lecturers</li>
+	  </ul>
+	</li>
+	<li>Yet another (... and it is my favorite ...) example of <strong class="red">generalization</strong>:
+	  <ul class="build">
+	    <li>A class <strong class="blue prettyprint28">BAT</strong> is a generalization of classes <strong class="blue prettyprint28">GREY-BAT</strong>, <strong class="blue prettyprint28">VAMPIRE-BAT</strong>, and <strong class="blue prettyprint28">BATMAN</strong></li>
+	    <li>This is so because a set of all grey bats is a <strong class="red">subset of</strong> a set of all bats and a set of all vampire bats is a <strong class="red">subset of</strong> a set of all bats and a set of all batmen is a <strong class="red">subset</strong> of a set of all bats</li>
+	  </ul>
+        </li>
+     </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 16 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+ 	    <li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapter 2, Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/I-knCZY166h8QXkEHK5o1u?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 10 Database System Development Cycle, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/wfxhC1WLwwtBqLP1SXJ5ye?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+
