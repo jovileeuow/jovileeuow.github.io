@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>50</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>COMPANY
+--
+name   ID1
+bg=#dddddd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>50</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>BUILDING
+--
+name   ID1
+address      ID2
+completion-date
+bg=#dddddd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>50</y>
+      <w>150</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>STAGE
+--
+name
+start-date
+completion-date
+cost
+bg=#dddddd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>60</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=
+m2=1..*
+&lt; Applies-to</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>100</y>
+      <w>540</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=
+r1=1..*
+m2=1..*
+Involved-in &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;490.0;60.0;490.0;40.0</additional_attributes>
+  </element>
+</diagram>

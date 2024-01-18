@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>60</y>
+      <w>230</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>SUBJECT
+--
+code             ID1 
+title               ID2
+credits
+enrolment-date[*]  
+bg=#dddddd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
