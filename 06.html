@@ -1,0 +1,1672 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/7mHgCANpDDtlWvjqFGyb_I?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>06Logical design</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Logical Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Methodology</a></li>
+	<li><a href="#5">Transformations</a></li>
+	<li><a href="#33">Example</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+  <slide>
+    <aside class="note">
+      <section>
+	<p>A logical design transforms a conceptual schema, into a set of relational schemas. Transformation of a conceptual schema is controlled by a collection of simple rules replacing the components of a simplified class diagram with linear specifications relational schemas, i.e. schema-name( attribute, attribute, ... ) primary key = ... foreign key = ...</p>
+	<br/>
+	<p>Application of the transformation rules is divided into few steps each one replacing one type of the components of a conceptual schema.</p>
+	<br/>
+	<p>A logical design is performed in the following steps:</p>
+	<br/>
+	<p>First, the multivalued attributes are replaced with the classes of objects, and depending on the semantics of multivalued attributes, either with one to many, or with many to many associations.</p>
+	<br/>
+	<p>In the second step, the association classes and link attributes, are replaced with the triples that consists of: one to many association, class-of-objects, and many-to-one-association.</p>
+	<br/>
+	<p>In the third step, many-to-many associations, are replaced with the triples that consists of: one to many association, class of objects, many to one association.</p>
+	<br/>
+	<p>In the fourth step, the qualifications are replaced with one to many associations, and with composite identifiers in object classes on "many" side of one to many associations.</p>
+	<br/>
+	<p>The remaining steps are listed on the next slide.</p>
+	<br/>
+      </section>
+    </aside>    
+    <hgroup>
+      <h2 class="green">Methodology</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>The <strong class="red">logical design</strong> transforms a <strong class="red">conceptual schema</strong> into a set of <strong class="red">relational schemas</strong></li>
+        <li>The <strong class="red">logical design</strong> is performed as a sequence of the following steps:</li>
+        <li>(1) The <strong class="red">multivalued attributes</strong> are replaced with  the <strong class="red">classes of objects</strong> and
+depending on the semantics of multivalued attribute either with <strong class="red">one-to-many</strong> or <strong class="red">many-to-many</strong> associations</strong></li>
+        <li>(2) The <strong class="red">associaton classes</strong> and <strong class="red">link attributes</strong> are replaced with the triples (<strong class="red">one-to-many association:class-of-objects :many-to-one-association</strong>)</li>
+	<li>(3) <strong class="red">Many-to-many</strong> associations are replaced with triples (<strong class="red">one-to-many association:class-of-objects:many-to-one association</strong>)</li>
+	<li>(4) The <strong class="red">qualifications</strong> are replaced with <strong class="red">one-to-many associations</strong> and <strong class="red">composite identifiers</strong> in <strong class="red">object classes</strong> on "many" side of <strong class="red">one-to-many</strong> associations</li> 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Continuation of transformation steps.</p>
+	<br/>
+	<p>In the fifth step, the selected identifiers are copied from the classes of objects on "one" side of associations, to the classes of objects on "many" side of associations, and later on, are tagged with FKn, where an index "n" is used to distinguish between different foreign keys.</p>
+	<br/>
+	<p>In the sixth step, the triples, that consists of: class of objects, one to one association, and class of objects,  are merged into one class of objects. Then, one to one associations are removed.</p>
+	<br/>
+	<p>In the seventh step, the superset, and/or subset, and/or association methods are used to transform the generalisations.</p>
+	<br/>
+	<p>In the eighth step, the primary and candidate keys are created.</p>
+	<br/>
+	<p>In the ninth step, the associations are removed.</p>
+	<br/>
+	<p>In the tenth step, the relational schemas with referential integrity constraints are created.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Methodology</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>(5) The selected <strong class="red">identifiers</strong> are copied from the <strong class="red">classes of objects</strong> on "one" sides of <strong class="red">association</strong> to the <strong class="red">classes of objects</strong> on "many" side of the <strong class="red">associationds</strong> and such <strong class="red">identifierds</strong> are tagged with <strong class="red">FKn</strong> tag (an index "n" is used to distinguish between different <strong class="red">foreign keys</strong>)</li>
+      </ul>
+      <ul class="build">
+	<li>(6) The triples (<strong class="red">class-of-objects:one-to-one asociation:class of objects</strong>) are merged into one <strong class="red">class of objects</strong> and <strong class="red">one-to-one associations</strong> are removed</li>
+	<li>(7) The <strong class="red">superset</strong>, <strong class="red">subset</strong> and  <strong class="red">association</strong> methods are used to transform the generalizations</li>
+	<li>(8) The <strong class="red">primary</strong> and <strong class="red">candidate keys</strong> are created</li>
+	<li>(9) The <strong class="red">associations</strong> are removed</li>
+	<li>(10) The <strong class="red">relational schemas</strong> with the <strong class="red">referential integrity constraints</strong> are created</li> 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Logical Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+       <li><a href="#2">Methodology</a></li>
+	<li><a class="red" href="#5">Transformations</a></li>
+	<li><a href="#33">Example</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>We start from a case 1 where a multivalued attribute is transformed into into a class of objects and many-to-many association. The second case where a multivalued attribute is transformed into a class of objects and one-to-many-association is presented later.
+</p>
+	<br/>
+	<p>Let us consider a class of objects: BOOK, and a multivalued attribute: author name. An attribute: author name in a class of objects: BOOK, is transformed in the following way.
+</p>
+	<br/>
+	<p>An attribute: author name is promoted to a new class of objects: AUTHOR. Such transformation is commonly called as a "reification". Next, a single valued attribute: author name, is added as an identifier to a class: AUTHOR.
+</p>
+	<br/>
+	<p>A multivalued attribute: author name is removed from a class of objects: BOOK. A many to many association: BOOK Is-written-by AUTHOR, is created between the classes of objects: BOOK and AUTHOR.</p>
+	<br/>
+      </section>
+    </aside>
+     <hgroup>
+      <h2 class="green">Multivalued attributes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>Case 1: Transformation into a <strong class="red">class of objects</strong> and <strong class="red">many-to-many</strong> association</li>
+      </ul>
+      <ul class= "build">
+	<p style="text-align:center;"><img src="images/slide-05-1.png" alt="Multivalued attribute" title="Multivalued attribute"></p>	 
+        <li>A <strong class="red">multivalued attribute</strong> <strong class="blue prettyprint28">author-name</strong> in a class of objects <strong class="blue prettyprint28">BOOK</strong> is transformed in the following way:
+          <ul class="build">
+            <li>An attribute <strong class="blue prettyprint28">author-name</strong> is promoted to a class of objects <strong class="blue prettyprint28">AUTHOR</strong> (such step is called as <strong class="red">reification</strong>)</li>
+	    <li>A single valued attribute <strong class="blue prettyprint28">author-name</strong> is added as an identifier to a class <strong class="blue prettyprint28">AUTHOR</strong></li>
+	    <li>A multivalued attribute <strong class="blue prettyprint28">author-name</strong> is removed from a class <strong class="blue prettyprint28">BOOK</strong></li>
+	    <li>A <strong class="red">many-to-many</strong> association <strong class="blue prettyprint28">Is-written-by</strong> is created between the classes <strong class="blue prettyprint28">BOOK</strong> and <strong class="blue prettyprint28">AUTHOR</strong></li>	 
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An association BOOK Is-written-by AUTHOR is many-to-many because a book can be written by many authors and an author can write many books. Information about multiplicity of an association is obtained from semantics of the association. Note, that multivalued attribute provides only information about of a book having many authors. Information, whether an author can contribute to many books is not included in a multivalued attribute and it must be discovered from semantics of the association and our knowledge of the reality</p>
+	<br/>
+	<p>The next slide presents a case where a reification provides a new association that is one-to-many.</p>
+	<br/>
+	<p>Elimination of multivalued attributes needs additional information not included in a conceptual schema. It is why we need to look at the semantics/meaning of a multivalued attribute. It is impossible to correctly transform a multivalued attribute without knowing its semantics.</p>
+	<br/>
+      </section>
+    </aside>
+  <hgroup>
+      <h2 class="green">Multivalued attributes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	    <p style="text-align:center;"><img src="images/slide-05-2.png" alt="Multivalued attribute" title="Multivalued attribute"></p>	 
+	    <li>An association <strong class="blue prettyprint28">Is-written-by</strong> is <strong class="red">many-to-many</strong> because a book can be written by many authors and an author can write many books</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+</slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the second case, we consider a transformation of a multivalued attribute into a class of objects and one-to-many association.</p>
+	<br/>
+	<p>Let us consider an attribute: phone number, in a class of objects: PERSON. A multivalued attribute: phone number in a class of objects: PERSON, is transformed in the following way.</p>
+	<br/>
+	<p>First, we apply a reification, and we promote an attribute: phone number, into a class of objects: PHONE. Next, a single valued attribute: number, is added as an identifier to a class of objects: PHONE.</p>
+	<br/>
+	<p>A multivalued attribute: phone number, is removed from a class of objects: PERSON.</p>
+	<br/>
+	<p>Finally, a one-to-many association: person has phone, is created between the classes: person and phone.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Multivalued attributes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>Case 2: Transformation into a <strong class="red">class of objects</strong> and <strong class="red">one-to-many</strong> association</li>
+      </ul>
+      <ul class= "build">      
+	<p style="text-align:center;"><img src="images/slide-08-3.png" alt="Multivalued attribute" title="Multivalued attribute"></p>	 
+        <li>A <strong class="red">multivalued attribute</strong> <strong class="blue prettyprint28">phone-number</strong> in a class of objects <strong class="blue prettyprint28">PERSON</strong> is transformed in the following way:
+          <ul class="build">
+            <li>An attribute <strong class="blue prettyprint28">phone-number</strong> is promoted to a class of objects <strong class="blue prettyprint28">PHONE</strong> (such step is called as <strong class="red">reification</strong>)</li>
+	    <li>A single valued attribute <strong class="blue prettyprint28">number</strong> is added as an identifier to a class <strong class="blue prettyprint28">PHONE</strong></li>
+	    <li>A multivalued attribute <strong class="blue prettyprint28">phone-number</strong> is removed from a class <strong class="blue prettyprint28">PERSON</strong></li>
+	    <li>A <strong class="red">one-to-many</strong> association <strong class="blue prettyprint28">Has</strong> is created between the classes <strong class="blue prettyprint28">PERSON</strong> and <strong class="blue prettyprint28">PHONE</strong></li>	 
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>An association: PERSON Has PHONE, has a multiplicity: one to many, because a person can have many mobile phones and a mobile phone has only one owner.</p>
+	<br/>
+	<p>A fact, that a mobile phone has only one owner is discovered from the semantics of a class PHONE and from our knowledge of the reality. A conceptual schema provides only information that a person may have many phones through a multivalued attribute phone number. After reification and linking of the classes PERSON and PHONE with a new association we must discover on of the multiplicities from our knowledge of the reality.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Multivalued attributes</h2>
+    </hgroup>
+    <article>
+      <ul>	
+	    <p style="text-align:center;"><img src="images/slide-09-3.png" alt="Multivalued attribute" title="Multivalued attribute"></p>	 
+	    <li>An association <strong class="blue prettyprint28">Has</strong> is <strong class="red">one-to-many</strong> because a person can have many mobile phones and a mobile phone is owned by one person</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the second step, we eliminate association classes and many to many associations through the transformations into one to many and many to one associations. An association class becomes and ordinary class of objects involved in both one-to-many and many-to-one associations.</p>
+	<br/>
+	<p>For example. we consider a many to many association: STUDENTS Enrols SUBJECT, represented by an association class: ENROLMENT. We assume an optimistic case, a student enrols in a subject only one time. the pessimistic case, when a subject is enrolled by the same student many times is considered later.</p>
+	<br/>
+	<p>First, an association class: ENROLMENT, is transformed in the following way.  Many to many association: STUDENTS Enrols SUBJECT, is removed. A new one-to-many association: STUDENT Performs ENROLMENT, is added between a class of objects: STUDENT, and a class of objects: ENROLMENT.</p>
+	<br/>
+	<p>Next, a one-to-many association: SUBJECT is-involved-in ENROLMENT, is added between a class of objects: SUBJECT and a class of objects: ENROLMENT.</p>
+	<br/>
+	<p>A qualification with an attribute: subject code (code), is added on a student side of association: STUDENT Performs ENROLMENT and a qualification with an attribute: student number (s#), is added on a subject side of an association: SUBJECT is-involved-in ENROLMENT. The qualifications are need to provide information about a derived identifier of a class ENROLMENT.</p>
+	<br/>
+	<p>In a general case, every many-to-many association can be replaced with one-to-many association CLASS OF OBJECTS (that represents an association) and many-to-one association. A derived identifier of CLASS OF OBJECT is a pair of identifiers taken from "one' sides of both associations. In our example it is a pair of attributes (student number, subject code).</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association classes</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-07-1.png" alt="Association class" title="Association class"></p>
+      </ul>
+	<ul class= "build">
+          <li>An <strong class="red">association class</strong> <strong class="blue prettyprint28">Enrols</strong> is transformed in the following way:
+          <ul class="build">
+            <li>Many-to-many association <strong class="blue prettyprint28">Enrols</strong> is removed</li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Performs</strong> is added between a class <strong class="blue prettyprint28">STUDENT</strong> and a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Is-involved-in</strong> is added between a class <strong class="blue prettyprint28">SUBJECT</strong> and a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A qualification with an attribute <strong class="blue prettyprint28">code</strong> is added on a <strong class="blue prettyprint28">STUDENT</strong> side of association <strong class="blue prettyprint28">Performs</strong> and a qualification with an attribute <strong class="blue prettyprint28">s#</strong> is added on  <strong class="blue prettyprint28">SUBJECT</strong> side of association <strong class="blue prettyprint28">Is-involved-in</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>A qualification with an attribute: subject code (code) of an association STUDENT Performs ENROLMENT contributes to an identifier that consists of: student number (s#) and subject code (code) in a class: ENROLMENT. It is because the association is qualified on STUDENT class side and an attribute student number (s#) together with an attributes used in the qualification forms an identifier of a class  ENROLMENt on the unqualified side of the association.</p>
+	<br/>
+	<p>A qualification with an attribute: student number (s#) of an association: SUBJECT Is-involved-in ENROLMENT, also contributes to an identifier that consists of: student number (s#), and subject code (code), in a class ENROLMENT. It is because the association is qualified on SUBJECT class side and an attribute subject code (code) together with an attributes used in the qualification forms an identifier of a class  ENROLMENt on the unqualified side of the association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Association classes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	    <p style="text-align:center;"><img src="images/slide-07-2.png" alt="Association class" title="Multivalued attribute"></p>
+	    <li>A qualification with an attribute <strong class="blue prettyprint28">code</strong> of an association <strong class="blue prettyprint28">Performs</strong> contributes to an identifier <strong class="red prettyprint28">(s#, code)</strong>  of a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A qualification with an attribute <strong class="blue prettyprint28">s#</strong> of an association <strong class="blue prettyprint28">Is-involved-in</strong> also contributes to an identifier <strong class="red prettyprint28">(s#, code)</strong> of a class <strong class="blue prettyprint28">ENROLMENT</strong></li>	    	   
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>  
+<!-- slide 12 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Now, we assume a pessimistic case, where a student must enrol a subject many times. In such a case, an association: STUDENT Enrols SUBJECT, must be qualified in the middle by an attribute: enrolment date (edate). This is, because an identifier of an association class consists of three attributes: students number (s#), subject code(code), and enrolment date (edate).</p>
+	<br/>
+	<p>A many to many association: STUDENT Enrols SUBJECT, and association class: ENROLS, qualified with an attribute: enrolment date (e ate) is transformed in the following way.</p>
+	<br/>
+	<p>Many to many association: STUDENT Enrols SUBJECT.</p>
+	<br/>
+	<p>A one-to-many association: STUDENT Performs ENROLMENT, is added between a class: STUDENT and a class: ENROLMENT.</p>
+	<br/>
+	<p>A one-to-many association: SUBJECT Is-involved-in ENROLMENT, is added between a class: SUBJECT and a class: ENROLMENT.</p>
+	<br/>
+	<p>A qualification with the attributes: subject code (code), and enrolment date (e date), is added on STUDENT side of an association: STUDENT Performs ENROLMENT.</p>
+	<br/>
+	<p>A qualification with the attributes: student number (s#), and enrolment date (e date), is added on a SUBJECT side of an association: SUBJECT Is-involved-in ENROLMENT.</p>
+	<br/>
+	<p>In a general case any many-to-many association is equivalent to to one-to-many association a class objects representing an association class and many-to-one association on the other side. If many-to-many association is not represented by an association class it is always possible to add an empty association class that has no attributes. Such association class is later on used as a class of objects in-between one-to-many and many-to-one associations , that replace one-to-many association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualified association classess</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-08-1.png" alt="Association class" title="Association class"></p>
+      </ul>
+      <ul class= "build">
+        <li>An <strong class="red">association class</strong> <strong class="blue prettyprint28">Enrols</strong> qualified with an attribute <strong class="blue prettyprint28">edate</strong> is transformed in the following way:
+          <ul class="build">
+            <li>Many-to-many association <strong class="blue prettyprint28">Enrols</strong> is removed</li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Performs</strong> is added between a class <strong class="blue prettyprint28">STUDENT</strong> and a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Is-involved-in</strong> is added between a class <strong class="blue prettyprint28">SUBJECT</strong> and a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A qualification with the attributes <strong class="blue prettyprint28">(code,edate)</strong> is added on <strong class="blue prettyprint28">STUDENT</strong> side of association <strong class="blue prettyprint28">Performs</strong> and a qualification with the attributes <strong class="blue prettyprint28">(s#,edate)</strong> is added on <strong class="blue prettyprint28">SUBJECT</strong> side of association <strong class="blue prettyprint28">Is-involved-in</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+  <!-- slide 13 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>Finally, an attribute: enrolment date (edate), is removed from a class: ENROLMENT.</p>
+	<br/>
+	<p>Note that, multiplicity of an association: STUDENT Performs ENROLMENT, is one-to-many, because a student can perform many enrolments and an enrolment is performed by one student.</p>
+	<br/>
+	<p>A multiplicity on the right hand side of association: STUDENT Performs ENROLMENT, is 0..1 because of a qualification. It means, that for a given student, at most one enrolment of a given subject can be performed on a given day.</p>
+	<br/>
+	<p>Also note, that a multiplicity of an association: SUBJECT Is-involved-in ENROLMENT, is one-to-many, because a subject can be involved in many enrolments and an enrolment is related to exactly one subject.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualified association classes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	    <li>An attribute <strong class="blue prettyprint28">edate</strong> is removed from a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <p style="text-align:center;"><img src="images/slide-08-2.png" alt="Association class" title="Multivalued attribute"></p>	 
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+  <aside class="note">
+      <section>
+	<p>In the next step of logical design,  we transform the link attributes.</p>
+	<br/>
+	<p>A link attribute: enrolment date (edate) is transformed in the following way. The link attribute: enrolment day (edate), is promoted to an association class: ENROLMENT.</p>
+	<br/>
+	<p>Next, an association class: ENROLMENT, is transformed in the way explained earlier. Many-to-many association is replaced with one-to-many association and many-to-one associations. A class ENROLMENT is located between the new associations.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Link attributes</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-09-1.png" alt="Link attribute" title="Link attribute"></p>
+      </ul>
+      <ul class= "build">      
+        <li>A <strong class="red">link attribute</strong> <strong class="blue prettyprint28">edate</strong> is transformed in the following way: 
+          <ul class="build">
+            <li>A link attribute <strong class="blue prettyprint28">edate</strong> is promoted to an association class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <p style="text-align:center;"><img src="images/slide-09-2.png" alt="Association class" title="Multivalued attribute"></p>	 
+	    <li>An association class <strong class="blue prettyprint28">ENROLMENT</strong> is transformed in a way explained earlier</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Next, we look at many to many associations, without association classes.</p>
+	<br/>
+	<p>A many-to-many association: SUPPLIER Supplies PART, is transformed in the following way. First, we create a new class of objects: SHIPMENT. The new class of objects has no attributes.</p>
+	<br/>
+	<p>Next, one-to-many association: SUPPLIER Performs SHIPMENT, is added between a class of objects: SUPPLIER and a class of objects: SHIPMENT.</p>
+	<br/>
+	<p>The second one-to-many association: PART Is-involved-in Shipment, is added between a class of objects PART and a class of objects: SHIPMENT.</p>
+	<br/>
+	<p>Next, we add a qualification with an attribute: part number (p#), to a SUPPLIER side of an association: SUPPLIER Performs SHIPMENT.</p>
+	<br/>
+	<p>Finally, we add a qualification with an attribute: supplier number (s#), to a PART side of an association: PART Is-involved-in SHIPMENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Many-to-many associations</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-11-1.png" alt="M:N associations" title="M:N associations"></p>
+      </ul>
+      <ul class= "build">      
+        <li>A <strong class="red">many-to-many association</strong> <strong class="blue prettyprint28">Supplies</strong> is transformed in the following way: 
+          <ul class="build">
+            <li>A new class of objects <strong class="blue prettyprint28">SHIPMENT</strong> is created</li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Performs</strong> is added between a class <strong class="blue prettyprint28">SUPPLIER</strong> and a class <strong class="blue prettyprint28">SHIPMENT</strong></li>
+	    <li>A one-to-many association <strong class="blue prettyprint28">Is-involved-in</strong> is added between a class <strong class="blue prettyprint28">PART</strong> and a class <strong class="blue prettyprint28">SHIPMENT</strong></li>
+	    <li>A qualification with the attributes <strong class="blue prettyprint28">(p#)</strong> is added on <strong class="blue prettyprint28">SUPPLIER</strong> side of association <strong class="blue prettyprint28">Performs</strong> and a qualification with the attributes <strong class="blue prettyprint28">(s#)</strong> is added on <strong class="blue prettyprint28">PART</strong> side of association <strong class="blue prettyprint28">Is-involved-in</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+</slide>
+<!-- slide 16 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A qualification with an attribute: part number (p#), of an association: SUPPLIER Performs SHIPMENT, contributes to an identifier, that consists of the attributes part number (p#), and supplier number (s#) in a class of objects SHIPMENT.</p>
+	<br/>
+	<p>A qualification with an attribute: supplier number (s#),  of an association: PART Is-involved-in SHIPMENT,  also contributes to an identifier, that consists of the attributes: part number (p#), and supplier number (s#) in a class of objects: SHIPMENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Many-to-many associations</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-11-2.png" alt="M:N associations" title="M:N associations"></p>
+	    <li>A qualification with an attribute <strong class="blue prettyprint28">p#</strong> of an association <strong class="blue">Performs</strong> contributes to an identifier <strong class="red">(p#, s#)</strong>  of a class <strong class="blue prettyprint28">SHIPMENT</strong></li>
+	<li>A qualification with an attribute <strong class="blue prettyprint28">s#</strong> of an association <strong class="blue">Is-involved-in</strong> also contributes to an identifier <strong class="red">(p#, s#)</strong> of a class <strong class="blue prettyprint28">SHIPMENT</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In step four of the logical design, we replace the qualifications.</p>
+	<br/>
+	<p>In the present slide, a qualification with an attribute: room number (room#) is eliminated in the following way.</p>
+	<br/>
+	<p>The attributes: building number (bldg#), and room number (room#), are copied to a class of objects: ROOM.</p>
+	<br/>
+	<p>A pair of attributes that consists of building number (bldg#), and room number (room#), is tagged with IDn in a class of objects room where "n" depends on the total number of identifiers already determined in a class. Usually "n" is equal to 1 because its is why qualifications has been used: to determine an identifier fro a class that has no identification system.</p>
+	<br/>
+	<p>In this way, a pair (bldg#, room#) becomes an identifier in a class of objects: ROOM.</p>
+	<br/>
+	<p>An attribute: building number (bldg#), is tagged with FKn to denote a foreign key referencing an identifier building number (bldg#) in a class of objects: BUILDING.</p>
+	<br/>
+	<p>A multiplicity of an association: BUILDING Has ROOM, on a ROOM side of qualified association is changed to * or 1..*.</p>
+	<br/>
+	<p>It is because buildings have zero or more rooms.</p>
+	<br/>
+	<p>At the end, a qualification with an attribute: room number (room#) is removed.</p>
+	<br/>
+	<p>In a general case a qualification is removed through application of its definition. A qualification provides information'</p>
+	<br/>
+	<p>about an identifier of a class, that has no own identification system, for example a class ROOM. Hence elimination of qualification must create an identifier for a class that has no own identification system. An identifier is created from the attributes used in qualification and from an identifier of a class located on a qualified side of association.</p>
+	<br/>
+	<p>In our case, it is a class BUILDING with an identifier bldg#. </p>
+	<br/>
+	<p>An identifier from a class on a qualified side of association (e.g. bldg#) becomes a future foreign key in a relational table ROOM. It is why it is tagged with FKn.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualifications</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-13-1.png" alt="Qualifications" title="Qualifications"></p>
+      </ul>
+      <ul class= "build">      
+        <li>A <strong class="red">qualification</strong> with the attribute <strong class="blue prettyprint28">room#</strong> is transformed in  the following way: 
+          <ul class="build">
+            <li>The attributes <strong class="blue prettyprint28">(bldg#, room#)</strong> are copied to a class <strong class="blue prettyprint28">ROOM</strong></li>
+	    <li>A pair of attributes <strong class="blue prettyprint28">(bldg#, room#)</strong> is tagged with <strong class="blue prettyprint28">IDn</strong> in a class <strong class="blue prettyprint28">ROOM</strong> (it becomes an identifier)</li>
+	    <li>An attribute <strong class="blue prettyprint28">bldg#</strong> is tagged with <strong class="blue prettyprint28">FKn</strong> to denote a foreign key referencing an identifier <strong class="blue prettyprint28">bldg#</strong> in a class <strong class="blue prettyprint28">BUILDING</strong></li>
+	    <li>A multiplicity on a class <strong class="blue prettyprint28">ROOM</strong> side of qualified association has is changed to <strong class="blue prettyprint28">*</strong> or <strong class="blue prettyprint28">1..*</strong></li>
+	    <li>A qualification with an attribute <strong class="blue prettyprint28">room#</strong> is removed</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+</slide>
+<!-- slide 18 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Continuing an example from the previous slide we find, that a pair of attributes, that consists of: building number (bldg#), and room number (room#), forms an identifier in a class: ROOM.</p>
+	<br/>
+	<p>An attribute: building number (bldg#), becomes a foreign key, referencing an attribute: building number (bldg#), in a class of objects: building.</p>
+	<br/>
+	<p>It is always such that an attribute being an identifier in a class on "one" side of association becomes a foreign key  after it is copied to "many" side of association.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualifications</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-13-2.png" alt="Qualification" title="Qualification"></p>
+	<li>The attributes <strong class="blue prettyprint28">(bldg#, room#)</strong> form an identifier of a class <strong class="blue prettyprint28">ROOM</strong></li>
+	<li>A attribute <strong class="blue prettyprint28">bldg#</strong> becomes a <strong class="red">foreign key</strong> referencing an attribute <strong class="blue prettyprint28">bldg#</strong> in a class <strong class="blue prettyprint28">BUILDING</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A double qualification is transformed in a similar way.</p>
+	<br/>
+	<p>For example, a double qualification with a pair of attributes: subject code (code), and enrolment date (edate), on one side of association: STUDENT Performs ENROLMENT, with a pair of attributes student number (s#), and enrolment date (edate) on the other side of association: SUBJECT Is-involved-in ENROLMENT is transformed in the following way.</p>
+	<br/>
+	<p>A pair of attributes, that consists of: subject code (code), and enrolment date (edate) and a pair of  attributes that consists of: student number (s#), and enrolment date  (edate) are copied to a class of objects: ENROLMENT.</p>
+	<br/>
+	<p>It is the same transformation as before. The attributes used in qualification and an identifier of a class on a qualified side of association are copied on the other side of association,</p>
+	<br/>
+	<p>Then, a triple of attributes, that consists of: subject code (code), student number (s#), and enrolment date (edate) is tagged with IDn in a class of objects: ENROLMENT. It means that such triple becomes and identifier in a class ENROLMENT.</p>
+	<br/>
+	<p>An attribute: subject code (code), is tagged with FKn to denote a foreign key referencing an identifier: subject code (code), in a class of objects: SUBJECT.</p>
+	<br/>
+	<p>An attribute: student number (s#) is tagged with FKm, where m is not necessarily equal to n, to denote a foreign key referencing an identifier: student number (s#), in a class of objects: STUDENT.</p>
+	<br/>
+	<p>Both 0..1 multiplicities on the left and right side of a class of objects: ENROLMENT, are changed to * or to 1..* depending on whether the associations SUBJECT Is-involved-in ENROLMENT and STUDENT Performs ENROLMENT are mandatory or optional on ENROLMENT side. To decide what multiplicities should be sued we have to ask the question: "is it possible, that a student has no enrolments ?" and "is it possible, that a subject has no enrolments ?".  If the answers to both questions are positive than we use an optional multiplicity * or 0..*.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualifications</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-14-1.png" alt="Qualifications" title="Qualifications"></p>
+      </ul>
+      <ul class= "build">      
+        <li>A <strong class="red">double qualification</strong> with the attributes <strong class="blue prettyprint28">(code, edate)</strong> and <strong class="blue prettyprint28">(s#, edate)</strong> is transformed in the following way: 
+          <ul class="build">
+            <li>The attributes <strong class="blue prettyprint28">(code, edate)</strong> and the attributes <strong class="blue prettyprint28">(s#, edate)</strong> are copied to a class <strong class="blue prettyprint28">ENROLMENT</strong></li>
+	    <li>A triple of attributes <strong class="blue prettyprint28">(code, s#, edate)</strong> is tagged with <strong class="blue prettyprint28">IDn</strong> in a class <strong class="blue prettyprint28">ENROLMENT</strong> (it becomes an identifier)</li>
+	    <li>An attribute <strong class="blue prettyprint28">code</strong> is tagged with <strong class="blue prettyprint28">FKn</strong> to denote a foreign key referencing an identifier <strong class="blue prettyprint28">code</strong> in a class <strong class="blue prettyprint28">SUBJECT</strong></li>
+	    <li>An attribute <strong class="blue prettyprint28">s#</strong> is tagged with <strong class="blue prettyprint28">FKm</strong> (where <strong class="blue prettyprint28">n</strong> <><strong class="blue prettyprint28">m</strong>) to denote a foreign key referencing an identifier <strong class="blue prettyprint28">s#</strong> in a class <strong class="blue prettyprint28">STUDENT</strong></li>
+	    <li>Both <strong class="blue prettyprint28">0..1</strong> multiplicities on the left and right side of a class <strong class="blue prettyprint28">ENROLMENT</strong> are changed to <strong class="blue prettyprint28">*</strong> or <strong class="blue prettyprint28">1..*</strong></li>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>After migration of the attributes, creating an identifier and foreign keys, both qualifications with the pairs of attributes, that consists of: subject code (code), and enrolment date (edate), and the second pair, that consists  of student number (s#) and enrolment date (edate) are removed.</p>
+	<br/>
+	<p>All information about an identifier of a class ENROLMENT and the future foreign keys is recorded in a class ENROLMENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Qualifications</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li> 
+          <ul>
+	    <li>Both qualifications with the attributes <strong class="blue prettyprint28">(code, edate)</strong> and <strong class="blue prettyprint28">(s#, edate)</strong> are removed</li>
+	    <p style="text-align:center;"><img src="images/slide-14-2.png" alt="Qualification" title="Qualification"></p>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In a step five of logical design, the foreign keys are created by copying the identifiers from one side of association, to a many side of association. It is a moment when we implement one-to-many associations in a relational data model.</p>
+	<br/>
+	<p>For example, an identifier that consists of a pair of attributes: building number (bldg#), and room number  (room#) is copied from "one" side of an association: EQUIPMENT Is-located- in ROOM, to a class of objects: EQUIPMENT, located on a many side of the association.</p>
+	<br/>
+	<p>A pair of attributes: building number (bldg#), and room number (room#) is tagged with FKn in a class of objects: EQUIPMENT.</p>
+	<br/>
+	<p>It becomes a composite foreign key referencing a pair of attributes: building number (bldg#) and room number (room#), that is an identifier in a class of objects ROOM.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Foreign keys</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-16-1.png" alt="FKs" title="FKs"></p>
+      </ul>
+      <ul class= "build">      
+        <li><strong class="red">Foreign keys</strong> are created in the following way: 
+          <ul class="build">
+            <li>An identifier <strong class="blue prettyprint28">(bldg#, room#)</strong> from "one" side of an association <strong class="blue prettyprint28">Is-located-in</strong> is copied to a class <strong class="blue prettyprint28">EQUIPMENT</strong> on "many" side of the association</li>
+	    <li>A pair of attributes <strong class="blue prettyprint28">(bldg#, room#)</strong> is tagged with <strong class="blue prettyprint28">FKn</strong> in a class <strong class="blue prettyprint28">EQUIPMENT</strong> (it becomes a <strong class="red">composite foreign key</strong>) referencing <strong class="blue prettyprint28">(bldg#, room#)</strong> in a class <strong class="blue prettyprint28">ROOM</strong></li>
+	    <p style="text-align:center;"><img src="images/slide-16-2.png" alt="FKs" title="FKs"></p>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 22 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In the sixth step of logical design, one to one associations are transformed in the following way.</p>
+	<br/>
+	<p>The object classes from both sides of one to one association are merged into a single class of objects.</p>
+	<br/>
+	<p>For example a triple, that consists of the objects classes: CHAIRMAN, and SCHOOL, and an association: CHAIRMAN Is-head-of SCHOOL, is merged into one class of objects: SCHOOL. The attributes: employee number (emp#), first name, last name, and date of birth (dob), that come from an optional 0..1 side of the association: CHAIRMAN Is-head-of SCHOOL, are tagged with 0..1 tag as optional attributes.</p>
+	<br/>
+	<p>An attribute like: name of school (name), that was an identifier of a class of objects on mandatory side, 1..1, of the association obtains a tag IDn.</p>
+	<br/>
+	<p>A tag IDn means, that it is an identifier of a new class obtained from the merge of the classes CHAIRMAN and SCHOOL. It means that every instance of an object of the new class must have a value of an attribute school name (name). Later on IDn will be converted into PK, i.e. a primary key of a relational table implementing the new class of objects</p>
+	<br/>
+	<p>An attribute like: employee number (emp#), that was an identifier of a class of objects on an optional side of association obtains a tag CKn. It is because it may happen that a school does not have a chairman due to an optional side of association on CHAIRMAN class side. Then a tag IDn is not appropriate because a value of an attribute employee number (emp#) maybe missing. In such a case and attribute employee number (emp#) can be at most a candidate key and not primary key.</p>
+	<br/>
+	<p>Finally, one to one association is removed.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">One-to-one associations</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-18-1.png" alt="FKs" title="FKs"></p>
+      </ul>
+      <ul class= "build">      
+        <li><strong class="red">One-to-one associations</strong> are transformed in the following way: 
+          <ul class="build">
+            <li>A triple (<strong class="blue prettyprint28">CHAIRMAN:Is-head-of:SCHOOL</strong>) is merged into one class of objects <strong class="blue prettyprint28">SCHOOL</strong></li>
+	    <li>The attributes (<strong class="blue prettyprint28">emp#</strong>, <strong class="blue prettyprint28">first-name</strong>, <strong class="blue prettyprint28">last-name</strong>, <strong class="blue prettyprint28">dob</strong>) that come from an optional 0..1 side of association <strong class="blue prettyprint28">Is-head-of</strong> are tagged with [0..1] as optional attributes</li>
+	    <li>An attribute like <strong class="blue prettyprint28">name</strong>, that was an identifier of a class on mandatory side (1..1) of and association obtains a tag <strong class="blue prettyprint28">IDn</strong></li>
+	    <li>An attribute like <strong class="blue prettyprint28">emp#</strong>, that was an identifier of a class on an optional side of association obtains a tag <strong class="blue prettyprint28">CKn</strong></li>
+	    <li>One-to-one association is removed</li>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+</slide>
+<!-- slide 23 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The final result from elimination of one-to-ne association is given on the present slide.</p>
+	<br/>
+	<p>Note, that a candidate key: employee number (emp#) may have no value. It is why employee number (e#) can be at most a candidate key and not primary key.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">One-to-one associations</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-18-2.png" alt="FKs" title="FKs"></p>
+	<li>Note, that a candidate key <strong class="blue prettyprint28">emp#</strong> may have no value, it means, that it can be <strong class="green prettyprint28">NULL</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 24 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In the seventh step of logical design, the generalisation hierarchies are transformed with the superset, subset and association methods.</p>
+	<br/>
+	<p>We start from a superset method.</p>
+	<br/>
+	<p>A superset method transforms entire generalisation hierarchy into a single class of objects by moving all attributes to the immediate higher level class of objects, changing multiplicities of attributes, and adding categorisation attributes.</p>
+	<br/>
+	<p>All attributes from the classes of objects at the lower levels of generalisation hierarchy are copied to the topmost level in the hierarchy and then such attributes become the optional attributes marked with 0..1 tag there.
+</p>
+	<br/>
+	<p>For example, the attributes: project and thesis, are copied from the classes of objects: UNDERGRADUATE STUDENT and POSTGRADUATE STUDENT, to a class of objects: STUDENT.
+</p>
+	<br/>
+	<p>A categorisation attribute, that determines a subtype of a superclass is added to a superclass.
+</p>
+	<br/>
+	<p>For example, an attribute: type of student, is added to a class of objects: STUDENT.</p>
+	<br/>
+	<p>Such attribute is necessary to distinguish between postgraduate and undergraduate students.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - superset method</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-20-1.png" alt="Generalization-superset" title="Generalization-superset"></p>
+     </ul>
+      <ul class= "build">	
+        <li>A <strong class="red">superset method</strong> transforms entire generalization hierarchy into a single class of objects in the following way:
+          <ul class="build">
+            <li>All attributes from the classes of objects at the lowest level of generalization hierarchy are copied to an immediate higher level and become optional attributes ([0..1] tag) there, e.g. the attributes <strong class="blue prettyprint28">project</strong> and <strong class="blue prettyprint28">thesis</strong> are copied from the classes <strong class="blue prettyprint28">UNDERGRADUATE-STUDENT</strong> and <strong class="blue prettyprint28">POSTGRADUATE-STUDENT</strong> to a class <strong class="blue prettyprint28">STUDENT</strong></li>
+	    <li>An attribute <strong class="blue prettyprint28">type-of-superclass</strong> is added to a superclass, e.g. and attribute <strong class="blue prettyprint28">type-of-students</strong> is added to a class <strong class="blue prettyprint28">STUDENT</strong></li>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 25 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>After the attributes from lower levels of generalisation are moved to their parent class all classes below the parent class are removed from a conceptual schema.</p>
+	<br/>
+	<p>The process is repeated until only the topmost class is left. It is important to remember that each time a set of attributes from subclasses is moved to a superclass we must remember about categorisation attribute. If a generalisation hierarchy has several levels then categorisation attributes from the lower levels must be moved to the higher levels. For example, of a class UNDERGRADUATE STUDENT has subclasses IT STUDENT and CS STUDENT then first elimination of the lowest level in the hierarchy contributes to a categorisation attribute it-or-cs. Then, elimination of the subclasses at the higher level contributes to a categorisation attribute pg-or-ug. Please remember that an attribute it-or-cs must be moved to the topmost class STUDENT as an optional attribute. i.e. it must be tagged with [0..1]. It is because we do not distinguish between it and cs students at postgraduate level.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - superset method</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          <ul>
+	    <li>All classes at the lowest level are removed</li>
+	  </ul>
+          <ul class="build">	  
+	    <li>The steps above are repeated until only one class of objects is left</li>
+	    <p style="text-align:center;"><img src="images/slide-21-1.png" alt="Generalization-superset" title="Generalization-superset"></p>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 26 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Next, to eliminate a generalisation hierarchy, we look at a subset method.</p>
+	<br/>
+	<p>A subset method transforms the entire generalisation hierarchy, into several classes of objects in the following way. All attributes from the classes of objects at the higher levels of generalisation hierarchy, are copied to the classes of objects at the lowest levels of generalisation hierarchy.</p>
+	<br/>
+	<p>For example, the attributes student number (s#), first name, last name and date of birth (dob) are copied from a class of objects: STUDENT, to the classes of objects: POSTGRADUATE STUDENT, and UNDERGRADUATE STUDENT.</p>
+	<br/>
+	<p>Copying the attributes from a superclasses to subclasses is nothing else as application of inheritance. If a postgraduate student is a student then all attributes and associations of a student are inherited by a postgraduate students accordingly to a rule postgraduate student ISA student.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - subset method</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-22-1.png" alt="Generalization-subset" title="Generalization-subset"></p>
+      </ul>
+      <ul class= "build">      
+        <li>A <strong class="red">subset method</strong> transforms entire generalization hierarchy into a number of classes of objects in the following way:
+          <ul class="build">
+            <li>All attributes from the classes of objects at the higher levels of generalization hierarchy are copied to the classes of objects at the lowest levels of generalization hierarchy e.g. the attributes <strong class="blue prettyprint28">s#</strong> and <strong class="blue prettyprint28">first-name</strong> last-name, dob are copied from a class <strong class="blue prettyprint28">STUDENT</strong> to the classes <strong class="blue prettyprint28">POSTGRADUATE-STUDENT</strong> and <strong class="blue prettyprint28">UNDERGRADUATE-STUDENT</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 27 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>All classes of objects, except those at the lowest levels of generalisation hierarchy, are removed.
+</p>
+	<br/>
+	<p>All associations the removed classes are involved in are connected to the respective subclases at the lowest level of generalization hierarchy.</p>
+	<br/>
+	<p>In our example, a class of objects: STUDENT, is removed.</p>
+	<br/>
+	<p>If a class STUDENT is involved in an association, for example STUDENT Owns CAR then association Owns is replicated and it is attached to both classes POSTGRADUATE STUDENT, and UNDERGRADUATE STUDENT. Then we get two associations POSTGRADUATE STUDENT Owns CAR  and UNDERGRADUATE STUDENT Owns CAR. In such aa case an association is inherited by both subclasses.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - subset method</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          <ul class="build">
+	    <li>All classes of objects except those at the lowest levels of generalization hierachy are removed, e.g. a class <strong class="blue prettyprint28">STUDENT</strong> is removed</li>	
+	    <p style="text-align:center;"><img src="images/slide-23-1.png" alt="Generalization-subset" title="Generalization-subset"></p>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 28 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>Finally, to eliminate a generalisation hierarchy, we look at an association method.</p>
+	<br/>
+	<p>An association method transforms the entire generalisation hierarchy, into several of classes of objects in the following way. One of the identifiers from a superclass of objects is copied to all subclasses of objects located one level below in a hierarchy.</p>
+	<br/>
+	<p>For example, an identifier: student number (s#) is copied from a class of objects: STUDENT, to the classes of objects: UNDERGRADUATE STUDENT, and POSTGRADUATE STUDENT. An identifier that has been copied obtains a tag FKn in the subclasses.</p>
+	<br/>
+	<p>The same procedure is repeated for all subclasses of objects at the same level in a generalisation hierarchy.</p>
+	<br/>
+	<p>After application of association method the classes STUDENT, UNDERGRADUATE STUDENT, and POSTGRADUATE STUDENT change their semantics/meaning. A class STUDENT contains the objects that are the common descriptions of postgraduate and undergraduate students. A class UNDERGRADUATE STUDENT contains the objects that are the descriptions of undergraduate students only. A class POSTGRADUATE STUDENT contains the objects that are the descriptions of postgraduate students only.</p>
+	<br/>
+	<p>A meaning of an association is Consists_of. For example STUDENT Consists-of UNDERGRADUATE STUDENT description or STUDENT Consists-of POSTGRADUATE STUDENT description.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - association method</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-24-1.png" alt="Generalization-partitioning" title="Generalization-partitioning"></p>
+      </ul>
+      <ul class="build">      
+        <li>An <strong class="red">association method</strong> transforms entire generalization hierarchy into a number of classes of objects in the following way:
+          <ul class="build">
+            <li>One of the identifiers from a superclass is copied to subclasses one level below a superclass, e.g. an attribute <strong class="blue prettyprint">s#</strong> is copied from a class <strong class="blue prettyprint">STUDENT</strong> to the classes <strong class="blue prettyprint">UNDEGRADUATE-STUDENT and POSTGRADUATE-STUDENT</strong></li>
+	    <li>The copied identifier obtains a tag <strong class="blue prettyprint">FKn</strong> in the subclasses</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>After a single level of generalisation hierarchy is replaced with an association and the semantics of object classes is changed then such a level of generalisation hierarchy, is removed from a conceptual schema.</p>
+	<br/>
+	<p>The associations are already implemented as the pairs of attributes student number (s#) in a class STUDENT and the foreign keys student number (s#) in the classes UNDERGRADUATE STUDENT, and POSTGRADUATE STUDENT. Please also note, that an attribute student number (s#) is an identifier in both classes UNDERGRADUATE STUDENT, and POSTGRADUATE STUDENT.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Generalizations - association method</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          <ul>
+	    <li>A generalization level is removed from a diagram</li>
+	  </ul>
+          <ul class="build">	  
+	    <p style="text-align:center;"><img src="images/slide-25-1.png" alt="Generalization-partitioning" title="Generalization-partitioning"></p>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 30 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In the eighth step of logical design, the primary keys and candidate keys, are created in the following way.</p>
+	<br/>
+	<p>In each class, one of the identifiers, either a single attribute identifier, or a composite identifier, is tagged with PK tag to become a primary key.</p>
+	<br/>
+	<p>For example, an attribute: student number (s#), in a class: STUDENT, is tagged with PK tag.</p>
+	<br/>
+	<p>All other identifiers in the same class are tagged with CKn tags and they become the candidate keys.</p>
+	<br/>
+	<p>For example, an attribute: social security number (ssno), is tagged with CK1 tag, and a triple of attributes: first name, last name, date of birth (dob), are all tagged with CK2 tags (this is because the triple of attributes forms one composite candidate key.)</p>
+	<br/>
+	<p>After the replacement of ID tags with either Pkn or CKm the identifiers of classes of objects dispapper and in the next step it is possible to replace a class of objects with a relational table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Primary keys and candidate keys</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-27-1.png" alt="PK/CKs" title="PK/CKs"></p>
+      </ul>
+      <ul class= "build">      
+        <li><strong class="red">primary keys and candidate keys</strong> are created in the following way: 
+          <ul class="build">
+            <li>In each class one of the identifiers (identifier or composite identifier), e.g. <strong class="blue prettyprint28">s#</strong> attribute is tagged with <strong class="blue prettyprint28">PK </strong> tag</li>
+	    <li>All other identifiers like <strong class="blue prettyprint28">ssno</strong>, (<strong class="blue prettyprint28">first-name</strong>, <strong class="blue prettyprint28">last-name</strong>, <strong class="blue prettyprint28">dob</strong>) are tagged with <strong class="blue prettyprint28">Ckn</strong> tags</li>
+	    <p style="text-align:center;"><img src="images/slide-27-2.png" alt="PK/CKs" title="PK/CKs"></p>	
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 31 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In the ninth step of logical design, we remove the associations from a conceptual schema.</p>
+	<br/>
+	<p>In this step, the associations are eliminated, and FKn tags are extended with the reference clauses in the following way.</p>
+	<br/>
+	<p>Each time, one to many association is removed, a respective, FKn tag is extended with a reference clause referring an attribute, or a group of attributes with a tag PK on the other side of the removed association.</p>
+	<br/>
+	<p>For example, when an association: EQUIPMENT Is-located-in ROOM, is removed, a pair of attributes: building number (bldg#) and room number (room#) tagged with FK1, is extended with a clause: REFERENCES ROOM(blgd#, room#).</p>
+	<br/>
+	<p>A REFERENCE clause is required by the specifications of the foreign key. It is mandatory to provide information about the structures of the foreign keys and about the referenced structures of the repsective primary keys.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Associations</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-29-1.png" alt="Associations" title="Associations"></p>
+      </ul>
+      <ul class= "build">      
+        <li>In this step association are eliminated and <strong class="blue prettyprint28">FKn tags</strong> are extended with <strong class="blue prettyprint28">REFERENCE</strong> clauses in the following way:
+          <ul class="build">
+            <li>Each time "on-to-many" association is removed a respective <strong class="blue prettyprint28">FKn</strong> tag is extended with <strong class="blue prettyprint28">REFERENCE</strong> clause refering <strong class="blue prettyprint28">PKn</strong> on the other side of the removed association, for example when an association <strong class="blue prettyprint28">Is-located-in</strong> is removed <strong class="blue prettyprint28">FK1:(bldg#, room#)</strong> is extened with a clause <strong class="blue prettyprint28">REFERENCES ROOM(blgd#, room#)</strong></li>
+	<p style="text-align:center;"><img src="images/slide-29-2.png" alt="Associations" title="Associations"></p>	 
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 32 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>In the final step of the logical design, the relational schemas are created in the following way.</p>
+	<br/>
+	<p>A relational schema is created from each object class left, such that in each class the attributes tagged with  PK  become a primary key, the attributes tagged with CKn become  candidate key, and the attributes tagged with FKn become a foreign key.</p>
+	<br/>
+	<p>A class of objects: ROOM, is transformed into a relational schema: ROOM, that consists of the attributes: building number, (bldg#), room number (room#), and area.</p>
+	<br/>
+	<p>A relational schema: ROOM, has one primary key, that consists of two attributes: building number (bldg#) and room number (room#).</p>
+	<br/>
+	<p>A class of objects: EQUIPMENT, is transformed into a relational schema: EQUIPMENT, that consists of the attributes: serial number (serial num), name, installation date, building number (bldg#), room number (room#),</p>
+	<br/>
+	<p>An attribute: serial number (serial num) becomes a primary key in a relational schema: EQUIPMENT.</p>
+	<br/>
+	<p>A pair of attributes: building number (bldg#), room number (room#) becomes a single and a composite foreign key referencing a primary key: building number (bldg#), room number (room#), in a relational schema: ROOM.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Relational schemas</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-31-1.png" alt="Relational Schemas" title="Relational Schemas"></p>
+      </ul>
+      <ul class= "build">      
+        <li>In the final step the <strong class="red">relational schemas</strong> are created in the following way:
+          <ul class="build">
+            <li>A relational schema is created from each object class left such that in each class the attributes tagged with <strong class="blue prettyprint28">PKn</strong> become a <strong class="red">primary key</strong>, the attributes tagged with <strong class="blue prettyprint28">CKn</strong> become a <strong class="red">candidate key</strong> and attributes tagged with <strong class="blue prettyprint28">FKn</strong> become a <strong class="red">foreign key</strong></li>
+<pre class="prettyprint" data-lang="Relational schema ROOM">
+
+ROOM(bldg#, room#, area)
+PRIMARY KEY = (bldg#, room#)</pre>
+<pre class="prettyprint" data-lang="Relational schema EQUIPMENT">
+  
+EQUIPMENT(serialnum, name, installation-date, bldg#, room#)
+PRIMARY KEY = (serialnum)
+FOREIGN KEY = (bldg#, room#)  REFERENCES ROOM(bldg#, room#)</pre>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 33 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Logical Design</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+       <li><a href="#2">Methodology</a></li>
+	<li><a href="#5">Transformations</a></li>
+	<li><a class="red" href="#33">Example</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 34 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A conceptual schema given in the present slide represents a simple database domain, that contains information about: parts, customers, orders submitted by customers, contents of each order, suppliers and parts shipped by suppliers.
+</p>
+	<br/>
+	<p>We plan to apply the transformations of the logical design to convert a conceptual schema into a collection of relational schemas.
+</p>
+	<br/>
+	<p>We start from the transformations of multivalued attributes. There is only one multivalued attribute: phone number (phone#), in a class of objects: SUPPLIER.
+</p>
+	<br/>
+	<p>A transformation rule for multivalued attributes says: create a new class of objects that represents the values of a multivalued attribute, add a single valued attribute to describe a new class and create either one-to-many or many-to-many-association between a new class and a class earlier desccribed by a multivalued attribute.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+        <li>The following conceptual schema represents a simple database domain that contains information about <strong class="blue3">parts</strong>, <strong class="blue3">customers</strong>, <strong class="blue3">orders submitted by customers</strong>, <strong class="blue3">contents of each order</strong>, <strong class="blue3">suppliers</strong> and <strong class="blue3">parts</strong> <strong class="blue3">shipped by suppliers</strong></li>
+	<p style="text-align:center;"><img src="images/slide-33-1.png" alt="Example" title="Example"></p>
+	<li>First, we transform <strong class="red">multivalued attributes</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 35 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The following conceptual schema, is obtained after the transformations of multivalued attributes.</p>
+	<br/>
+	<p>A new class of objects: phone, has been created.</p>
+	<br/>
+	<p>The class of objects is described by an attribute: number, and the attribute is an identifier of the class, see ID1 tag.
+</p>
+	<br/>
+	<p>An association SUPPLIER Has PHONE has been added to the design. The new association is on-to-many because a supplier may have many phones and a phone has only one owner.
+</p>
+	<br/>
+	<p>In the next step, we transform the association classes and link attributes.</p>
+	<br/>
+	<p>There is one association class: PART-SHIPPED-BY and there are no link attributes.</p>
+	<br/>
+	<p>A transformation rule for association classes says: replace many-to-many association represented by an association class with the following structure: one-to-many association connected on many side to a class of object the same as an association class and many-to-one association connected on many side to a class of objects the same as an association class. Then use qualifications to determine an identifier of a new class in between one-to-many and many-to-one associations.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - multivalued attributes</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of multivalued attributes</strong></li>
+	<p style="text-align:center;"><img src="images/slide-34-1.png" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">association classes</strong> and <strong class="red">link attributes</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 36 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The following conceptual schema, is obtained after transformation of association classes.</p>
+	<br/>
+	<p>Transformation of an association class: PART-SHIPPED-BY,  created a new class of objects: PART-SHIPPED-BY and one-to-many association PART Shipped-in PART-SHIPPED-BY, and one-to-many association SUPPLIER Involved-in PART-SHIPPED-BY.</p>
+	<br/>
+	<p>The qualifications determine an identifier of a class of objects: PART-SHIPPED-BY. A qualification of an association PART Shipped-in PART-SHIPPED-BY with the attributes shipment-date and sname on PART side of association means, that an identifier of a class PART-SHIPPED-BY consists of the attributes (p#, shipment-date, sname).</p>
+	<br/>
+	<p>A qualification of an association SUPPLIER Involved-in PART-SHIPPED-BY with the attributes shipment-date and p# on SUPPLIER side of association means, that an identifier of a class PART-SHIPPED-BY consists of the attributes (p#, shipment-date, sname).</p>
+	<br/>
+	<p>Next, we transform many to many associations.</p>
+	<br/>
+	<p>A transformation rule for many-to-many associations says: create a new association class that represents many-to-many association and later on eliminate a new associations class. It means, that the transformation is  almost the same as a transformation of association classes,</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Association classes and link attributes</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of association classes</strong></li>
+	<p style="text-align:center;"><img src="images/slide-35-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">many-to-many associations</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 37 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The design does not have any many-to-many associations.</p>
+	<br/>
+	<p>Next, we transform the qualifications.</p>
+	<br/>
+	<p>There are three qualifications. An association: ORDER Consists-of LINEITEM, is qualified with an attribute: line number (line#) on a side of ORDER class of objects to provide information about an identifier in a class of objects: LINEITEM.
+</p>
+	<br/>
+	<p>An association: PART Shipped-in PART-SHIPPED-BY, is qualified with the attributes: shipment-date and supplier name (sname) to provide information about an identifier of a class of objects: PART-SHIPPED-BY.
+</p>
+	<br/>
+	<p>An association: SUPPLIER Involved-in PART-SHIPPED-BY, is qualified with the attributes: shipment-date and part number (p#) to provide information about an identifier of a class of objects: PART-SHIPPED-BY.
+</p>
+	<br/>
+	<p>A transformation rule for qualifications says: copy the attributes used in a qualification and one of the identifiers of a class on a qualified side of association to a class on an unqualified side of association. Append ID tag to all attributes copied, i.e. create a composite identifier, that consists of the attributes used in qualification and identifier borrowed from a class on a qualified side of association. Append a tag FKn to an attributed borrowed from a class on a qualified side of association. FKn  means, that later on, it is going to be a foreign key referencing a primary key.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Many-to-many associations</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of many-to-many-associations</strong></li>
+	<p style="text-align:center;"><img src="images/slide-36-1.png"  width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">qualifications</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 38 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The following conceptual schema is obtained after the transformations of qualifications.</p>
+	<br/>
+	<p>Elimination of qualifications adds the attributes: order number (order#), and line number (line#), to a class of objects: LINEITEM. A pair of attributes: order number (order#), and line number (line#), becomes an identifier in a class of objects: LINEITEM.
+</p>
+	<br/>
+	<p>An attribute: order number (order#), becomes a foreign key referencing the future primary key in the future relational schema: ORDER.
+</p>
+	<br/>
+	<p>A class of objects: PART-SHIPPED-BY, obtains an identifier that consists of the attributes: supplier name (sname), part number (p#), and shipment -ate.
+</p>
+	<br/>
+	<p>An attribute: supplier name (sname) becomes a foreign key referencing the future primary key in the future relational table: SUPPLIER.
+</p>
+	<br/>
+	<p>An attribute: part number (p#) becomes a foreign key referencing the future primary key in the future relational table: PART.
+</p>
+	<br/>
+	<p>A transformation rule for implementation of one-to-many association says: copy the identifiers from one side to many side of one-to-many association.
+</p>
+	<br/>
+	<p>There are two one to many associations: CUSTOMER Submits ORDER, and LINEITEM Lists PART-shipped-by.</p>
+	<br/>
+	<p></p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Qualifications</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of qualifications</strong></li>
+	<p style="text-align:center;"><img src="images/slide-37-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we create <strong class="red">foreign keys</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 39 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A conceptual schema given in the present slide is created  after migration of the foreign keys.</p>
+	<br/>
+	<p>An attribute: phone number (phone), has been copied from a class of objects: CUSTOMER, to a class of objects: ORDER, and it has been tagged with FK1 to denote the future foreign key referencing a primary key in the future relational schema: CUSTOMER.</p>
+	<br/>
+	<p>The attributes: supplier name (sname), part number (part#), and shipment date have been copied from  class of objects: PART-SHIPPED-BY, to a class of objects: LINEITEM.</p>
+	<br/>
+	<p>The copied attributes has been tagged with FK2 to denote the future foreign key, referencing a primary key in the future relational schema: PART-SHIPPED-BY.</p>
+	<br/>
+	<p>In the next step we transform one-to-one associations.</p>
+	<br/>
+	<p>A transformation rule fro one-to-one associations says: the classes of objects involved in one-to-one association are merged into a single class. One of identifier from a class of object on mandatory side of one-to-one association obtains a tag IDn. The attributes describing a class on optional sode of one-to-one association obtain a tag [0..1].</p>
+	<br/>
+	<p>In the present design there is no one-to-one associations.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Foreign keys</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">creation of foreign keys</strong></li>
+	<p style="text-align:center;"><img src="images/slide-38-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">one-to-one asociations</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 40 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The conceptual schema does not have any one to one associations, and because of that transformations of one to one associations can be skipped.</p>
+	<br/>
+	<p>Next, we transform the generalisation hierarchies. The conceptual schema has one generalisation hierarchy: FREQUENT-CUSTOMER ISA CUSTOMER.</p>
+	<br/>
+	<p>In this case we use association method to transform a generalisation hierarchy. It is recommended to practice yourself the other two methods: subset and superset.</p>
+	<br/>
+	<p>A transformation rule for association method says: copy an identifier from a superclass to subclasses and replace generalization with one-to-one associations between a superclass and subclasses. Append a tag FKn REFERENCES SUPER-CLASS to identifier copied to subclasses.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - One-to-one associations</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of one-to-one associations</strong></li>
+	<p style="text-align:center;"><img src="images/slide-39-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">generalizations</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 41 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A transformation of generalisation hierarchy: FREQUENT CUSTOMER ISA CUSTOMER with an association method is performed in the following way.</p>
+	<br/>
+	<p>We copy an identifier: phone number (phone) from a class of objects: CUSTOMER, to a class of objects: FREQUENT CUSTOMER.</p>
+	<br/>
+	<p>Then, we tag with FK1 an attribute phone number (phone) in a class of objects: FREQUENT CUSTOMER,  and we add a clause: REFERENCES CUSTOMER(PHONE) to denote the future foreign key referencing a primary key in the future relational schema: CUSTOMER.</p>
+	<br/>
+	<p>Next, we remove a generalisation hierarchy.</p>
+	<br/>
+	<p>In the next step of logical design, we create the primary keys and candidate keys.</p>
+	<br/>
+	<p>The transformation rule for creating primary candidate keys says: All attributes tagged with the IDn tag from either primary key or candidate key. If one of such attributes is option then may contribute to a candidate key only. The attributes forming a primary kay are tagged with PK. The attributes forming candidate keys are tagged with CKn. A value of n depends on how many candidate keys can be created.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Generalizations</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of generalizations with an association method</strong></li>
+	<p style="text-align:center;"><img src="images/slide-40-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we create <strong class="red">primary keys and candidate keys</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 42 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>The following primary keys and candidate keys through transformation of identifiers and optional identifiers.</p>
+	<br/>
+	<p>An attribute: phone number (number), in a class: CUSTOMER, becomes a primary key, and it is tagged with a tag PK.</p>
+	<br/>
+	<p>An attribute: phone number (number), in a class: FREQUENT CUSTOMER, becomes a primary key, and it is tagged with a tag PK.</p>
+	<br/>
+	<p>An FK tag of an attribute: phone number (number), in a class: FREQUENT CUSTOMER, is extended with a clause: REFERENCES CUSTOMER (PHONE).</p>
+	<br/>
+	<p>An attribute: order number (order#) in a class: ORDER, is tagged with PK to denote a primary key in the future relational schema: ORDER.</p>
+	<br/>
+	<p>The attributes: supplier name (sname), part number (p#), and shipment date are tagged with PK to denote a composite primary key in the future relational schema: PART SHIPPED BY.</p>
+	<br/>
+	<p>An attribute: part number (p#) is tagged with PK to denote a primary key in the future relational schema: PART.</p>
+	<br/>
+	<p>An attribute: supplier name (sname) is tagged with PK to denote a primary key in the future relational schema: SUPPLIER.</p>
+	<br/>
+	<p>An attribute: phone number (number) has been tagged with PK to denote a primary key in the future relational schema: PHONE.</p>
+	<br/>
+	<p>Next, we transform the associations.</p>
+	<br/>
+	<p>A rule, that transforms the associations says: append a clause REFERENCES <table-name>(list-of attribute-names) to the attributes tagged with FKn.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Primary keys and Candidate keys</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">creation of primary keys and candidate keys</strong></li>
+	<p style="text-align:center;"><img src="images/slide-41-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we transform <strong class="red">associations</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 43 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A transformation of the associations contributes to the following modification with REFERENCES clause of the attributes tagged with FKn </p>
+	<br/>
+	<p>An association: CUSTOMER Submits ORDER is replaced with a clause: REFERENCES CUSTOMER(phone), attached to a foreign key: phone number (phone).</p>
+	<br/>
+	<p>An association: ORDER Consists-of LINEITEM is replaced with a clause: REFERENCES ORDER(order number) (order#), attached to a foreign key: order number (order#).</p>
+	<br/>
+	<p>An association: PART Shipped-in part SHIPPED-BY is replaced with a clause: references PART(part number) (p#), attached to a foreign key: part number (p#).</p>
+	<br/>
+	<p>An association: SUPPLIER Involved-in PART-SHIPPED-BY, is replaced with a clause: REFERENCES SUPPLIER(supplier name) (s name), attached to a foreign key: supplier name (s name).</p>
+	<br/>
+	<p>An association: SUPPLIER Has PHONE, has been replaced with a clause: REFERENCES SUPPLIER(supplier name) (s name), attached to a foreign key: supplier name (s name).</p>
+	<br/>
+	<p>An association: LINEITEM Lists PART-SHIPPED-BY, has been replaced with a clause: REFERENCES PART-SHIPPED-BY(supplier name) (s name), part number (p#), and shipment date, attached to  a composite foreign key, that consists of: supplier name (s name), part number (p#) and shipment date.</p>
+	<br/>
+	<p>Finally, we create the relational schemas.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Associations</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>The following conceptual schema is obtained after <strong class="blue3">transformation of associations</strong></li>
+	<p style="text-align:center;"><img src="images/slide-42-1.png" width="1000" alt="Multivalued attributes" title="Multivalued attributes"></p>	 
+	<li>Next, we create <strong class="red">relational schemas</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 44 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>At the end we obtain the following collection of relational schemas.</p>
+	<br/>
+	<p>A relational schema: CUSTOMER, that consists of the attributes customer name (name), phone number (phone) and address.</p>
+	<br/>
+	<p>An attribute: phone number (phone), is a primary key in a relational schema CUSTOMER.</p>
+	<br/>
+	<p>A relational schema: FREQUENT-CUSTOMER, that consists of the attributes: phone number (phone) and points.</p>
+	<br/>
+	<p>An attribute: phone number (phone), is a primary key in a relational schema: FREQUENT-CUSTOMER.</p>
+	<br/>
+	<p>An attribute: phone number (phone) is a foreign key in a relational schema: FREQUENT-CUSTOMER, and it references a primary key: phone number (phone) in a relational schema: CUSTOMER.</p>
+	<br/>
+	<p>A relational schema: ORDER, that consists of the attributes: order number (order#), order date (o date) and phone number (phone).</p>
+	<br/>
+	<p>An attribute: order number (order#), is a primary key in a relational schema: ORDER.</p>
+	<br/>
+	<p>An attribute phone number (phone), is a foreign key in a relational schema: ORDER, and it references and a primary key: phone number (phone), in a relational schema: CUSTOMER.</p>
+	<br/>
+	<p>A relational schema: SUPPLIER that consists of the attributes: supplier name (s name) and fax number (fax).</p>
+	<br/>
+	<p>An attribute: supplier name (s name), is a primary key in a relational schema: SUPPLIER.</p>
+	<br/>
+	<p>A relational schema: PHONE, that consists of the attributes: phone number (number) and supplier name (s name).</p>
+	<br/>
+	<p>An attribute: phone number (number), is a primary key in a relational schema: PHONE.</p>
+	<br/>
+	<p>An attribute supplier name (s name), is a foreign key in a relational schema: PHIONE and it references a primary key: supplier name (sname) in a relational schema SUPPLIER</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Relational schemas (1)</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>At the end we obtain the following collection of <strong class="blue3">relational schemas</strong>:
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Relational schema CUSTOMER">
+CUSTOMER(name, phone, address)
+PRIMARY KEY = (phone)</pre>
+<pre class="prettyprint" data-lang="Relational schema FREQUENT-CUSTOMER">
+FREQUENT-CUSTOMER(phone, points)
+PRIMARY KEY = (phone)
+FOREIGN KEY = (phone) REFERENCES CUSTOMER(phone)</pre>
+<pre class="prettyprint" data-lang="Relational schema ORDERS">
+ORDERS(order#, odate, phone)
+PRIMARY KEY = (order#)
+FOREIGN KEY = (phone) REFERENCES CUSTOMER(phone)</pre>
+<pre class="prettyprint" data-lang="Relational schema SUPPLIER">
+SUPPLIER(sname, fax)
+PRIMARY KEY = (sname)</pre>
+<pre class="prettyprint" data-lang="Relational schemas phone">
+PHONE(number, sname)
+PRIMARY KEY = (number)
+FOREIGN KEY = (sname) REFERENCES SUPPLIER(sname)</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 45 ================================================================================= -->
+<slide>
+<aside class="note">
+      <section>
+	<p>A relational schema: PART, that consists of the attributes: part number (p#), part name (name) and price.</p>
+	<br/>
+	<p>An attribute: part number (p#) is a primary key in a relational schema: PART.</p>
+	<br/>
+	<p>A relational schema: PART-SHIPPED-BY, that consists of the attributes: supplier name (s name), part number (p#) and shipment date.</p>
+	<br/>
+	<p>A triple of attributes: supplier name (s name), part  number (p#), and shipment date, is a primary key in a relational schema: PART-SHIPPED-BY.</p>
+	<br/>
+	<p>An attribute: supplier name (s name), is a foreign key in a relational schema: PART-SHIPPED-BY, and it references a primary key: supplier name (s name) in a relational schema: SUPPLIER.</p>
+	<br/>
+	<p>An attribute: part number, is a foreign key in a relational schema: PART-SHIPPED-BY, and it references a primary key: part number (p#), in a relational schema: PART.</p>
+	<br/>
+	<p>A relational schema: LINEITEM, that consists of the attributes: order number (order#), line number (line#), supplier name (s name), part number (p#) and shipment date. </p>
+	<br/>
+	<p>A pair of attributes: order number (order#), and line number (line#), is a primary key in a relational schema: LINEITEM.</p>
+	<br/>
+	<p>An attribute: order number (order#), is a foreign key in a relational schema: LINEITEM, and it references a primary key: order number (order#), in a relational schema: ORDER.</p>
+	<br/>
+	<p>A triple of attributes: supplier name (s name), part number (p#), and shipment date, is a foreign key in a relational schema: LINEITEM, and it references a primary key supplier name (s name), part number (p#) and shipment date in a relational schema: PART-SHIPPED-BY.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Example - Relational schemas (2)</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>At the end we obtain the following collection of <strong class="blue3">relational schemas</strong>:
+	  <ul class="build">
+	<pre class="prettyprint" data-lang="Relational schema PART">	  
+PART(p#, name, price)
+PRIMARY KEY = (p#)</pre>
+	<pre class="prettyprint" data-lang="Relational schema PART-SHIPPED-BY">	  
+PART-SHIPPED-BY(sname, p#, shipment-date)
+PRIMARY KEY = (sname, p#, shipment-date)
+FOREIGN KEY1 = (sname) REFERENCES SUPPLIER(sname)
+FOREIGN KEY2 = (p#) REFERENCES PART(p#)</pre>
+	<pre class="prettyprint" data-lang="Relational schema LINEITEM">	  
+LINEITEM(order#, line#, sname, p#, shipment-date)
+PRIMARY KEY = (order#, line#)
+FOREIGN KEY1 = (order#) REFERENCES ORDER(order#)
+FOREIGN KEY2 = (sname, p#, shipment-date)
+                              REFERENCES PART-SHIPPED-BY(sname, p#, shipment-date)</pre>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 46 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapter 2 Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/9lytCBNqBBtR4gv2C6WTIn?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 17 Methodology - Logical Database Design for the Relational Model, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/80PVCD1vkkTJVRXGHAhLgE?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+

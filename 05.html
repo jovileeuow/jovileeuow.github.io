@@ -1,0 +1,1118 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/DIJ9C0YKRRhgoAo9FDd_zo?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>05RelationalDataModel</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+<slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a href="#14">Consistency Constraints</a></li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+<slide>
+     <aside class="note">
+      <section>
+	<p>At the very beginning it is good to return to a concept of "data model". What is a data model ?</p>
+	<br/>
+	<p>As it has been explained earlier, a data model provides a database user with an abstract view of data. Such abstract view of data, can be used for the purpose of: data definition, data manipulation, data retrieval, and data administration in a database system. A data model organises data elements, and standardises how the data elements relate to one another. A data model also provides a set of operations, that can be used to manipulate and to retrieve data. Because a data model provides an abstract view, it is also called as an abstract view of data.</p>
+	<br/>
+	<p>In the past, we discussed the following views of data.</p>
+	<br/>
+	<p>At a hardware level, we talked about sectors, tracks, and cylinders.</p>
+	<br/>
+	<p>At a physical level, we talked about sequences of data blocks.</p>
+	<br/>
+	<p>At a file level, we talked about records, files and file systems.</p>
+	<br/>
+	<p>At a logical level, we talked about tables, hierarchies, and networks.</p>
+	<br/>
+	<p>At a conceptual level we talked about classes of objects, associations, attributes, and generalisation hierarchies.</p>
+	<br/>
+	<p>A data model always comes with a collection of languages that allow of definitions of abstract units of data, manipulation on abstract units of data, retrieval of abstract units of data, and administration of abstract units of data.</p>
+	<br/>
+	 </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Basic Concepts</h2>
+    </hgroup>
+    <article class=>
+      <ul class="build">
+        <li><strong class="red">Data model</strong> ? What is it ?</li>
+	<li>A <strong class="red">data model</strong> provides an abstract view of data that can be used for data definition, data manipulation, data retrieval, and data administration</li>
+	<li>Accordingly to <a href="https://protect-au.mimecast.com/s/_HRMCgZ0JJUw0z0js2EFBZ?domain=en.wikipedia.org">Wikipedia</a>) a <strong class="red">data model</strong> organises data elements and standardises how the data elements relate to one another</li>
+        <li>Because a <strong class="red">data model</strong> provides an abstract view it is also commonly called as a <strong class="red">view of data</strong></li>
+        <li>In the past we talked about the following views of data:
+          <ul class="build">
+            <li><a href="https://protect-au.mimecast.com/s/8zq0CjZ1RRUG5x5wI7vqj0?domain=en.wikipedia.org">Sector</a>, <a href="https://protect-au.mimecast.com/s/94ZaCk81RRtXWJWRcJTQOX?domain=en.wikipedia.org">track</a>, <a href="https://protect-au.mimecast.com/s/FQNYClx1YYtPnYn3CYILdv?domain=en.wikipedia.org">cylinder</a></li>
+            <li>Sequence of data <a href="https://protect-au.mimecast.com/s/7cs1CmO5ZZhPJQJ7CNiupl?domain=en.wikipedia.org">blocks</a></li>
+            <li>Record, file, file system</li>
+	    <li>Two dimensional tables (tabular view), Hierarchies (tree view), Networks (graph view)</li>
+	    <li>Classes of objects, associations, attributes</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>In 1970 Edgar Frank Codd from IBM Corporation defined a model of data based on a tabular view  of data and called it as Relational Model of Data. These days IBM Corporation owned more than 90% of IT market and all strategic decisions made by IBM were almost compulsory for the other IT companies. Therefore, everyone agreed that tabular view of data is a wonderful idea and everyone followed IBM. The next 20 years was an absolute domination of The Relational Model of Data</p>
+	<br/>
+	<p>In the future we refer to it as to The Relational Data Model.</p>
+	<br/>
+	<p>At the moment approximately 95% of all database systems is based on The Relational Data Model.</p>
+	<br/>
+	<p>However, it is important to say, that in the past and now Relational Data Model had and still has  few serious contenders like Object-Oriented Model, Object-Relational Model, XML Data Model, and recently JSON Data Model.</p>
+	<br/>
+	<p>In the past The Relational Data Model survived the attempts to be replaced by Object-Oriented and later on Object-Relational data model, XML-data model and the most recently JSON Data Model.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Basic Concepts</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>In 1970 <strong class="green">Edgar Frank Codd from IBM Corporation</strong> defined a model of data based on a tabular view and called it as <strong class="red">Relational Model of Data</strong> or simply <strong class="red">Relational Model</strong></li>
+	<li>At the moment (early 2021) ~95% of all database systems is based on <strong class="red">Relational Model of Data</strong></li>
+	<li>However, it is important to say that in the past and now,  <strong class="red">Relational Model of Data</strong> had and still has a few serious contenders like <strong class="blue3">Object-Oriented Model</strong>, <strong class="blue3">Object-Relational Model</strong>, <strong class="red">XML Data Model</strong>, and recently <strong class="red">JSON Data Model</strong></li>
+      </ul>
+ <footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+ <a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>What view of data provides the relational data model?</p>
+	<br/>
+	<p>The model provides a tabular view of data, where a database consists of so called relational tables. It will be explained later why the tables are called "relational" even the tables do no represent any relations. A relational table consists of a header, and theoretically unlimited number of rows.</p>
+	<br/>
+	<p>A header consists of a sequence of attribute names. An order of attributes in a header is immaterial. It means, the contents of a relational tables does not change when the locations of the columns with attributes are changed.</p>
+	<br/>
+	<p>A row consists of a sequence of values of attributes. A relational table consists of one header and theoretically unlimited number of rows. A structure of each row must be consistent with a structure of a header.</p>
+	<br/>
+	<p>A vertically oriented sequence, that starts from an attribute name in a header, and it is followed by the attribute values in the rows, is called as a column. As we mentioned earlier, and order of columns in a relational table is immaterial.</p>
+	<br/>
+	<p>A header, is also called as a relational schema.</p>
+	<br/>
+	<p>A set of all values of an attribute, is called as a domain of such attribute.</p>
+	<br/>
+	<p>A database is a set of the relational tables.</p>
+	<br/>
+	</section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Basic Concepts</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>What view of data provides <strong class="red">Relational Model of Data</strong> ?
+	  <ul class="build">
+	    <li>The model provide a <strong class="red">tabular view of data</strong></li>
+	    <li>A <strong class="red">relational table</strong> consists of a <strong class="red">header</strong> and theoretically an unlimited number of <strong class="red">row</strong>s</li>
+	    <li>A <strong class="red">header</strong> consists of a sequence of <strong class="red">attribute</strong> names</li>
+	    <li>A <strong class="red">row</strong> consists of a sequence of values of attributes</li>
+	    <li>A vertical sequence of <strong class="red">attribute name</strong> followed by the <strong class="red">attribute value</strong>s is called a <strong class="red">column</strong></li>
+	    <li>A <strong class="red">header</strong> is also called a <strong class="red">relational schema</strong></li>
+	    <li>A set of all values of an <strong class="red">attribute</strong> is called a <strong class="red">domain</strong> of an attribute</li>
+	    <li>A <strong class="red">database</strong> is a set of <strong class="red">relational table</strong>s</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+    <aside class="note">
+      <section>
+	<p>A picture in the slide shows a sample relational table.</p>
+	<br/>
+	<p>The relational table contains information about the employees.</p>
+	<br/>
+	<p>A header of the relational table contains the names of attributes describing the employees.</p>
+	<br/>
+	<p>An employee is described by a unique number (anum), first name (fname), last name (lname), date of birth (dob), and address, that consists of city name (city), and state (state), and phone number (phone).</p>
+	<br/>
+	<p>The rows below a header, contain the values of attributes describing employees.</p>
+	<br/>
+	<p>A single row describes a single employee.</p>
+	<br/>
+	<p>A symbol: NULL, represents an empty slot in a table.</p>
+	<br/>
+	<p>An empty slot in a table, can be interpreted as a lack of value of an attribute. It may happen, that a value of an attribute is unknown, or an attribute is not applicable to a description of a real world object. In such a case, NULL symbol can be interpreted as a fact that an attribute does not apply to a description a real worlds object. Then, it is impossible to record a value of an attribute.The Relational Model of Data does not enforce any particular meaning of NULL symbol. So, at the end, interpretation of NULL symbol is up to a database designer.</p>
+	<br/>
+	<p>A vertical sequence, that start from a name of attribute in a header and the values of an attribute below is called as a column.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Basic Concepts</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A sample <strong class="red">relational table</strong>:</li>
+	<p style="text-align:center;"><img src="images/slide-05-1.png" alt="Step 2" title="Step 2"></p>	 	 
+     </li>
+   </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>Why a relational table is called as "relational" ?</p>
+	<br/>
+	<p>This is due to the following original Codd's definition of a relational table.</p>
+	<br/>
+	<p>Let A1, A2,  An, be the names of attributes.</p>
+	<br/>
+	<p>Let dom(A1), dom(A2), ... , dom(An) be the domains of the attributes, domains mean the sets of values of attributes A1 , A2, ..., An.</p>
+	<br/>
+	<p>A relational table is defined as a subset of the following Cartesian product:</p>
+	<br/>
+	<p>dom(A1) x dom(A2) cx ... x dom(An_</p>
+	<br/>
+	<p>In mathematics, a subset of Cartesian product is called as a "relation" ... and it is why a relational table is called as "relational".</p>
+	<br/>
+	<p>The original definition of a relational table is not completely correct. It is because two relational tables with the different orders of columns contain the same information. However, two relations with a different order of domains involved in a Cartesian product are different.</p>
+	<br/>
+	<p>Next, we show a definition of a relational table, that more precisely matches the reality.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Basic Concepts</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Why a <strong class="red">relational table</strong> is called as a <strong class="red">"relational"</strong> ?</li>
+	<li>This is because of the following original E.F. Codd's definition of a <strong class="red">relational table</strong>:
+	  <ul class="build">
+	    <li>Let A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub> be the names of attributes</li>
+	    <li>Let dom(A<sub class="subscript">1</sub>), dom(A<sub class="subscript">2</sub>), ... dom(A<sub class="subscript">n</sub>) be the domains of the attributes, A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>, it means, the sets of values of each attribute A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub></li>
+	    <li>A <strong class="red">relational table</strong> is defined as a subset of the <strong class="blue">Cartesian Product</strong> <br/> dom(A<sub class="subscript">1</sub>) x dom(A<sub class="subscript">2</sub>) x … x dom(A<sub class="subscript">n</sub>)</li>
+	    </ul>
+	  </li>
+	  <li>In mathematics a subset of the <strong class="blue">Cartesian Product</strong> is known as a <strong class="red">relation</strong></li>
+	  <li>This is why a </strong>relational table</strong> is called <strong class="red">"relational"</strong></li>
+          <li>The original definition of a <strong class="red">relational table</strong> is not completely correct because two tables with the different orders of columns contain the same information ...</li>
+	  <li>... however two <strong class="red">relations</strong>, that have a different order of domains are different</li>
+   </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a class="red" href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a href="#14">Consistency Constraints</a></li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A more precise definition of a relational table, that is consistent with the reality, is the following.</p>
+	<br/>
+	<p>Let A1, A2, ..., An be the names of attributes.</p>
+	<br/>
+	<p>Let dom(A1), dom(A2), ..., dom(An) be the domains of attributes, it means the sets of values of attributes A1, A2, ...,  An</p>
+	<br/>
+	<p>A row r is defined as a full mapping of attribute names A1, A2,  ..., An into a union of domains dom(A1), dom(A2), ..., dom(An)   such that for all A in a set of attributes A1, A2,  , ..., An, </p>
+	<br/>
+	<p>r(A) is in a domain of attribute A.</p>
+	<br/>
+	<p>A relational table is still defined as a set of rows.</p>
+	<br/>
+	<p>Now, an order of columns is immaterial, because we can swap the attributes in the mapping but, ...  a name "relational" is not well justified.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Relational Table</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A correct definition of relational tables is the following:
+	  <ul class="build">
+	    <li>Let A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub> be the <strong class="red">names of attributes</strong></li>
+	    <li>Let dom(A<sub class="subscript">1</sub>), dom(A<sub class="subscript">2</sub>), ... dom(A<sub class="subscript">n</sub>) be the <strong class="red">domains of attributes</strong> A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>, it means, the sets of values of each attribute A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub></li>
+	    <li>A <strong class="red">row</strong> r is a  full mapping r: {A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ...A <sub class="subscript">n</sub>} -> dom(A<sub class="subscript">1</sub>) U dom(A<sub class="subscript">2</sub>) U ... dom(A<sub class="subscript">n</sub>) such that for all A in {A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>}, r(A) is in dom(A)</li>
+	    <li>A <strong class="red">relational table</strong> is defined as a set of rows </li>
+	  </ul>
+	</li>
+        <li>Now, an order of columns is immaterial, but ... a name <strong class="red">"relational"</strong> is not well justified ;)</li>
+   </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a class="red" href="#10">Principles of Relational Model</a></li>
+	<li><a href="#14">Consistency Constraints</a></li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A relational table, that has no multivalued, and composite attributes, is in the first normal form, it is also denoted as 1NF.</p>
+	<br/>
+	<p>For example, a relational table in the slide is NOT in 1NF because it contains composite values of attributes in a column: car used and also sets of values in a column: car used. For example, a composite value is a pair Toyota, PKR 234 in a column: car used.
+</p>
+	<br/>
+	<p>A set of values consists if two composite values in a column: car used.</p>
+	<br/>
+	<p>We can also say, that such table is in zeroth normal form, 0NF,  or, that it is a nested table.  We shall not use the nested relational tables in this subject.
+</p>
+	<br/>
+	<p>Are there any higher normal forms like for example 2NF or 3NF  ? Yes ! However, we shall not discuss this topic now !
+</p>
+	<br/>
+	<p>Is a nested relational table in 0NF completely useless ? No ! However, we shall not discuss this topic in this subject !</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Principles of Relational Model</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>A relational table that has <strong class="red">no multivalued attributes and composite attributes</strong> is in the <strong class="red">first normal form</strong> (<strong class="red">1NF</strong>)</li>
+	<li>For example, a relational table below is <strong class="red">NOT</strong> in <strong class="red">1NF</strong></li>
+	  <ul>
+	    <p style="text-align:center;"><img src="images/slide-10-1.png" alt="0NF" title="0NF" height="150" width="350"></p>
+	  </ul>
+        </li>
+        <li>Sometimes we say, that such table is in <strong class="red">0NF</strong> or that it is a <strong class="blue">nested table</strong></li>
+	<li>Are there any <strong class="red">higher normal form</strong>s like for example <strong class="red">2NF</strong>, <strong class="red">3NF</strong>, ... ?</li>
+	<li><strong class="red">YES !</strong> However, we shall not discuss this topic now !</li>
+	<li>Is <strong class="red">0NF</strong>  completely useless ?</li>
+	<li><strong class="red">NO !</strong> However, we shall not discuss this topic in this subject !</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>An important principle of the relational data model,  is "access to the rows by the contents only rule". The rule says, that we can only retrieve the rows by their contents, and we cannot refer to their physical locations in a relational table.</p>
+	<br/>
+	<p>It means, that it is NOT allowed to say, give me the second row from a relational table given in the current slide. Instead we can say: give me a row such that a value of an attribute a num equals 2, or such that a value of attribute f  name equals to 'Johnny', and a value of attribute l name equals to 'Walker'.</p>
+	<br/>
+	<p>Such rule is consistent with a definition of a relational table as a set of rows. If a table is a set of rows that the rows are not ordered in. any way and it is impossible to ask about the first, the second, etc element in a set.</p>
+	<br/>
+	<p>Typically when we insert the rows into a relational table, that is initially empty, the rows are listed in the same order as they have been inserted. It creates an illusion, that whenever a new row is inserted it is always added at the end of a table. In fact, a database system may insert a new row in any location in a relational table assuming that there is enough space in a data block. For example, if some rows inserted at the very beginning are deleted, then a space occupied by such rows can re-used by the news rows. Then, the new rows are inserted at the very beginning of a relational table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Principles of Relational Model</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+	<li><strong class="red">Access to the rows by the contents</strong> rule:
+	  <ul class="build">
+	    <li><strong class="red">We can only retrieve rows by their contents</strong></li>
+	  </ul>
+	</li>
+        <li>It is NOT allowed to say: <strong class="blue3">give me the second row from the following table:</strong>
+	  <ul class="build">
+           <pre class="prettyprint" data-lang="APPLICANT Table">
+
++------+----------+--------------+------------+------------+-------------------+
+| anum | fname    | lname        | dob        | city       | state             |
++------+----------+--------------+------------+------------+-------------------+
+|    1 | Harry    | Potter       | 1980-12-12 | Perth      | Western Australia |
+|    2 | Johnny   | Walker       | 1990-01-13 | Geelong    | Victoria          |
+|    3 | Mary     | Poppins      | 1950-01-01 | Melbourne  | Victoria          |
+|    4 | Michael  | Collins      | 1960-05-25 | Brisbane   | Queensland        |
+|    5 | Margaret | Finch        | 1953-12-07 | Sydney     | New South Wales   |
+|    6 | Claudia  | Kowalewski   | 1959-05-03 | Hobart     | Tasmania          |
+|    7 | James    | Bond         | 1960-01-01 | Perth      | Western Australia |
+|    8 | Stephen  | Staunton     | 1977-10-23 | Freemantle | Western Australia |
+|    9 | Joseph   | Staunton     | 1977-10-23 | Newcastle  | New South Wales   |
+|   10 | John     | Spiderman    | 1990-06-21 | Sydney     | New South Wales   |
++------+----------+--------------+------------+------------+-------------------+</pre>
+	  </ul>
+	</li>
+	<li>We have to say:  give me a row such that </strong><strong class="blue prettyprint"> anum = 2</strong> or such that <br/> <strong class="blue prettyprint">fname = 'Johnny' and lname = 'Walker'</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>The next principle of the relational data model is the unique rows rule.</p>
+	<br/>
+	<p>The rule says, that a relational table cannot contain two identical rows. It is, because a relational table is defined as a set of rows, and a set cannot contain to identical elements.</p>
+	<br/>
+	<p>The rule is violated by all commercial Database Management Systems !</p>
+	<br/>
+	<p>If a relational table does not have primary key and candidate key then, in any commercial DBMS it is possible to insert into such table two identical rows.</p>
+	<br/>
+	<p>Of course another principle of the relational data model says that each relational table must have a primary key. Even in such a case when processing the queries it is possible to pick few columns from a relational table in a way that a new table will contain identical rows.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Principles of Relational Model</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li><strong class="red">Unique rows</strong> rule:
+	  <ul class="build">
+	    <li><strong class="red">A relational table cannot contain two identical rows
+</strong></li>
+	  </ul>
+	</li>
+        <li>This rule is violated by all commercial Database Management Systems !</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a class="red" href="#14">Consistency Constraints</a></li>
+	  <ul>
+	    <li><a class="red" href="#14">Keys</a></li>
+	    <li><a class="prettyprint" href="#19">NULL</a></li>
+	    <li><a href="#21">Referential Integrity Constraints</a></li>
+	    <li><a href="#26">Domain Constraints</a></li>
+	  </ul>
+	</li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>In the present slide we define a concepts of key, minimal key and superkey.</p>
+	<br/>
+	<p>Let R(A1, A2, ..., An) be a relational table with a relational schema (header), that consists of the attributes A1, A2, ..., An.</p>
+	<br/>
+	<p>A key in a relational table R is a set of attributes K equal to Ak1, Ak2, ..., Akm, such that:</p>
+	<br/>
+	<p>(1) K is included in a set of attributes A1, A2, ..., An, and it means, that K is a subset of the schema of a relational table R. Every attribute that belongs to key must be a member of a relational schema R,</p>
+	<br/>
+	<p>(2) for any two rows v, w, in a relational table R(A1, A2, ..., An), their k-values must be different. It means that a projection of a row v on a set of attributes k must be different from  a projection of a row w on the same set of attributes k. Projection of a row v on a set of attributes k means that we remove from a row v the values of all attributes that do not belong to a set of attributes k.</p>
+	<br/>
+	<p>(3) no proper subset of k, satisfies a property above. It means, that if we remove any attribute from a set of attributes k and we create a news set k', then a property (2) is not true for a set of attributes k'.</p>
+	<br/>
+	<p>A key, that does not satisfy property (3), is called a superkey.</p>
+	<br/>
+	<p>A key, that satisfies all conditions, is called a minimal key. In the other words a minimal key is a key such that no attributes can be removed such that we can still preserve the properties (1) and (2). As a consequence, it is the smallest key.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Keys</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+	<li>Let R(A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>) be a relational table with a relational schema (header) {A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>}</li>
+	<li>A <strong class="red">key</strong> for a table R is a set of attributes K = {A<sub class="subscript">k1</sub>, A<sub class="subscript">k2</sub>, ... A<sub class="subscript">km</sub>} such that:
+
+	  <ul class="build">
+	    <li>(1) K is included in {A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>}, it means, that K is a subset of the relational schema {A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>}</li>
+	    <li>(2) for any two rows v, w in R(A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>) their k-values must be different,<br/> i.e. v[k] &ne; w[k]</li>
+	    <li>(3) no proper subset of K satisfies a property (2) above
+	  </ul>
+	</li>
+        <li>A <strong class="red">key</strong> that does not satisfy a condition (3) is called as <strong class="red">superkey</strong></li>
+	<li>A <strong class="red">key</strong> that satisfies the conditions (1) and (2) and (3) is called as <strong class="red">minimal key</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+ </slide>
+<!-- slide 16 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>Let us look at few examples of minimal keys, and superkeys, valid in the relational schemas.</p>
+	<br/>
+	<p>First, we consider  relational schema: students, that consists of the attributes: student number (snum), first name, last name and date of birth. A set of attributes, that contains only a student number, is a minimal key in a relational schema: student. It is, because every student has a unique student number given by university administration when he/she is enrolled. It is a minimal key, because it is impossible to remove an attribute, such that a remaining set of attributes is not empty.</p>
+	<br/>
+	<p>A set of attributes, that contains only the attributes: student number and last name,  is a superkey in a relational schema: student. It is a key, because every student has a unique pair of values of attributes: student number and last name. It is a superkey, because if we remove an attribute: last name, a remaining set of attributes, that contains only a student number, is still a key. Well, it is even a minimal key.</p>
+	<br/>
+	<p>Next, consider a relational schema: enrolment, that consists of the attributes: student number (s num), subject code (code) enrolment date, and enrolment time measured with a precision up to a single milisecond. A set of attributes: student number (s num), code, enrolment date and enrolment-time, is a minimal key in a relational schema: enrolment. It is so, because a student can enrol in only one subject, on a given day, and in a given moment in time, It is a minimal key, because we cannot remove any attributes such, that the remaining set of attributes, still remain a minimal key. For example, if we remove enrolment time, then it is possible that a student enrolled in a subject, dropped the same subject, and enrolled in it again on the same day.</p>
+	<br/>
+	<p>Next, we consider a relational schema: room, that consists of the attributes: building number (bldg#), room number (room#), and room area. A set of attributes: building number and room number, is a minimal key in a relational schema: room. It is so, because all rooms in a building must have unique numbers. A set of attributes: building number, room number, and room area is a superkey. It is so, because we can remove an attribute area: and a pair of attributes left:  building number and room number is still a key.</p>
+	<br/>
+	<p>Finally, let us consider a relational schema: part, that consists of the attributes part number (p#), part name, price, and part manufacturer. A set of attributes, that consists of: part number, manufacturer, and price, is a superkey in a relational schema: part. It is so, because if we remove an attribute: price, then a pair of attributes: part number and manufacturer, is a key in a relational schema: part. A set of attributes that consists of: part number, and  manufacturer, is a superkey in a relational schema: part. It is so because if we remove manufacturer then a part number is a key in a relational schema part. Finally, a set of attributes, that consists only of: part number, is a minimal key in a relational schema: part.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Keys</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+	<li>Examples:
+	  <ul class="build">
+	    <li>A set of attributes <strong class="blue prettyprint28">{snum}</strong> is a <strong class="red">minimal key</strong> in a relational schema<br/> <strong class="blue prettyprint28">STUDENT={snum, first-name, last-name, date-of-birth}</strong></li>
+	    <li>A set of attributes <strong class="blue3 prettyprint28">{snum, last-name}</strong> is a <strong class="red">superkey</strong> in a relational schema <strong class="blue prettyprint28">STUDENT={snum, first-name, last-name, date-of-birth}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{snum, code, enrolment-date, enrolment-time}</strong> is a <strong class="red">minimal key</strong> in a relational schema <br/><strong class="blue prettyprint28">ENROLMENT={snum, code, enrolment-date, enrolment-time}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{bldg#, room#}</strong> is a <strong class="red">minimal key</strong> in a relational schema <strong class="blue prettyprint28">ROOM={bldg#, room#, area}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{p#, manufacturer, price}</strong> is a <strong class="red">superkey</strong> in a relational schema <strong class="blue prettyprint28">PART={p#, name, price, manufacturer}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{p#, manufacturer}</strong> is a 
+	      <strong class="red">superkey</strong> in a relational schema <strong class="blue prettyprint28">PART={p#, name, price, manufacturer}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{p#}</strong> is a <strong class="red">minimal key</strong> in a relational schema <br/><strong class="blue prettyprint28">PART={p# name, price, manufacturer}</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>Let us look at more examples of superkeys and minimal keys.</p>
+	<br/>
+	<p>A relational schema: player, consists of the attributes: player number (pnumber), first name, last name, date of birth (dob ), and team name.</p>
+	<br/>
+	<p>A set of attributes, that consists of: player number, first name, last name, date of birth, and team, is a superkey in a relational schema: player. It is so, because a team never has two players with the same first name, last name and date of birth.</p>
+	<br/>
+	<p>A set of attributes, that consists of: player number, first name, last name, and date of birth, is a superkey in a relational schema: player. It is so, because we do not have two or more playes participating in the competition such first name, last name, and date of birth is the same fro two or more players.</p>
+	<br/>
+	<p>A set of attributes, that consists of: first name, last name, and date of birth, is a minimal key in a relational schema: player. It is so, because it is possible to have two players with the same first name and date of birth, two players with the same last name and date of birth and two players with the same first name and last name.</p>
+	<br/>
+	<p>A relational schema shipment consists of the attributes: supplier number, (supplier num), part number (part num), delivery date, and delivery address. A set of attributes, that consists of: supplier number, part number, delivery date, and delivery address, is a minimal key in a relational schema: shipment.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Keys</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>More examples:
+	  <ul class="build">
+
+
+	    <li>A set of attributes <strong class="blue prettyprint28">{pnum, first-name,last-name, dob, team}</strong> is a <strong class="red">superkey</strong> in a relational schema <br/><strong class="blue prettyprint28">PLAYER={pnum, first-name, last-name, dob, team}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{pnum, first-name,last-name, dob}</strong> is a <strong class="red">superkey</strong> in a relational schema <br/><strong class="blue prettyprint28">PLAYER={pnum, first-name, last-name, dob, team}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{first-name,last-name, dob}</strong> is a <strong class="red">minimal key</strong> in a relational schema <br/><strong class="blue prettyprint28">PLAYER={pnum, first-name, last-name, dob, team}</strong></li>
+	    <li>A set of attributes <strong class="blue prettyprint28">{supplier-num, part-num, delivery-date, delivery-address}</strong> is a <strong class="red">minimal key</strong> in a relational schema <br/><strong class="blue prettyprint28">SHIPMENT={supplier-num, part-num, delivery-date, delivery-address}</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 18 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>All minimal keys valid in a relational schema are also called as candidate keys.</p>
+	<br/>
+	<p>A primary key is one of the candidate keys arbitrarily chosen by a database designer, to uniquely identify the rows in a relational table.</p>
+	<br/>
+	<p>For example, a set of attributes that consists of: student number (snum) is a  candidate key in a relational schema: student. A set of attributes, that consists of: first name, last name, and date of birth is a composite candidate key in a relational schema: student.</p>
+	<br/>
+	<p>Then, a candidate key: student number, can be selected by a database designer as a primary key. It is also possible, that a candidate key that consists of the attributes: first name, last name, and date of birth, is selected by a database designer as a primary key.</p>
+	<br/>
+	<p>Usually, when we have two or more candidate keys we pick as a primary kery the one that consists of the smaller number of attributes. It is because such primary key may be a foreign key in another relational table and then we minimise the redundancies created by the repetitions of the values of primary key as the values of foreign key in another relational table. On the other hand a longer primary key indicates a longer foreign key and it may reduce the number of join operations on the relational tables.</p>
+	<br/>
+	<p>In the future, a relational schema will be denoted by R(A1, A2, ... An), and any key: Ai1, Ai2, ..., Aim, included in R will be denoted by (Ai1, Ai2, ..., Aim).</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Keys</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>All <strong class="red">minimal key</strong>s valid in a relational schema are also called as <strong class="red">candidate key</strong>s</li>
+	<li>A <strong class="red">primary key</strong> is one of the <strong class="red">candidate key</strong>s arbitrarily chosen by a database designer to uniquely identify the rows in a relational table</li>
+	<li>Examples:
+	  <ul class="build">
+	    <li>A set of attributes <strong class="blue prettyprint28">{snum}</strong> and a set of attributes <strong class="blue prettyprint28">{first-name, last-name, date-of-birth}</strong> are the <strong class="red">candidate key</strong>s in a relational schema <strong class="blue prettyprint28">STUDENT={snum, first-name, last-name, date-of-birth}</strong></li>
+	    <li>A <strong class="red">candidate key</strong> <strong class="blue prettyprint28">{snum}</strong> can be selected by a database designer as a <strong class="red">primary key</strong></li>
+	    <li>It is also possible that a <strong class="red">candidate key</strong> <strong class="blue prettyprint28">{first-name, last-name, date-of-birth}</strong> can be selected by a database designer as a <strong class="red">primary key</strong></li>
+	  </ul>
+        </li>
+	<li><strong class="red">In the future a relational schema</strong> R ={A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>} <strong class="red"> will be denoted by</strong> R(A<sub class="subscript">1</sub>, A<sub class="subscript">2</sub>, ... A<sub class="subscript">n</sub>) <strong class="red"> and any sort of key </strong> {A<sub class="subscript">i1</sub>, A<sub class="subscript">i2</sub>, ... A<sub class="subscript">im</sub>} <strong class="red">included in</strong> R <strong class="red"> will be denoted by</strong> (A<sub class="subscript">i1</sub>, A<sub class="subscript">i2</sub>, ... A<sub class="subscript">im</sub>)</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+       <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a class="red" href="#14">Consistency Constraints</a></li>
+	  <ul>
+	    <li><a href="#14">Keys</a></li>
+	    <li><a class="red prettyprint" href="#19">NULL</a></li>
+	    <li><a href="#21">Referential Integrity Constraints</a></li>
+	    <li><a href="#26">Domain Constraints</a></li>
+	  </ul>
+	</li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A NULL constraint says, that an attribute in a relational table may have no values at all.</p>
+	<br/>
+	<p>Consider a conceptual schema, where a class: DEPARTMENT, is related to  class: CHAIR, through an association: DEPARTMENT Has CHAIR. Because a multiplicity of the association on a chair class side is zero or one, then it may happen, that a department has no chairperson.</p>
+	<br/>
+	<p>In such situation, some values in a column: chairperson, in a relational table: Department can be missing.</p>
+	<br/>
+	<p>A lack of value in a slot of a relational table, is represented by a symbol: NULL.</p>
+	<br/>
+	<p>An attribute: budget, is an optional attribute in a description of a class: DEPARTMENT. If a department has no budget, then such situation is represented by a NULL symbol in a column: budget, in a relational table: Department.</p>
+	<br/>
+	<p>An Entity Integrity constraint  says, that no column belonging to a primary key, or candidate key is allowed to take on NULL for any row. All commercial Database Management Systems allow NULLs for the candidate keys.</p>
+	<br/>
+	<p>All commercial DBMSs do not allow for NULL within primary keys. It means that if a column belongs to a primary key then its NULL/NOT NULL constraint must be NOT NULL.</p>
+	<br/>
+	<p>In practice, it is recommended to use NULL constraint as rarely as it is possible. A lack of values leads to three valued logic when search conditions are evaluated over the rows in a relational table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green prettyprint">NULL</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red prettyprint28">NULL</strong><strong class="red"> constraint</strong> says that <strong class="red">an attribute in a relational table may have no values at all </strong></li>
+	<p style="text-align:center;"><img src="images/slide-18-1.png" width="600" alt="Step 2" title="Step 2"></p>
+	<li>With an exception saying that <strong class="red">no column belonging to a primary key or candidate key is allowed to take on</strong> <strong class="red prettyprint28">NULL</strong><strong class="red"> for any row</strong> (it is also called as <strong class="red">Entity Integrity constraint</strong>)</li>
+	<li>All commercial Database Management Systems allow <strong class="red prettyprint28">NULL</strong> for candidate keys</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a class="red" href="#14">Consistency Constraints</a></li>
+	  <ul>
+	    <li><a href="#14">Keys</a></li>
+	    <li><a class="prettyprint" href="#19">NULL</a></li>
+	    <li><a class="red" href="#21">Referential Integrity Constraints</a></li>
+	    <li><a href="#26">Domain Constraints</a></li>
+	  </ul>
+	</li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 22 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A referential integrity constraint says, that a set of attributes F, in a relational schema R, is called a foreign key, if a combination of values of attributes in F, in any row is required to either contain NULLs or else to match the value combination of a set of columns P, representing a candidate or primary key in some other relational schema S.</p>
+	<br/>
+	<p>For example, an attribute supplier number (s#), in a relational schema: Shipment, is a foreign key referencing a primary key:  supplier number (s#), in a relational schema Supplier. It means, that a column: supplier number (s#), in a relational table: Shipment, must contain only the values already inserted into a column: supplier number (s#,) in a relational table: Supplier. In such a case, a value in a column: supplier number (s#), in a table: Shipment, cannot be missing ( NULL ), because an attribute: supplier number, is a component of a primary key in a relational table: Shipment.</p>
+	<br/>
+	<p>In another example, an attribute" part number (p#), in a relational schema: Shipment, is a foreign key referencing a primary key: part number (p#), in a relational schema Part. It means, that a column: part number (p#) in a relational table: Shipment, must contain only the values already inserted into a column: part number (p#), in a relational table: part. In such a case, a value in column: part number (p#), in a table: shipment, cannot be missing ( NULL ), because an attribute: supplier number, is a component of a primary key in a relational table: Shipment.</p>
+	<br/>
+	<p>A relational database system uses enforces referential integrity constraints to avoid so called "dangling pointer references" commonly known from procedural programming languages like C, C++, Modula, etc that allow fro dynamic memory allocation. A dangling pointer reference happens when a fragment of transient memory addressed by a pointer is released and after that the pointer points to a memory address not available to an application. In a relational database system it would mean a value of foreign such that it is not a value of a referenced primary key. For example, a shipment where a value of an attribute part number (p#) is recorde in Shipment table and it is not recorded in Part table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Referential Integrity Constraints</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A set of attributes <strong class="blue">F</strong> in a relational schema <strong class="blue">R</strong> is a called a <strong class="red">foreign key</strong> if  the combination of values of attributes in <strong class="blue">F</strong> in any row is required to either contain <strong class="red prettyprint28">NULL</strong>s or else to match the value combination of a set of columns <strong class="blue3">P</strong> representing a candidate or primary key in some other relational schema <strong class="blue">S</strong></li>
+	<p style="text-align:center;"><img src="images/slide-20-1.png" alt="FK" title="FK"></p>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+ </slide>
+<!-- slide 23 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A referential integrity rule is in force, if the columns of foreign keys in any relational table, either:</p>
+	<br/>
+	<p>have NULLs in at least one column, that allows NULLs, or have no NULLs, and a combination of all its values is equal to the combination of primary key values in the other relational table.</p>
+	<br/>
+	<p>It means, that the values in the columns: supplier number (s#) and part number (p#) in Shipment table,  must be earlier inserted into the columns: supplier number (s#) and part number (p#), in the relational tables: Supplier and Part.</p>
+	<br/>
+	<p>A value of a foreign key can be NULL. However, in this case the columns: supplier number (s#) and part number(p#), cannot have empty slots (NULLs) because both attributes are the members of a primary key, that consists of the attributes: supplier number and part number.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Referential Integrity Constraints</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<p style="text-align:center;"><img src="images/slide-20-1.png" alt="FK" title="FK"></p>
+	<li>A <strong class="red">referential integrity rule</strong> is in force if the columns of a foreign key in any relational table either:
+	  <ul class="build">
+	    <li>(1) have <strong class="red prettyprint28">NULL</strong>s in at least one column that allows <strong class="red prettyprint28">NULL</strong>s</li>
+	    <li>(2) have no <strong class="red prettyprint28">NULL</strong>s and a combination of all its values is equal to the combination of primary key values in the other relational table</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 24 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>Now, we present two examples related to the referential integrity constrains.</p>
+	<br/>
+	<p>First, assume, that a relational schema: BUILDING, consists of the attributes building number (bldg#), floor number (floor#), and name, has a primary key building number. A relational schema: ROOM that consists of the attributes building number (bldg#), room number (room#), and area, has a composite primary key that consists of building number and room number. Then, a set of attributes, that consists of:  building number, and included a relational schema: ROOM, is a foreign key, that references a primary key: building number, in a relational schema: BUILDING.</p>
+	<br/>
+	<p>In another example, assume, that a relational schema: STUDENT, consists of the attributes: student number (s#), first name, last name, and date of birth (dob). A relational schema: STUDENT, has a primary key: student number. Next, assume that a relational schema: SUBJECT, consists of the attributes: subject code (code), title, and total number of credits (credits). A relational schema: SUBJECT, has a primary key: subject code. Then, a relational schema: ENROLMENT, that consists of: student number (s#), subject code (code), and enrolment date (e date), has a foreign key: student number, referencing a primary key: student number, in a relational table: STUDENT.</p>
+	<br/>
+	<p>A relational schema: ENROLMENT has another foreign key: subject code, that refers to a primary key: subject code, in a relational table: SUBJECT. It means, that we cannot add information about an enrolment of a subject, performed by a student, unless we first enter information about the student and about the subject.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Referential Integrity Constraints</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Example of <strong class="red">referential integrity constraint</strong>:
+	  <ul class="build">
+	    <li>A relational schema <strong class="blue prettyprint28">BUILDING(bldg#, floor#, name)</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(bldg#)</strong></li>
+	    <li> A relational schema <strong class="blue prettyprint28">ROOM(bldg#, room#, area}</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(bldg#, room#)</strong></li>
+	    <li>Then a set of attributes <strong class="blue prettyprint28">(bldg#)</strong> included in a schema <strong class="blue prettyprint28">ROOM</strong> is a <strong class="red">foreign key</strong> that references a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(bldg#)</strong> in a schema <strong class="blue prettyprint28">BUILDING</strong></li>
+	  </ul>
+	</li>
+	<li>Another example of <strong class="red">referential integrity constraint</strong>:
+	  <ul class="build">
+	    <li>A relational schema <strong class="blue prettyprint28">STUDENT(s#, first-name, last-name, dob)</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(s#)</strong></li>
+	    <li>A relational schema <strong class="blue prettyprint28">SUBJECT(code, title, credits)</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(code)</strong></li>
+	    <li>Then a relational schema <strong class="blue prettyprint28">ENROLMENT(s#, code, edate)</strong> has a </strong>foregin key</strong> <strong class="blue prettyprint28">(s#)</strong> referencing <strong class="red">primary key</strong> <strong class="blue prettyprint28">{s#}</strong> in a schema <strong class="blue prettyprint28">STUDENT</strong> and ...</li>
+            <li>... a relational schema <strong class="blue prettyprint28">ENROLMENT(s#, code, edate)</strong> has a <strong class="red">foreign key</strong> <strong class="blue prettyprint28">(code)</strong> referencing <strong class="red">primary key</strong> <strong class="blue prettyprint28">(code)</strong> in a schema <strong class="blue prettyprint28">SUBJECT</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 25 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>In a yet another example, related to referential integrity constraints, we consider a relational schema: ROOM, that consists of attributes: building number (bldg#), room number (room#), and area. A relational schema: ROOM, has a primary key, that consists of: building number and room number.</p>
+	<br/>
+	<p>Another relational schema: LECTURER, consists of the attributes: employee number (emp#), first name, last name, building number, and room number. The values of attributes: building number and room number, determine a location of a lecturer.</p>
+	<br/>
+	<p>Then, a set of attributes, that consists of: building number and room number, included in a relational schema: LECTURER, is a foreign key, that references a primary key in a relational schema: BUILDING, that consists of: building number and room number, in a relational schema: ROOM. It means, that we cannot assign a lecturer to a room, that is not described in a relational table: room.</p>
+	<br/>
+	<p>In this case, it is still possible to enter information about a lecturer who is not assigned to any room yet.  To do so, we remove the values of the attributes: building number and room number, from a description of a lecturer. We represent such fact with NULLs in the columns: building number and employee number, in a row that describes a lecture in a relational table: LECTURER. </p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Referential Integrity Constraints</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>Yet another example of <strong class="red">referential integrity constraint</strong>:
+	  <ul class="build">
+            <li>A relational schema <strong class="blue prettyprint28">ROOM=(bldg#, room#, area)</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(bldg#, room#)</strong></li>
+	    <li>A relational schema <strong class="blue prettyprint28">LECTURER=(emp#, first-name, last-name, bldg#, room#)</strong> has a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(emp#)</strong></li>
+	    <li>Then a set of attributes <strong class="blue prettyprint28">(bldg#, room#)</strong> included in a relational schema <strong class="blue prettyprint28">LECTURER</strong> is a <strong class="red">foreign key</strong> that references a <strong class="red">primary key</strong> <strong class="blue prettyprint28">(bldg#, room#)</strong> in a schema <strong class="blue prettyprint28">ROOM</strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 26 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a class="red" href="#14">Consistency Constraints</a></li>
+	  <ul>
+	    <li><a href="#14">Keys</a></li>
+	    <li><a class="prettyprint" href="#19">NULL</a></li>
+	    <li><a href="#21">Referential Integrity Constraints</a></li>
+	    <li><a class="red" href="#26">Domain Constraints</a></li>
+	  </ul>
+	</li>
+	<li><a href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 27 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>A domain constraint is a condition imposed on the values of an attribute: A, that determines the values of dom(A), it means, a domain of attribute A.</p>
+	<br/>
+	<p>For example, an attribute: student-number, is a sequence of 7 digits.</p>
+	<br/>
+	<p>An attribute date of birth cannot have a value greater then todays date.</p>
+	<br/>
+	<p>An attribute salary is a positive real number, it cannot have negative values.</p>
+	<br/>
+	<p>Accordingly to the traditional believes, value of an attribute gender can be either, female, or male.</p>
+	<br/>
+	<p>A value of an attribute credits can be either 6 or 12.</p>
+	<br/>
+	<p>A value of an attribute first name, is a string of letters and blanks that starts from a capital letter.</p>
+	<br/>
+	<p>A domain constraints can be used to eliminate the simple errors preformed at data entry. For example, a wrong position of a decimal dot, too many digits, too long string of characters, a value out of a given set of values and so on.</p>
+	<br/>
+	<p>It is also possible to implement the domain constraints on the finite domain sets using referential integrity constraints. To do so we create a single column table and we insertt into such table all values that belong to a domain of an attribute. Then we make such column a primary key in a single column table. Then if a domain of another attribute in another relational table is the same as a domain created in a single column table the we nominate such as attribute as a foreign key referencing a primary key in a single column table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Domain Constraints</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">domain constraint</strong> is a condition imposed on the values of an attribute <strong class="blue prettyprint28">A</strong> that determines the values of <strong class="blue prettyprint28">dom(A)</strong>, i.e. a <strong class="red">domain</strong> of attribute <strong class="blue prettyprint">A</strong>.</li>
+	<li>Examples:
+	  <ul class="build">
+	    <li>An attribute <strong class="blue prettyprint28">student-number</strong> <strong class="red">is a sequence of 7 digits</strong></li>
+	    <li>An attribute <strong class="blue prettyprint28">date-of-birth</strong> <strong class="red">cannot have a value greater then todays date</strong></li>
+	    <li>An attribute <strong class="blue prettyprint28">salary</strong> is a <strong class="red">positive real number</strong></li>
+	    <li>A value of an attribute <strong class="blue prettyprint28">gender</strong> <strong class="red">can be either 'female' or 'male'</strong></li>
+	    <li>A value of an attribute <strong class="blue prettyprint28">credits</strong> <strong class="red">can be either 6 or 12</strong></li>
+	    <li>A value of an attribute <strong class="blue prettyprint28">first-name</strong> <strong class="red">is a string of letters an blanks that starts from  a capital letter</strong></strong></li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 28 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">The Relational Model of Data</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Basic Concepts</a></li>
+	<li><a href="#8">Relational Table</a></li>
+	<li><a href="#10">Principles of Relational Model</a></li>
+	<li><a href="#14">Consistency Constraints</a></li>
+	<li><a class="red" href="#28">Summary</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>Accordingly to the principles of the relational data model,  a database is a collection of relational tables.</p>
+	<br/>
+	<p>A relational table consists of rows, also known as: tuples, and columns, also known as: attributes. A relational table is a set of rows. Such constraint can be abolished in a commercial database system when a table does not have enforced primary and candidate key constraints.</p>
+	<br/>
+	<p>All attributes must have atomic values. Each attribute has a domain, a domain of an attribute is a set of acceptable values of the attribute. It means, that the values cannot have any internal structures, that can be used when storing or retrieving data from a relational table. In the commercial database systems it is possible to have columns  that store complex values, e.g. dates, addresses, even XML or JSON documents.</p>
+	<br/>
+	<p>A row in a relational table represents a relationship among a set of attributes.</p>
+	<br/>
+	<p>A relational table is a subset of a Cartesian product of the attribute domains. Such definition is not completely consistent with the properties of relational tables. For example it does not allow for changing of an order of columns in a relational tables.</p>
+	<br/>
+	<p>An attribute may have no value and a lack of value is denoted by the symbol NULL.</p>
+	<br/>
+	<p>A relational table implements either a class of objects, or an association.</p>
+	<br/>
+	<p>All identifiers in a conceptual schema are implemented as the keys in the relational tables.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Summary</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A <strong class="red">database</strong> is a collection of <strong class="red">relational tables</strong></li>
+	<li>A <strong class="red">relational table</strong> consists of <strong class="red">rows</strong> (<strong class="red">tuples</strong>) and <strong class="red">columns</strong> (<strong class="red">attributes</strong>)</li>
+	<li>All <strong class="red">attributes</strong> have <strong class="red">atomic values</strong></li>
+	<li>Each <strong class="red">attribute</strong> has a <strong class="red">domain</strong>, it means, that a set of acceptable values</li>
+	<li>A <strong class="red">row</strong> represents a relationship among a set of <strong class="red">attribute</strong>s</li>
+	<li>A <strong class="red">relational table is a subset</strong> of the <strong class="blue">Cartesian Product</strong> of <strong class="red">attribute  domains</strong></li>
+	<li>An <strong class="red">attribute</strong> may have no value (<strong class="red prettyprint28">NULL</strong>)</li>
+	<li>A <strong class="red">relational table</strong> implements either a <strong class="red">class of objects</strong> or an <strong class="red">association</strong></li>
+	<li>All <strong class="red">identifiers</strong> in a <strong class="red">conceptual schema</strong> are implemented as the <strong class="red">keys</strong> in the <strong class="red">relational tables</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 30 ================================================================================= -->
+ <slide>
+  <aside class="note">
+      <section>
+	<p>This section, plays a role of a tourist guide through the land of keys.</p>
+	<br/>
+	<p>A key, is a set of attributes whose values uniquely identify each row in a relational table.</p>
+	<br/>
+	<p>A minimal key, is the smallest key.</p>
+	<br/>
+	<p>A superkey, is a minimal key plus other attributes.</p>
+	<br/>
+	<p>A candidate key, is any minimal key.</p>
+	<br/>
+	<p>A primary key, is one of arbitrarily selected candidate keys.</p>
+	<br/>
+	<p>A foreign key, is an attribute or a set of attributes referencing a primary key or a candidate key in another or in the same relational table.</p>
+	<br/>
+      </section>
+    </aside>
+    <hgroup>
+      <h2 class="green">Summary</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>A "tourist guide" through a "land of keys"
+	  <ul class="build">
+	    <li><strong class="red">Minimal key</strong> => <strong class="blue3">the smallest key</strong></li>
+	    <li><strong class="red">Superkey</strong> => <strong class="blue3">minimal key + other attribute(s)</strong></li>
+	    <li><strong class="red">Candidate key</strong> => any <strong class="red">minimal key</strong></li>
+	    <li><strong class="red">Primary key</strong> => one of <strong class="red">candidate keys</strong></li>
+	    <li><strong class="red">Foreign key</strong> => an <strong class="red">attribute</strong> or set of <strong class="red">attribute</strong>s referencing a <strong class="red">primary key</strong> or a <strong class="red">candidate key</strong> in another or the same relational table</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 31 ================================================================================= -->
+  <slide>
+     <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	<li>C. Coronel, S. Morris, A. Basta, M. Zgola, Data Management and Security, Chapter 2 Cengage Compose eBook, 2018, <a href="https://protect-au.mimecast.com/s/7fRbCnx155t3ORO1F05zqk?domain=cengagebrain.com.au">eBook: Data Management and Security, 1st Edition</a></li>	
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation, and Management, Chapter 4 The Relational Model, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/LfySCoV122HPqyq1C2EZxF?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+

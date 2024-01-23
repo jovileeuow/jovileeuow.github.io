@@ -1,0 +1,1001 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: <a href="https://protect-au.mimecast.com/s/OfAtCXLWDDCDLY0Jt6xZxy?domain=code.google.com">https://code.google.com/p/io-2012-slides</a>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>07DatabaseDesignQuality</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen"> 
+<!--
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ISIT311.png"></span>
+    </article>
+  </slide>
+-->
+<!-- slide 01 ================================================================================= -->
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">&nbsp;&nbsp;</aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 class="black" data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 class="black" data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p class="black" data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+<!-- slide 02 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design Quality</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a class="red" href="#2">Why not ONE BIG TABLE !?</a></li>
+	<li><a href="#7">Where is a problem ?</a></li>
+	<li><a href="#11">Insertion test</a></li>
+	<li><a href="#20">Good design guidelines</a></li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 03 ================================================================================= -->
+<slide>
+  <aside class="note">
+      <section>
+	<p>An interesting question related to a process of logical design is why do we need to create many relational table instead of ONE BIG TABLE where we could store all data ? Transformation of the classes of objects into relational schemas later on implemented as relational table and filled with rows seems to be a very natural and very straightforward decision. But, in a case when we transform one-to-one association we merge the attributes from two classes into one relational schema. Can we do the same thing with the classes linked with one-to-many association and many-to-many association ?
+</p>
+	<br/>
+	<p>Or when we create a conceptual schema can we create ON BIG CLASS and later on transform such class in ONE BIG TABLE ?</p>
+	<br/>
+	<p>In order to find why we cannot have ONE BIG TABLE let us look at the following example. Let us consider the following database domain:</p>
+	<br/>
+	<p>A customer is described by a unique customer number, first and last name. Customers submit orders. An order is described by a unique order number and order date. Orders consist of lines. A line contains information about a name of ordered item, price per single item and total number of ordered items.</p>
+	<br/>
+	<p>A conceptual schema obtained from a process of object modeling is given on the present slide. We created three classes of objects: CUSTOMER, ORDER and LINE. Then, we linked the classes with the associations: CUSTOMER Submits ORDER and ORDER Consists-of LINE.</p>
+	<br/>
+	<p>There is no doubts, that such conceptual schema represents a given database domain in a consistent and comprehensive way.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Why not ONE BIG TABLE !?</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+        <li>Let us consider the following database domain:
+          <ul class="build">
+            <li>A <strong class="blue3">customer</strong> is described by a unique <strong class="blue3">customer number</strong>, <strong class="blue3">first</strong> and <strong class="blue3">last name</strong></li>
+            <li><strong class="blue3">Customers</strong> submit <strong class="blue3">orders</strong></li>
+	    <li>An <strong class="blue3">order</strong> is described by a <strong class="blue3">unique order number</strong> and <strong class="blue3">order date</strong></li>
+            <li><strong class="blue3">Orders</strong> consist of <strong class="blue3">lines</strong></li>
+	    <li>A <strong class="blue3">line</strong> contains information about a <strong class="blue3">name of ordered item</strong>, <strong class="blue3">price per single item</strong> and <strong class="blue3">total number of ordered items</strong></li>
+          </ul>
+        </li>
+        <p style="text-align:center;"><img src="images/slide-03-1.png" alt="Association class" title="Multivalued attribute"></p>	 
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 04 ================================================================================= -->
+<slide>
+ <aside class="note">
+      <section>
+	<p>Now, we apply to the conceptual schema created on the previous slide a process of logical design and we get three relational schemas:</p>
+	<br/>
+	<p>CUSTOMER(cnumber, first-name, last-name) </p>
+	<br/>
+	<p>PRIMARY KEY = (cnumber)</p>
+	<br/>
+	<p>ORDERS(onumber, odate, cnumber) PRIMARY KEY = (onumber)</p>
+	<br/>
+	<p>FOREIGN KEY = (cnumber) REFERENCES CUSTOMER(cnumber)</p>
+	<br/>
+	<p>and</p>
+	<br/>
+	<p>LINE(onumber, lnumber, item, price total)</p>
+	<br/>
+	<p>PRIMARY KEY = (onumber, lnumber)</p>
+	<br/>
+	<p>FOREIGN KEY = (onumber) REFERENCES ORDERS(onumber)</p>
+	<br/>
+	<p>The foreign keys in the relational schemas ORDERS and LINE reference the respective primary keys in the relational tables CUSTOMER and ORDERS. These are the outcomes from a typical process of conceptual modeling followed by a process of logical design.
+</p>
+	<br/>
+	<p>Now, we return to the first question: is it possible to have ONE BIG TABLE with a header (relational schema), that consists of all attributes used in the design ?
+</p>
+	<br/>
+	<p>For example:</p>
+	<br/>
+	<p>CUSTOMER(cnumber, first-name, last-name, onumber, odate, cnumber, onumber, lnumber, item, price total)</p>
+	<br/>
+	<p>PRIMARY KEY = (cnumber, onumber, lnumber)</p>
+	<br/>
+	<p>Primary key in such table would be a composite key, that uniquely identifies each line in each order. It is why primary key consists of the attributes (onumber, lnumber).</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Why not ONE BIG TABLE !?</h2>
+    </hgroup>
+    <article>
+      <ul class= "build">
+	<li>Logical design provides the following relational schemas:
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Relational schema CUSTOMER">
+
+CUSTOMER(cnumber, first-name, last-name) 
+PRIMARY KEY = (cnumber)</pre>
+<pre class="prettyprint" data-lang="Relational schema ORDERS">
+
+ORDERS(onumber, odate, cnumber) PRIMARY KEY = (onumber)
+FOREIGN KEY = (cnumber) REFERENCES CUSTOMER(cnumber)</pre>
+<pre class="prettyprint" data-lang="Relational schema LINE">
+	
+LINE(onumber, lnumber, item, price total)
+PRIMARY KEY = (onumber, lnumber)
+FOREIGN KEY = (onumber) REFERENCES ORDERS(onumber)</pre>
+          </ul>
+	</li>
+        <li>Why not one relational schema ?
+          <ul class="build">
+<pre class="prettyprint" data-lang="Big relational schema">
+
+CUSTOMER(cnumber, first-name, last-name, onumber, odate, cnumber, 
+         onumber, lnumber, item, price total)
+PRIMARY KEY = (cnumber, onumber, lnumber)</pre>
+          </ul>
+	</li>	
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 05 ================================================================================= -->
+<slide>
+ <aside class="note">
+      <section>
+	<p>At the first glance, ONE BIG TABLE design looks all right. However, insertion of few rows into such table reveals the problems.</p>
+	<br/>
+	<p>Two rows that contain information about two lines from the same order have order date information repeated twice, for example a date 2017-01-01 of an order number 7 is repeated twice because such order consists of 2 lines. If an would consist of 100 lines then order date would be repeated 100 time. Next, information about a customer submitted order like first and last name is repeated as many time as many lines all orders consists of. In our example it is repeated 5 times.</p>
+	<br/>
+	<p>In conclusion, A number, first name and last name of a customer is repeated as many times as the total number of different items purchased in all orders and order number is repeated together with order date as many times as the total number of different items purchased in an order.</p>
+	<br/>
+	<p>It means that ONE BIG TABLE may have a lot of redundancies and it is the main reason why such design is not good.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Why not ONE BIG TABLE !?</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class= "build">
+	<li>Insertion of information about one customer who submitted 2 orders, such that each order consists several lines reveals a problem !
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Big relational table">
+
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+| cnumber | fname | lname | onumber | odate       | lnumber | item  | price | total |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+|    +----------------------+   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       1 | bolt  | 23.04 |     5 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       2 | screw | 29.01 |     3 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       3 | nut   |  4.55 |     2 |
+|    |    |       |       | |   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       1 | bolt  | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       2 | screw | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       3 | nut   | 23.04 |     2 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       4 | lock  | 23.04 |     1 |
+|    +----------------------+   +---------------+ |         |       |       |       |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+</pre>
+          </ul>
+        </li>
+	<li>A <strong class="blue3">number</strong>, <strong class="blue3">first name</strong> and <strong class="blue3">last name</strong> of a customer is repeated as many times as the total number of different items purchased in all orders and <strong class="blue3">order number</strong> is repeated together with <strong class="blue3">order date</strong> as many times as the total number of different items purchased in an order</li>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 06 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>The original relational design, that consists of 3 tables does not have such problem. </p>
+	<br/>
+	<p>Information about a customer such as customer number, first name and last name is repeated one time in a relational table CUSTOMER.</p>
+	<br/>
+	<p>Information about an order such as order number and order date is repeated one time in a relational table ORDERS.</p>
+	<br/>
+	<p>A customer number in a relational table ORDERS is repeated as many times as many orders are submitted by a customer. This sort of redundancy where a value of a foreign key is repeated many times is inevitable in a relational data model. Such redundancy can be eliminated at a stahe of physical design through clustering of a relational table ORDERS on a clustering key cnumber.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Why not ONE BIG TABLE !?</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class= "build">
+        <li>A multitable design does not have such a problem:
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Relational schema CUSTOMER">
+
+CUSTOMER(cnumber, first-name, last-name) 
+PRIMARY KEY = (cnumber)</pre>
+
+<pre class="prettyprint" data-lang="Relational table CUSTOMER">
+
++---------+-------+-------+
+| cnumber | fname | lname |
++---------+-------+-------+
+|       7 | James | Bond  |
++---------+-------+-------+</pre>
+<pre class="prettyprint" data-lang="Relational schema ORDERS">
+
+ORDERS(onumber, odate, cnumber) PRIMARY KEY = (onumber)
+FOREIGN KEY = (cnaumber) REFERENCES CUSTOMER(cnumber)</pre>
+<pre class="prettyprint" data-lang="Relational table ORDERS">
+
++---------+------------+---------+
+| onumber | odate      | cnumber |
++---------+------------+---------+
+|       7 | 2017-01-01 |       7 |
+|       8 | 2018-01-01 |       7 |
++---------+------------+---------+</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 07 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A relational  table LINE contains the repetition of the order numbers in a column onumber. It is because a column onumber is a foreign key in a relational table LINE. The repetitions of the values in foreign key columns are inevitable in the relational data model. However, such repetitions can be eliminated at the physical stage of  a design through clustering of the relational table(s).</p>
+	<br/>
+	<p>In the past (when the hard drives had the capacities ~40Mbs, hmmm, hard to believe in something like that, these days ...) at the ed of logical design the relational tables with the long primary keys, i.e. composite primary keys that consisted of 3 or more attributes obtained an additional attribute called "surrogate key". Then surrogate key could be used as the foreign keys in the other relational tables to implement in the relational model an association between the classes of objects. A goal of using surrogate keys was to avoid large storage consumption for storing the values of foreign keys.</p>
+	<br/>
+	<p>Nowadays, we do not use surrogate keys. Now, "surrogate keys" is a "blast from the past" because of large amounts of cheap and faster persistent storage available fro implementation of relational tables. It is even better to have long composite primary keys because it is away how more attributes can be copied to the other tables as foreign keys. Such strategy reduces the probabilities of joins and makes query processing faster.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Why not ONE BIG TABLE !?</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>A multitable design does not have such a problem:
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Relational schema LINE">
+LINE(onumber, lnumber, item, price total)
+PRIMARY KEY = (onumber, lnumber)
+FOREIGN KEY = (onumber) REFERENCES ORDERS(onumber)</pre>
+<pre class="prettyprint" data-lang="Relational table LINE">
+
++---------+---------+-------+-------+-------+
+| onumber | lnumber | item  | price | total |
++---------+---------+-------+-------+-------+
+|       7 |       1 | bolt  | 23.04 |     5 |
+|       7 |       2 | screw | 29.01 |     3 |
+|       7 |       3 | nut   |  4.55 |     2 |
+|       8 |       1 | bolt  | 23.04 |     1 |
+|       8 |       2 | screw | 23.04 |     1 |
+|       8 |       3 | nut   | 23.04 |     2 |
+|       8 |       4 | lock  | 23.04 |     1 |
++---------+---------+-------+-------+-------+</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 08 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design Quality</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Why not ONE BIG TABLE !?</a></li>
+	<li><a class="red" href="#7">Where is a problem ?</a></li>
+	<li><a href="#11">Insertion test</a></li>
+	<li><a href="#20">Good design guidelines</a></li>
+      </ul>
+<footer class="source">
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 09 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>So, ONE BIG TABLE is not a good solution if we would like to minimize the redundancies from the relational tables. An interesting question is why do we get the redundancies in incorrectly designed relational tables ?</p>
+	<br/>
+	<p>To answer such question assume, that we have a relational table with colours and assume, that the following data dependencies are valid in the tables:</p>
+	<br/>
+	<p>- whenever a value in COLUMN_1 is green then in the same row a value in COLUMN_2 is red</p>
+	<br/>
+	<p>- whenever a value in COLUMN_1 is blue then in the same row a value in COLUMN_2 is yellow</p>
+	<br/>
+	<p>- whenever a value in COLUMN_1 is orange then in the same row a value in COLUMN_2 is red</p>
+	<br/>
+	<p>It is possible to generalize the data dependencies listed above into a single template:</p>
+	<br/>
+	<p>- whenever a value in COLUMN_1 is x then in the same row a value in COLUMN_2 is year</p>
+	<br/>
+	<p>If we know that such data dependency holds in every state of the relational table then practically there is no need to include COLUMN_2 in the relational table because each value in COLUMN_2 can be logically derived from a value in COLUMN_1.</p>
+	<br/>
+	<p>Hence, there is no need to repeat the pairs (green,red), (blue,yellow) and (orange, red). It is why due to the different values in the related columns the redundancies are inevitable.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Where is a problem ?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Why do we get redundancies in an incorrectly designed relational table ?</li>
+        <p style="text-align:center;"><img src="images/slide-08-1.png" alt="Decomposition" title="Decomposition" width="530"></p>
+	<li>Data dependencies:
+	  <ul class="build">
+	    <li>If <strong class="green prettyprint">COLUMN_1</strong> is green then <strong class="green prettyprint">COLUMN_2</strong> is red</li>
+	    <li>If <strong class="green prettyprint"> COLUMN_1</strong> is blue then <strong class="green prettyprint">COLUMN_2</strong> is yellow</li>
+	    <li>If <strong class="green prettyprint">COLUMN_1</strong> is orange then <strong class="green prettyprint">COLUMN_2</strong> is red</li>
+	    <li>For any colour x if <strong class="green prettyprint">COLUMN_1</strong> is x then <strong class="green prettyprint">COLUMN_2 is</strong> y</li>
+	  </ul>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 10 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>To solve the problem we create a new table that consists of the COLUMN_1 and COLUMN_2 only and we remove COLUMN_2 from the original table.</p>
+	<br/>
+	<p>Then the repetitions of pairs (green,red), (blue,yellow), and (orange, red) are no longer needed because the values in COLUMN_1 do not need to be associated with many other values in the remain columns.</p>
+	<br/>
+	<p>The repetitions disappeared from the original table because COLUMN_2 has been removed from the original table.</p>
+	<br/>
+	<p>It is still possible to restore the original table through join of the tables over an equality condition on COLUMN_1.</p>
+	<br/>
+	<p>The repetitions of values in COLUMN_1 like green repeated 3 times, blue and orange repeated 2 times each are inevtable because of a tabular representation of data. As it has been mentioned earlier such redundancies can be removed through clustering of a relational table over COLUMN_1.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Where is a problem ?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Data dependencies can be represented as a separate relational table ... </li>
+        <p style="text-align:center;"><img src="images/slide-09-1.png" alt="Decomposition" title="Decomposition" width="400" height="200"></p>
+	<li> ... and <strong class="green prettyprint">COLUMN_2</strong> can be removed from the original table</li>
+        <p style="text-align:center;"><img src="images/slide-09-2.png" alt="Decomposition" title="Decomposition" width="400" height="300"</p>	
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 11 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>Do the same data dependencies exist in BIG TABLE ?</p>
+	<br/>
+	<p>Yes, it is easy to find, that:</p>
+	<br/>
+	<p>Data dependencies:</p>
+	<br/>
+	<p>If customer number = 7 then first name of customer = James</p>
+	<br/>
+	<p>If customer number = 7 then last name of customer = Bond and it can be generalized to a data dependency:</p>
+	<br/>
+	<p>For any customer number x if customer number = x then first name of customer = y and last name of customer = z</p>
+	<br/>
+	<p>It also means, we can use such data dependency to create a separate table with information about the customer numbers and respective full names of the customers. The numbers and the names of customers are repeated in BIG TABLE many times because both customer number and full name of a customer must be repeated as many time as many orders are submitted by a customer.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Where is a problem ?</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul class="build">
+        <li>Do data dependencies exist in BIG TABLE ?
+	  <ul class="build">
+	    <pre class="prettyprint" data-lang="Big relational table">
+	
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+| cnumber | fname | lname | onumber | odate       | lnumber | item  | price | total |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+|    +----------------------+   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       1 | bolt  | 23.04 |     5 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       2 | screw | 29.01 |     3 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       3 | nut   |  4.55 |     2 |
+|    |    |       |       | |   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       1 | bolt  | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       2 | screw | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       3 | nut   | 23.04 |     2 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       4 | lock  | 23.04 |     1 |
+|    +----------------------+   +---------------+ |         |       |       |       |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+</pre>
+          </ul>
+	</li>
+	<li>Data dependencies:
+	  <ul class="build">
+	    <li>If <strong class="green prettyprint">cnumber</strong> = 7 then <strong class="green prettyprint">fname</strong> = James</li>
+	    <li>If <strong class="green prettyprint">cnumber</strong> = 7 then <strong class="green prettyprint">lname</strong> = Bond</li>
+	    <li>For any customer number x if <strong class="green prettyprint">cnumber</strong> = x then <strong class="green prettyprint">fname</strong> = y and <strong class="green prettyprint">lname</strong> = z</li>
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 12 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>BIG TABLE contains more redundancies triggered by the same sort of data dependencies. For example</p>
+	<br/>
+	<p>If order number = 7 then order date = 2017-01-01</p>
+	<br/>
+	<p>If order number = 8 then order date = 2018-01-01</p>
+	<br/>
+	<p>In a general case:</p>
+	<br/>
+	<p>For any order number x if order number = x then order date = y</p>
+	<br/>
+	<p>Like before it is possible to eliminate such redundancies  through a new relational table that contains only information about the numbers of orders and dates of orders. Then, there is no need to repeat the identical pairs (order number, order date) with each item included in. an order.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Where is a problem ?</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>Do data dependencies exist in BIG TABLE ?
+	  <ul>
+	    <pre class="prettyprint" data-lang="Big relational table">
+	
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+| cnumber | fname | lname | onumber | odate       | lnumber | item  | price | total |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+
+|    +----------------------+   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       1 | bolt  | 23.04 |     5 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       2 | screw | 29.01 |     3 |
+|    |  7 | James | Bond  | |   | 7 | 2017-01-01| |       3 | nut   |  4.55 |     2 |
+|    |    |       |       | |   +---------------+ |         |       |       |       |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       1 | bolt  | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       2 | screw | 23.04 |     1 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       3 | nut   | 23.04 |     2 |
+|    |  7 | James | Bond  | |   | 8 | 2018-01-01| |       4 | lock  | 23.04 |     1 |
+|    +----------------------+   +---------------+ |         |       |       |       |
++---------+-------+-------+---------+-------------+---------+-------+-------+-------+</pre>
+          </ul>
+	</li>
+	<li>More data dependencies:
+	  <ul class="build">
+	    <li>If <strong class="green prettyprint">onumber</strong> = 7 then <strong class="green prettyprint">odate</strong> = 2017-01-01</li>
+	    <li>If <strong class="green prettyprint">onumber</strong> = 8 then <strong class="green prettyprint">odate</strong> = 2018-01-01</li>
+	    <li>For any order number x if <strong class="green prettyprint">onumber</strong> = x then <strong class="green prettyprint">odate</strong> = y</li>	    
+	  </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 13 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design Quality</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Why not ONE BIG TABLE !?</a></li>
+	<li><a href="#7">Where is a problem ?</a></li>
+	<li><a class="red" href="#11">Insertion test</a></li>
+	<li><a href="#20">Good design guidelines</a></li>
+      </ul>
+<footer class="source">
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 14 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>The reason of the redundancies occurring in BIG TABLE is insertion into such table incorrect columns like first and last names of of customers and dates of orders. These columns should be included into the separate relational tables.</p>
+	<br/>
+	<p>An interesting question is how to verify if a relational schema is designed in a correct way ? In the other word how to check if a relational schema does not contain the attributes that trigger the redundancies in the respective relational table. It is possible to formally prove that a relational schema is constructed in correct way through so called "normalization of relational schema". A formal prof is beyond a scope of this subject and here we shall only use an intuitive verification of correctness through so called "insertion test".</p>
+	<br/>
+	<p>We start from inserting of a single row into a relational table, any row we can imagine, it really does not matter what are the values of the attributes in the first inserted row. For example, we insert information about building number, room number, and area of a room: </p>
+	<br/>
+	<p>[3, SCIT, 210,20]</p>
+	<br/>
+	<p>Then, we insert the second row that contains information about another room in the same building. To trigger the redundancies we try to insert a new row such that as many as it is possible values are the same as in the first row. if we insert information about another room in the same building then building number and building name can be the same in the second row as in the first one:</p>
+	<br/>
+	<p>[3, SCIT,211,22]</p>
+	<br/>
+	<p>Now, we can see that a pair o values [3,SCIT] is repeated as many times as many rooms are located in a building 3. It means, we discovered a data dependency of the same sort as before:</p>
+	<br/>
+	<p>If building number is equal to 3 the building name is always equal to SCIT.</p>
+	<br/>
+	<p>In a general case if a building number is equal to x then building name is always equal to y.</p>
+	<br/>
+	<p>To make it completely sure, we insert information about one more broom in building 3:</p>
+	<br/>
+	<p>[3, SCIT,213,20]</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smallest">
+      <ul class="build">
+        <li>How to verify if a relational schema is designed in a correct way ?</li>
+	<li>Simple ! We try to insert few rows to create the redundancies</li>
+	<li>For example, we insert few rows into a relational table <strong class="green prettyprint28">ROOM</strong>
+	  <ul class="build">
+<pre class="prettyprint" data-lang="Relational schema ROOM">
+ROOM(bldgnum, name, roomnum, area)
+PRIMARY KEY = (bldgnum, roomnum)</pre>
+<pre class="prettyprint" data-lang="Relational table ROOM">
++---------+----------+---------+------+
+| bldgnum | bldgname | roomnum | area |
++---------+----------+---------+------+
+|       3 | SCIT     |     210 |   20 |
++---------+----------+---------+------+</pre>
+<pre class="prettyprint" data-lang="Relational table ROOM">
++---------+----------+---------+------+
+| bldgnum | bldgname | roomnum | area |
++---------+----------+---------+------+
+|       3 | SCIT     |     210 |   20 |
+|       3 | SCIT     |     211 |   22 |
++---------+----------+---------+------+</pre>
+<pre class="prettyprint" data-lang="Relational table ROOM">
++---------+----------+---------+------+
+| bldgnum | bldgname | roomnum | area |
++---------+----------+---------+------+
+|       3 | SCIT     |     210 |   20 |
+|       3 | SCIT     |     211 |   22 |
+|       3 | SCIT     |     213 |   20 |
++---------+----------+---------+------+</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 15 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>A design problem we discovered through the "insertion test"is such that a building name is repeated as many times as many rooms are included in a building. For example, if a building hosts 100 rooms then its name is repeated 100 times.</p>
+	<br/>
+	<p>It means that an attribute building name cannot be included in a relational schema that contains information about the rooms located in a building. To eliminate such problem we have to remove an attribute building name from the schema.</p>
+	<br/>
+	<p>Of course one may say, well, I got such relational schema from a logical design, i.e. from a process of transformation of a class of objects into relational schemas. Does it mean that a class of objects has been constructed in an incorrect way ? Yes, it precisely means so. In a moment when a designer created a class of objects he/she used an incorrect attribute (building name) to describe a class of objects. The attributes used to describe a class of objects are selected in an intuitive way mainly based on our understanding of a modelled database domain. If our understanding is not correct or not complete it is possible to use a wring attribute to describe a class of objects.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<ul>
+<pre class="prettyprint" data-lang="Relational table ROOM">
++---------+----------+---------+------+
+| bldgnum | bldgname | roomnum | area |
++---------+----------+---------+------+
+|       3 | SCIT     |     210 |   20 |
+|       3 | SCIT     |     211 |   22 |
+|       3 | SCIT     |     213 |   20 |
++---------+----------+---------+------+</pre>
+        </ul>
+      </ul>
+      <ul class="build">
+        <li>Problems:
+          <ul class="build">
+        <li>It is clearly visible that a <strong class="blue3">building name</strong> is repeated as many times as many rooms are included in a building</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 16 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>In another example we consider a relational schema:</p>
+	<br/>
+	<p>WAREHOUSE(name, address, part, quantity)</p>
+	<br/>
+	<p>A relational table based on such schema contains information about names of warehouses, addresses warehouses, names and quantities of parts stored in the warehouse.</p>
+	<br/>
+	<p>We ask the same question as before: is the relational schema WAREHOUSE constructed in a correct way ?</p>
+	<br/>
+	<p>To answer the question we insert few rows into a relational table with information about warehouses and parts stored in each warehouse. We start from a row:</p>
+	<br/>
+	<p>[Golden Bolts, Northfields Ave, bolt, 210]</p>
+	<br/>
+	<p>Then like before we try to insert the next row such that as many values as possible are the same as in the first row. For example we insert information about a name and quantity of part located in the same warehouse:</p>
+	<br/>
+	<p>[Golden Bolts, Northfields Ave, lock, 20]</p>
+	<br/>
+	<p>Again we see that addition of information about a new part located in the sam warehouse triggers a repetition of a warehouse address. It means, that if add information about more parts located in the same warehouse then information about warehouse address will be repeated with information about each part.</p>
+	<br/>
+	<p>For example, addition of one more row:</p>
+	<br/>
+	<p>[Golden Bolts, Northfields Ave, screw, 211]</p>
+	<br/>
+	<p>triggers one more repetition of the same address.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smallest">
+      <ul class="build">
+        <li>In another example, we insert few rows into a relational table <strong class="green prettyprint28">WAREHOUSE</strong>
+	  <ul class="build">
+<pre class="prettyprint" data-lang="A relational schema WAREHOUSE">
+WAREHOUSE(name, address, part, quantity)
+PRIMARY KEY = (name, part)</pre>
+<pre class="prettyprint" data-lang="A relational table WAREHOUSE">
++--------------+-----------------+-------+----------+
+| name         | address         | part  | quantity |
++--------------+-----------------+-------+----------+
+| Golden Bolts | Northfields Ave | bolt  |      210 |
++--------------+-----------------+-------+----------+</pre>
+<pre class="prettyprint" data-lang="A relational table WAREHOUSE">
++--------------+-----------------+-------+----------+
+| name         | address         | part  | quantity |
++--------------+-----------------+-------+----------+
+| Golden Bolts | Northfields Ave | bolt  |      210 |
+| Golden Bolts | Northfields Ave | lock  |       20 |
++--------------+-----------------+-------+----------+</pre>
+<pre class="prettyprint" data-lang="A relational table WAREHOUSE">
++--------------+-----------------+-------+----------+
+| name         | address         | part  | quantity |
++--------------+-----------------+-------+----------+
+| Golden Bolts | Northfields Ave | bolt  |      210 |
+| Golden Bolts | Northfields Ave | lock  |       20 |
+| Golden Bolts | Northfileds Ave | screw |      211 |
++--------------+-----------------+-------+----------+</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 17 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>The redundancies clearly visible in the present design are the following:</p>
+	<br/>
+	<p>An address of a warehouse is repeated as many times as many different parts are stored in the warehouse.</p>
+	<br/>
+	<p>Another problem with the present design is such that if at some point in time, there are no parts stored in a warehouse then there may be no rows to keep a warehouse address or the values of certain attributes must be set to NULL. it means, that information about a warehouse address disappears from a relational table when the warehouse is empty. It is because we cannot set to NULL a value of an attribute part because it is a component of a composite primary key.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<ul>
+<pre class="prettyprint" data-lang="A relational table WAREHOUSE">
++--------------+-----------------+-------+----------+
+| name         | address         | part  | quantity |
++--------------+-----------------+-------+----------+
+| Golden Bolts | Northfields Ave | bolt  |      210 |
+| Golden Bolts | Northfields Ave | lock  |       20 |
+| Golden Bolts | Northfileds Ave | screw |      211 |
++--------------+-----------------+-------+----------+</pre>
+        </ul>
+      </ul>
+      <ul class="build">
+        <li>Problems:
+          <ul class="build">
+	    <li>An <strong class="blue3">address</strong> of a warehouse is repeated as many times as many different parts are stored  in the warehouse</li>
+	    <li>If at some point in time, there are no parts stored in a warehouse then there may be no rows to keep a warehouse <strong class="blue3">address</strong> or the values of certain attributes must be set to <strong class="blue3 prettyprint28">NULL</strong></li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 18 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>In a yet another example of incorrect design we consider a relational schema EMPLOYEE(enum, skill, hobby). A relational table with a header EMPLOYEE(enum, skill, hobby) suppose to contain information about employee number, kills possessed by an employee and hobbies of an employee.</p>
+	<br/>
+	<p>To verify whether the design is correct we insert  a number of rows with information about an employee who possesses two skills and who has two hobbies. Due to the 1NF assumption we can only insert into the columns skill and hobby one value per row. We start from insertion of information about a fact saying, that an employee number 7 possess a skill cooking and a hobby hiking. Such information is represented as a single row:</p>
+	<br/>
+	<p>[7, cooking, hiking]</p>
+	<br/>
+	<p>Next, we add information about a new hobby "swimming" possessed by an employee number 7. Such information is represented by a single row:</p>
+	<br/>
+	<p>[7, cooking, swimming]</p>
+	<br/>
+	<p>Now, we get the first signal that the design is incorrect, Information about a skill "cooking" possessed by an employee number 7 is repeated twice in the first two rows.</p>
+	<br/>
+	<p>Next, we insert information about a new skill "programming" possessed by an employee number 7. So, initially we add a row:</p>
+	<br/>
+	<p>[7, programming, hiking]</p>
+	<br/>
+	<p>The, we have to to add a row:</p>
+	<br/>
+	<p>[7, programming, swimming]</p>
+	<br/>
+	<p>because a skill "swimming" does not depend on the hobbies of the employee. Therefore, to add a new piece of information we have to add two rows.</p>
+	<br/>
+	<p>Such effect is called "tuples explosion". If an employee has 5 skills and 3 hobbies than we need to add 5 *3 = 15 rows. Now, it is clear why it is called "tuples explosion".</p>
+	<br/>
+	<p>The design is incorrect because two unrelated mutivalued attributes are incorrectly transformed into the single valued attribute in a process of logical design. It is an evident mistake performed during a stage of logical design.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smallest">
+      <ul class="build">
+        <li>In yet another example, we insert few rows into a relational table <strong class="green prettyprint28">EMPLOYEE</strong>
+	  <ul class="build">
+<pre class="prettyprint" data-lang="A relational schema EMPLOYEE">
+EMPLOYEE(enum, skill, hobby)
+PRIMARY KEY = (enum, skill, hobby)</pre>
+<pre class="prettyprint" data-lang="A relational table EMPLOYEE">
++------+-------------+----------+
+| enum | skill       | hobby    |
++------+-------------+----------+
+|    7 | cooking     | hiking   | 
++------+-------------+----------+</pre>
+<pre class="prettyprint" data-lang="A relational table EMPLOYEE">
++------+-------------+----------+
+| enum | skill       | hobby    |
++------+-------------+----------+
+|    7 | cooking     | hiking   |
+|    7 | cooking     | swimming |
++------+-------------+----------+</pre>
+<pre class="prettyprint" data-lang="A relational table EMPLOYEE">
++------+-------------+----------+
+| enum | skill       | hobby    |
++------+-------------+----------+
+|    7 | cooking     | hiking   |
+|    7 | cooking     | swimming |
+|    7 | programming | hiking   |
+|    7 | programming | swimming |
++------+-------------+----------+</pre>
+          </ul>
+	</li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 19 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>We discover the following problems with redundancies in a relational table based on a relational schema EMPLOYEE(enum, skill, hobby):</p>
+	<br/>
+	<p>- a skill name must be repeated with each hobby name</p>
+	<br/>
+	<p>- a hobby name must be repeated with each skill name</p>
+	<br/>
+	<p>- If at some point in time an employee has no hobbies (or skills) then a value of an attribute hobby (or skill) must be set to NULL, however, it is impossible due to PRIMARY KEY = (enum, skill, hobby) constraint.</p>
+	<br/>
+	<p>A solution to the problem of "tuples explosion" is quite simple. We decompose the original relational schema EMPLOYEE(enum, skill, hobby) into two schemas: EMPLOYEE-SKILL(enum, skill) with primary key = (enum, skill) and EMPLOYEE-HOBBY(enum,hobby) with primary key = (enum, hobby). Such decomposition is correct because do not exists any semantic relationships, that must be stored in a database,  between skills possessed and hobbies owned by an employee.</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Insertion test</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+	<ul>
+<pre class="prettyprint" data-lang="A relational table EMPLOYEE">
++------+-------------+----------+
+| enum | skill       | hobby    |
++------+-------------+----------+
+|    7 | cooking     | hiking   |
+|    7 | cooking     | swimming |
+|    7 | programming | hiking   |
+|    7 | programming | swimming |
++------+-------------+----------+</pre>
+        </ul>
+      </ul>
+      <ul class="build">
+        <li>Problems:
+          <ul class="build">
+	    <li>A <strong class="blue3">skill name</strong> must be repeated with each <strong class="blue3">hobby name</strong></li>
+	    <li>A <strong class="blue3">hobby name</strong>  must be  repeated with each <strong class="blue3">skill name</strong></li>
+	    <li>If at some point in time an employee has no <strong class="blue3">hobbies</strong> (or <strong class="blue3">skills</strong>) then a value of an attribute <strong class="blue3 prettyprint28">hobby</strong> (or <strong class="blue3 prettyprint28">skill</strong>) must be set to <strong class="blue3 prettyprint28">NULL</strong>, however, it is impossible due to <strong class="blue3 prettyprint28">PRIMARY KEY = (enum, skill, hobby)</strong> constraint</li>
+          </ul>
+        </li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 20 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">Database Design Quality</h2>
+      <h3 class="red">Outline</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><a href="#2">Why not ONE BIG TABLE !?</a></li>
+	<li><a href="#7">Where is a problem ?</a></li>
+	<li><a href="#11">Insertion test</a></li>
+	<li><a class="red" href="#20">Good design guidelines</a></li>
+      </ul>
+<footer class="source">
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 21 ================================================================================= -->
+  <slide>
+   <aside class="note">
+      <section>
+	<p>An insertion test is a pretty powerful tool that can be used to informally verify the correctness of a relational design. Apart from verification of an already existing design application of "good design guidelines" significantly reduces a chance for a mistake in a design.</p>
+	<br/>
+	<p>The "good design guidelines" are the following:</p>
+	<br/>
+	<p>- design a relational table such that it is easy to explain its meaning</p>
+	<br/>
+	<p>- do not include the unrelated attributes into the same table</p>
+	<br/>
+	<p>- design a relational table such that the insertion, deletion and update tests do not cause anomalies</p>
+	<br/>
+	<p>- minimize the total number of attributes whose values can be missing (NULL)</p>
+	<br/>
+	<p>- design the relational tables such that they can be joined over an equality conditions on the attributes that are either primary or foreign keys in a way that creates no spurious rows</p>
+	<br/>
+	<p>-and the first of all ...</p>
+	<br/>
+	<p>ALWAYS START YOUR DESIGN FROM THE CONCEPTUAL MODELING !</p>
+	<br/>
+      </section>
+    </aside>  
+    <hgroup>
+      <h2 class="green">Good design guidelines</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Design  a relational table such that it is easy to explain its meaning</li>
+	<li>Do not include the unrelated attributes into the same table</li>
+	<li>Design  a relational table such that the insertion, deletion and update tests do not cause anomalies</li>
+	<li>Minimize the total number of attributes whose values can be missing (<strong class="blue3 prettyprint28">NULL</strong>)</li>
+	<li>Design the relational tables such that they can be joined over an equality conditions on the attributes that are either primary or foreign keys in a way that creates no spurious rows</li>
+	<li><strong class="red">And the first of all ...</strong></lI>
+	<li><strong class="red">ALWAYS START YOUR DESIGN FROM THE CONCEPTUAL MODELING !</strong></li>
+      </ul>
+<footer class="source"><strong class="green">In HTML view press 'p' to see the lecture notes</strong><br/>
+<a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+<!-- slide 29 ================================================================================= -->
+  <slide>
+    <hgroup>
+      <h2 class="green">References</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>T. Connoly, C. Begg, Database Systems, A Practical Approach to Design, Implementation and Management, Chapters 14.1 - 14.3 Introduction to normalization, Pearson Education Ltd, 2015</li>
+      </ul>
+<footer class="source"><a href="#2">TOP</a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</footer>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+<!--
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 'https://protect-au.mimecast.com/s/Xc7jCYW8EEtpyxO8uGFl7I?domain=google-analytics.com';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+-->
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+
